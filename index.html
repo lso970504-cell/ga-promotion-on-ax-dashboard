@@ -34,8 +34,9 @@
         font-family: "Segoe UI", "Malgun Gothic", sans-serif;
         color: var(--ink-900);
         background:
-          radial-gradient(circle at top right, rgba(77, 141, 255, 0.24), transparent 20rem),
-          linear-gradient(180deg, #eef4ff 0%, var(--surface) 100%);
+          radial-gradient(circle at top left, rgba(77, 141, 255, 0.18), transparent 24rem),
+          radial-gradient(circle at top right, rgba(10, 42, 102, 0.08), transparent 20rem),
+          linear-gradient(180deg, #eef4ff 0%, #f6f9ff 52%, #edf3fb 100%);
       }
 
       button,
@@ -46,6 +47,9 @@
 
       .app-shell {
         min-height: 100vh;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)),
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0 1px, transparent 1px 120px);
       }
 
       .screen {
@@ -327,14 +331,14 @@
       }
 
       .dashboard-screen {
-        padding: 24px;
+        padding: 32px 28px 40px;
       }
 
       .dashboard-shell {
         width: min(1400px, 100%);
         margin: 0 auto;
         display: grid;
-        gap: 20px;
+        gap: 24px;
       }
 
       .dashboard-card,
@@ -343,14 +347,16 @@
       }
 
       .dashboard-card {
-        padding: 30px 32px;
+        padding: 34px 36px;
+        border: 1px solid rgba(214, 225, 242, 0.9);
       }
 
       .dashboard-header {
         display: grid;
-        gap: 22px;
+        gap: 24px;
         background:
-          linear-gradient(135deg, rgba(10, 42, 102, 0.98), rgba(18, 89, 177, 0.92)),
+          radial-gradient(circle at top right, rgba(255, 255, 255, 0.12), transparent 18rem),
+          linear-gradient(135deg, rgba(10, 42, 102, 0.98), rgba(18, 89, 177, 0.94)),
           linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
         color: #fff;
       }
@@ -363,15 +369,15 @@
       }
 
       .header-titleblock {
-        max-width: 860px;
+        max-width: 920px;
       }
 
       .dashboard-header h1 {
-        margin: 10px 0 0;
-        font-size: clamp(36px, 4.6vw, 52px);
-        line-height: 1.04;
+        margin: 12px 0 0;
+        font-size: clamp(40px, 4.9vw, 58px);
+        line-height: 1.02;
         white-space: nowrap;
-        letter-spacing: -0.03em;
+        letter-spacing: -0.045em;
       }
 
       .header-subtitles {
@@ -384,26 +390,53 @@
       .header-subtitle {
         display: inline-flex;
         align-items: center;
-        min-height: 40px;
-        padding: 10px 14px;
+        min-height: 44px;
+        padding: 11px 16px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.14);
-        font-size: 14px;
+        background: rgba(255, 255, 255, 0.16);
+        font-size: 15px;
         font-weight: 700;
       }
 
       .header-copy {
-        margin: 12px 0 0;
-        max-width: 740px;
-        color: rgba(255, 255, 255, 0.82);
-        line-height: 1.6;
+        margin: 14px 0 0;
+        max-width: 800px;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 17px;
+        line-height: 1.68;
       }
 
       .header-actions {
         display: flex;
+        flex-direction: column;
+        align-items: flex-end;
         gap: 10px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
+        justify-content: flex-start;
+      }
+
+      .header-date-box {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .header-date-label {
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .header-date-value {
+        color: #fff;
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
       }
 
       .month-tabs {
@@ -413,13 +446,15 @@
       }
 
       .month-tab {
-        min-width: 92px;
-        height: 42px;
-        padding: 0 14px;
+        min-width: 104px;
+        height: 46px;
+        padding: 0 18px;
         border: 1px solid rgba(255, 255, 255, 0.18);
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.08);
         color: rgba(255, 255, 255, 0.84);
+        font-size: 15px;
+        font-weight: 700;
         cursor: pointer;
         transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
       }
@@ -438,27 +473,31 @@
       .summary-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
+        gap: 16px;
       }
 
       .summary-card {
-        padding: 22px 20px;
-        border-radius: 22px;
-        background: linear-gradient(180deg, #ffffff, #f8fbff);
-        border: 1px solid #e4ebf6;
+        padding: 28px 26px;
+        border-radius: 24px;
+        background:
+          linear-gradient(180deg, #ffffff, #f8fbff);
+        border: 1px solid #dbe6f6;
+        box-shadow: 0 12px 24px rgba(16, 56, 126, 0.05);
       }
 
       .summary-card span {
         display: block;
-        font-size: 13px;
+        font-size: 15px;
+        font-weight: 700;
         color: var(--ink-500);
       }
 
       .summary-card strong {
         display: block;
-        margin-top: 8px;
-        font-size: 30px;
+        margin-top: 12px;
+        font-size: 42px;
         color: var(--brand-950);
+        letter-spacing: -0.04em;
       }
 
       .content-grid {
@@ -571,88 +610,112 @@
       }
 
       .panel {
-        padding: 24px;
+        padding: 30px 30px 32px;
+        border: 1px solid rgba(214, 225, 242, 0.95);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.98));
       }
 
       .panel-head {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 14px;
-        margin-bottom: 18px;
+        gap: 18px;
+        margin-bottom: 22px;
       }
 
       .panel-head h2 {
         margin: 0;
-        font-size: 22px;
+        font-size: 34px;
+        letter-spacing: -0.04em;
       }
 
       .panel-head p {
-        margin: 8px 0 0;
+        margin: 10px 0 0;
         color: var(--ink-700);
-        line-height: 1.6;
+        font-size: 17px;
+        line-height: 1.65;
+      }
+
+      .panel-date {
+        margin: 12px 0 0;
+        color: var(--brand-900);
+        font-size: 17px;
+        font-weight: 700;
       }
 
       .panel-role-chip {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 108px;
-        height: 36px;
-        padding: 0 14px;
+        min-width: 116px;
+        height: 40px;
+        padding: 0 16px;
         border-radius: 999px;
         background: #edf3ff;
         color: var(--brand-900);
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 700;
       }
 
       .filter-stack {
         display: grid;
         gap: 12px;
-        margin-bottom: 18px;
+        margin-bottom: 22px;
+        padding: 18px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, #f8fbff, #f3f7ff);
+        border: 1px solid #e2eaf7;
       }
 
       .search-filter-grid {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.15fr) 110px;
-        gap: 12px;
+        gap: 14px;
         align-items: end;
       }
 
       .search-filter-field {
         display: grid;
-        gap: 8px;
+        gap: 10px;
       }
 
       .search-filter-field label {
         color: var(--ink-700);
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 700;
       }
 
       .search-filter-control {
         width: 100%;
-        height: 56px;
-        padding: 0 18px;
+        height: 62px;
+        padding: 0 20px;
         border: 1px solid #dbe5f3;
         border-radius: 18px;
         background: #fff;
         color: var(--brand-950);
-        font-size: 15px;
+        font-size: 17px;
         font-weight: 700;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      .search-filter-control:focus {
+        outline: none;
+        border-color: #9ebcf2;
+        box-shadow: 0 0 0 4px rgba(77, 141, 255, 0.14);
       }
 
       .search-filter-button {
         width: 100%;
-        height: 56px;
+        height: 62px;
         border: 0;
         border-radius: 18px;
-        background: #243f81;
+        background: linear-gradient(180deg, #304f98, #203b7c);
         color: #fff;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
         cursor: pointer;
+        box-shadow: 0 12px 22px rgba(32, 59, 124, 0.18);
       }
 
       .filter-helper-row {
@@ -662,23 +725,24 @@
 
       .search-filter-toggle {
         width: 220px;
-        height: 56px;
+        height: 58px;
         border: 1px solid #dbe5f3;
         border-radius: 18px;
         background: #fff;
         color: var(--brand-900);
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 700;
         cursor: pointer;
       }
 
       .table-wrap {
         overflow: auto;
-        max-height: 560px;
-        border: 1px solid #e4ebf6;
-        border-radius: 18px;
+        max-height: 620px;
+        border: 1px solid #dbe5f3;
+        border-radius: 22px;
         scrollbar-width: auto;
         scrollbar-color: #9db0d8 #eef3fb;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
       }
 
       .table-wrap::-webkit-scrollbar {
@@ -701,37 +765,94 @@
         border-collapse: collapse;
         min-width: 980px;
         background: #fff;
+        table-layout: fixed;
       }
 
       thead {
-        background: #f7faff;
+        background: linear-gradient(180deg, #f8fbff, #f1f6ff);
       }
 
       th,
       td {
-        padding: 16px 14px;
+        padding: 22px 18px;
         border-bottom: 1px solid #edf2fa;
         text-align: left;
-        font-size: 14px;
+        font-size: 16px;
         vertical-align: middle;
       }
 
       th {
         color: var(--ink-700);
         font-weight: 700;
+        font-size: 16px;
         position: sticky;
         top: 0;
         z-index: 1;
-        background: #f7faff;
+        background: linear-gradient(180deg, #f8fbff, #f1f6ff);
       }
 
       tr:last-child td {
         border-bottom: 0;
       }
 
+      tbody tr:nth-child(even) {
+        background: rgba(244, 248, 255, 0.66);
+      }
+
+      tbody tr:hover {
+        background: rgba(232, 241, 255, 0.82);
+      }
+
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 18%;
+      }
+
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 18%;
+      }
+
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 28%;
+      }
+
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 14%;
+        text-align: center;
+      }
+
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 22%;
+      }
+
       .agency-cell strong,
       .file-list strong {
         display: block;
+        font-size: 19px;
+        line-height: 1.4;
+      }
+
+      .region-cell,
+      .branch-cell {
+        font-weight: 700;
+        color: var(--brand-950);
+        font-size: 17px;
+      }
+
+      .status-cell,
+      .notice-cell,
+      .updated-cell {
+        text-align: center;
+      }
+
+      th:nth-child(4) .sort-header-button,
+      th:nth-child(5) .sort-header-button {
+        width: 100%;
+        justify-content: center;
       }
 
       .agency-cell span,
@@ -739,7 +860,7 @@
       .mini-note {
         display: block;
         margin-top: 4px;
-        font-size: 12px;
+        font-size: 14px;
         color: var(--ink-500);
       }
 
@@ -750,7 +871,7 @@
         border: 0;
         background: transparent;
         color: var(--ink-700);
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 700;
         padding: 0;
         cursor: pointer;
@@ -764,10 +885,10 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 8px 12px;
+        padding: 11px 16px;
         border-radius: 999px;
         font-weight: 700;
-        font-size: 13px;
+        font-size: 15px;
       }
 
       .traffic::before {
@@ -842,30 +963,34 @@
       }
 
       .notice-links {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
+        display: grid;
+        gap: 10px;
+        min-width: 132px;
       }
 
       .notice-link {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
-        min-width: 72px;
-        height: 34px;
-        padding: 0 12px;
+        width: 100%;
+        min-width: 0;
+        height: 44px;
+        padding: 0 14px;
         border: 1px solid #d7e2f4;
-        border-radius: 999px;
+        border-radius: 14px;
         background: #f8fbff;
         color: var(--brand-900);
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 700;
         text-decoration: none;
+        box-shadow: 0 8px 16px rgba(16, 56, 126, 0.05);
       }
 
       .notice-link.disabled {
         opacity: 0.45;
         cursor: not-allowed;
+        background: #eef3fb;
+        color: #7d8da8;
       }
 
       .side-stack {
@@ -947,16 +1072,16 @@
         align-items: center;
         justify-content: space-between;
         gap: 16px;
-        padding: 20px 22px;
+        padding: 22px 24px;
         border-radius: 22px;
         background: #fff;
         border: 1px solid #e3e9f3;
-        box-shadow: 0 10px 26px rgba(14, 34, 73, 0.04);
+        box-shadow: 0 12px 28px rgba(14, 34, 73, 0.06);
       }
 
       .resource-card strong {
         display: block;
-        font-size: 16px;
+        font-size: 18px;
         color: var(--brand-950);
       }
 
@@ -964,13 +1089,16 @@
         display: block;
         margin-top: 6px;
         color: var(--ink-500);
-        font-size: 13px;
+        font-size: 14px;
       }
 
       .resource-button {
-        min-width: 100px;
-        height: 44px;
-        padding: 0 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 112px;
+        height: 46px;
+        padding: 0 20px;
         border: 1px solid #d5dff1;
         border-radius: 999px;
         background: #fff;
@@ -979,10 +1107,34 @@
         text-decoration: none;
       }
 
-      .resource-button:disabled {
+      .resource-button.disabled {
         background: #eef3fb;
-        color: #8a97ae;
+        color: #93a3bd;
         cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .admin-resource-upload-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .admin-resource-upload-item {
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: #f7faff;
+        border: 1px solid #dbe5f3;
+      }
+
+      .admin-resource-upload-item strong {
+        display: block;
+        color: var(--brand-950);
+        font-size: 16px;
+      }
+
+      .admin-resource-upload-item .mini-note {
+        margin-top: 6px;
       }
 
       .file-box {
@@ -1116,16 +1268,17 @@
       }
 
       .admin-kpi-card {
-        padding: 22px 24px;
-        border-radius: 24px;
+        padding: 24px 26px;
+        border-radius: 26px;
         background: #fff;
         border: 1px solid #dfe7f4;
+        box-shadow: 0 12px 24px rgba(16, 56, 126, 0.05);
       }
 
       .admin-kpi-card span {
         display: block;
         color: var(--ink-500);
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 700;
       }
 
@@ -1143,10 +1296,6 @@
         gap: 16px;
       }
 
-      .admin-action-grid-wide {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
       .admin-insight-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1154,22 +1303,27 @@
       }
 
       .admin-action-card {
-        padding: 22px;
-        border-radius: 24px;
+        padding: 24px;
+        border-radius: 26px;
         background: #fff;
         border: 1px solid #dfe7f4;
+        box-shadow: 0 12px 26px rgba(16, 56, 126, 0.05);
+      }
+
+      .admin-action-card.upload-card-wide {
+        grid-column: span 2;
       }
 
       .admin-action-card h4 {
         margin: 0;
         color: var(--brand-950);
-        font-size: 18px;
+        font-size: 20px;
       }
 
       .admin-action-card p {
         margin: 14px 0 0;
         color: var(--ink-500);
-        font-size: 14px;
+        font-size: 15px;
         line-height: 1.6;
       }
 
@@ -1185,6 +1339,48 @@
         gap: 14px;
       }
 
+      .admin-upload-row.upload-main-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: stretch;
+      }
+
+      .admin-upload-row.upload-emphasis > *,
+      .admin-upload-row.compact-actions > * {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      .admin-upload-row.upload-emphasis .admin-file-field.is-picker {
+        flex: 1.2 1 0;
+      }
+
+      .admin-upload-row.upload-main-row .admin-file-field.is-picker {
+        flex: unset;
+      }
+
+      .admin-upload-row.upload-emphasis .admin-main-button,
+      .admin-upload-row.upload-emphasis .button-link {
+        flex: 0.9 1 0;
+      }
+
+      .admin-upload-row.upload-main-row .admin-main-button,
+      .admin-upload-row.upload-main-row .button-link {
+        flex: unset;
+      }
+
+      .admin-upload-row.upload-main-row .button-link {
+        grid-column: 1 / 3;
+      }
+
+      .admin-upload-row.upload-main-row .admin-file-field {
+        grid-column: 1 / 2;
+      }
+
+      .admin-upload-row.upload-main-row .admin-main-button {
+        grid-column: 2 / 3;
+      }
+
       .admin-file-field,
       .admin-password-field {
         flex: 1 1 auto;
@@ -1196,35 +1392,123 @@
       }
 
       .admin-file-field {
+        position: relative;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         color: var(--ink-700);
         font-size: 14px;
         overflow: hidden;
-      }
-
-      .admin-file-field.compact {
-        height: 48px;
-        padding: 0 16px;
-        border-radius: 16px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: 700;
       }
 
       .admin-file-field input {
+        position: absolute;
+        inset: 0;
         width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .admin-file-field span {
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .admin-file-field.is-picker {
+        background: #f7faff;
+        color: #3556a8;
+        padding: 0 14px;
+      }
+
+      .admin-file-field.is-picker span {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        line-height: 1.25;
+        font-size: 13px;
       }
 
       .admin-upload-row.upload-emphasis .admin-file-field {
-        height: 68px;
+        height: 62px;
         padding: 0 22px;
         border-radius: 20px;
         font-size: 15px;
       }
 
-      .admin-upload-row.upload-emphasis .admin-main-button {
-        min-width: 190px;
-        height: 68px;
+      .admin-upload-row.upload-emphasis .admin-main-button,
+      .admin-upload-row.upload-emphasis .button-link {
+        min-width: 0;
+        height: 62px;
         border-radius: 20px;
+        font-size: 16px;
+      }
+
+      .admin-upload-row.upload-main-row .admin-file-field,
+      .admin-upload-row.upload-main-row .admin-main-button,
+      .admin-upload-row.upload-main-row .button-link {
+        height: 70px;
+        border-radius: 22px;
+      }
+
+      .admin-upload-row.upload-main-row .admin-file-field {
+        padding: 0 24px;
+        justify-content: center;
+        border: 1px solid #c8d7f0;
+        background: linear-gradient(180deg, #f8fbff, #eef4ff);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      .admin-upload-row.upload-main-row .admin-file-field span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 17px;
+        font-weight: 700;
+        color: #3556a8;
+        text-align: center;
+      }
+
+      .admin-upload-row.upload-main-row .admin-main-button,
+      .admin-upload-row.upload-main-row .button-link {
+        font-size: 18px;
+      }
+
+      .admin-upload-row.compact-actions {
+        align-items: stretch;
+      }
+
+      .admin-upload-row.compact-actions .admin-file-field,
+      .admin-upload-row.compact-actions .admin-main-button,
+      .admin-upload-row.compact-actions .button-link {
+        height: 52px;
+      }
+
+      .admin-single-action {
+        margin-top: 18px;
+      }
+
+      .admin-single-action .admin-main-button {
+        width: 100%;
+        height: 48px;
+        border-radius: 18px;
+        font-size: 15px;
+      }
+
+      .admin-approve-row .admin-password-field {
+        height: 48px;
+      }
+
+      .admin-approve-row .admin-main-button {
+        min-width: 148px;
+        height: 48px;
+        font-size: 15px;
       }
 
       .admin-main-button {
@@ -1427,39 +1711,6 @@
         font-size: 12px;
       }
 
-      .admin-sub-upload-grid {
-        display: grid;
-        gap: 14px;
-        margin-top: 18px;
-      }
-
-      .sub-upload-card {
-        padding: 16px 18px;
-        border-radius: 20px;
-        background: #f7faff;
-        border: 1px solid #dbe5f3;
-      }
-
-      .sub-upload-card strong {
-        display: block;
-        font-size: 15px;
-        color: var(--brand-950);
-      }
-
-      .sub-upload-card span {
-        display: block;
-        margin-top: 6px;
-        font-size: 12px;
-        color: var(--ink-500);
-      }
-
-      .sub-upload-row {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        margin-top: 14px;
-      }
-
       .preview-button {
         min-width: 96px;
         height: 40px;
@@ -1485,9 +1736,9 @@
       .preview-dialog {
         width: min(980px, 100%);
         max-height: 90vh;
-        padding: 22px;
+        padding: 26px;
         overflow: auto;
-        border-radius: 28px;
+        border-radius: 30px;
         background: #fff;
         box-shadow: 0 24px 48px rgba(8, 21, 46, 0.28);
       }
@@ -1502,12 +1753,13 @@
 
       .preview-dialog-head h3 {
         margin: 0;
-        font-size: 22px;
+        font-size: 26px;
       }
 
       .preview-dialog-head p {
         margin: 8px 0 0;
         color: var(--ink-700);
+        font-size: 16px;
         line-height: 1.6;
       }
 
@@ -1528,29 +1780,25 @@
         background: #f4f8ff;
       }
 
-      .preview-image-surface,
-      .inline-template-preview {
-        margin-top: 18px;
-        padding: 18px;
-        border-radius: 24px;
-        background: linear-gradient(180deg, #edf6ff, #dfefff);
-        border: 1px solid #d4e4fb;
-      }
-
-      .preview-image,
-      .template-preview-image {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        border: 1px solid #cfe0f7;
-        background: #ffffff;
-        box-shadow: 0 18px 36px rgba(15, 58, 128, 0.12);
-      }
-
       @media (max-width: 1180px) {
         .summary-grid {
           grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .admin-action-card.upload-card-wide {
+          grid-column: span 1;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .admin-upload-row.upload-main-row {
+          grid-template-columns: 1fr;
+        }
+
+        .admin-upload-row.upload-main-row .button-link,
+        .admin-upload-row.upload-main-row .admin-file-field,
+        .admin-upload-row.upload-main-row .admin-main-button {
+          grid-column: 1 / 2;
         }
       }
 
@@ -1616,8 +1864,7 @@
         .status-actions,
         .resource-card,
         .admin-upload-row,
-        .admin-approve-row,
-        .sub-upload-row {
+        .admin-approve-row {
           flex-direction: column;
           align-items: stretch;
         }
@@ -1654,6 +1901,7 @@
 
       const LOGIN_USER_STORAGE_KEY = "promo-login-users";
       const LOGIN_USER_UPDATED_AT_STORAGE_KEY = "promo-login-users-updated-at";
+      const PROMO_MONTHLY_STORAGE_KEY = "promo-monthly-dashboard-state";
 
       const monthOptions = ["2026.06", "2026.05", "2026.04", "2026.03", "2026.02", "2026.01"];
 
@@ -1721,6 +1969,38 @@
           window.localStorage.setItem(LOGIN_USER_UPDATED_AT_STORAGE_KEY, updatedAt);
         } catch (error) {
           console.error("권한 사번 목록 저장 실패", error);
+        }
+      }
+
+      function loadStoredPromoDashboardState() {
+        try {
+          const saved = window.localStorage.getItem(PROMO_MONTHLY_STORAGE_KEY);
+          if (!saved) return null;
+          const parsed = JSON.parse(saved);
+          return parsed && typeof parsed === "object" ? parsed : null;
+        } catch (error) {
+          console.error("?붾퀎 ?낅줈???곹깭 濡쒕뱶 ?ㅽ뙣", error);
+          return null;
+        }
+      }
+
+      function saveStoredPromoDashboardState() {
+        try {
+          window.localStorage.setItem(PROMO_MONTHLY_STORAGE_KEY, JSON.stringify({
+            promotions: state.promotions,
+            selectedMonth: state.selectedMonth,
+            templateForms: state.templateForms,
+            monthMetaMap: state.monthMetaMap,
+            monthBlocksMap: state.monthBlocksMap,
+            monthNoticeMap: state.monthNoticeMap,
+            monthUploadFileMap: state.monthUploadFileMap,
+            monthExcelUpdatedAtMap: state.monthExcelUpdatedAtMap,
+            monthGeneratedAtMap: state.monthGeneratedAtMap,
+            monthApprovedAtMap: state.monthApprovedAtMap,
+            monthUploadModeMap: state.monthUploadModeMap
+          }));
+        } catch (error) {
+          console.error("?붾퀎 議고쉶 ?곗씠?곕? ���옣?섎뒗 ?以??ㅻ쪟媛 諛쒖깮?덉뒿?덈떎.", error);
         }
       }
 
@@ -1808,11 +2088,25 @@
       }
 
       function normalizeMonthValue(value) {
-        if (!value) return "2026.06";
-        const text = String(value);
-        const match = text.match(/(20\d{2})\D?(\d{1,2})/);
-        if (!match) return "2026.06";
-        return `${match[1]}.${match[2].padStart(2, "0")}`;
+        if (!value && value !== 0) return "2026.06";
+        const text = String(value).trim();
+        const yearMonthMatch = text.match(/(20\d{2})\D{0,3}(\d{1,2})/);
+        if (yearMonthMatch) {
+          return `${yearMonthMatch[1]}.${yearMonthMatch[2].padStart(2, "0")}`;
+        }
+
+        const monthOnlyMatch = text.match(/(^|[^0-9])(\d{1,2})\s*월/);
+        if (monthOnlyMatch) {
+          return `2026.${monthOnlyMatch[2].padStart(2, "0")}`;
+        }
+
+        const compact = text.replace(/\s+/g, "");
+        const decimalLikeMatch = compact.match(/^(20\d{2})\.(\d{1,2})$/);
+        if (decimalLikeMatch) {
+          return `${decimalLikeMatch[1]}.${decimalLikeMatch[2].padStart(2, "0")}`;
+        }
+
+        return "2026.06";
       }
 
       function normalizePromotion(item, index) {
@@ -1844,6 +2138,11 @@
         return seedPromotions.map((item, index) => normalizePromotion(item, index));
       }
 
+      const storedPromoDashboardState = loadStoredPromoDashboardState();
+      const initialPromotions = Array.isArray(storedPromoDashboardState?.promotions) && storedPromoDashboardState.promotions.length
+        ? storedPromoDashboardState.promotions.map((item, index) => normalizePromotion(item, index))
+        : getInitialPromotions();
+
       const state = {
         currentUser: null,
         uploadedLoginUsers: loadStoredLoginUsers(),
@@ -1856,29 +2155,117 @@
         agencyQuery: "",
         sortField: "status",
         sortDirection: "desc",
-        promotions: getInitialPromotions(),
-        selectedMonth: "2026.06",
+        promotions: initialPromotions,
+        selectedMonth: storedPromoDashboardState?.selectedMonth || initialPromotions[0]?.month || "2026.06",
         period: "직전 6개월",
         excelUpdatedAt: "2026-06-16 09:20",
+        selectedUploadDownloadUrl: "",
         generatedAt: "",
         approvedAt: "",
         selectedUploadFileName: "6월_프로모션_입력샘플_20260617.xlsx",
+        sampleTemplateFileName: "6월_프로모션_입력샘플_20260617.xlsx",
+        sampleTemplateDownloadUrl: "./outputs/ga-promotion-template/6월_프로모션_입력샘플_20260617.xlsx",
+        sampleTemplateUpdatedAt: "",
         uploadMeta: createDefaultUploadMeta(),
         uploadBlocks: createDefaultUploadBlocks(),
         uploadNoticeLines: createDefaultNoticeLines(),
         uploadMode: "template",
-        templateForms: {},
+        refundFileName: "",
+        refundDownloadUrl: "",
+        refundUpdatedAt: "",
+        templateForms: storedPromoDashboardState?.templateForms || {},
+        monthMetaMap: storedPromoDashboardState?.monthMetaMap || {},
+        monthBlocksMap: storedPromoDashboardState?.monthBlocksMap || {},
+        monthNoticeMap: storedPromoDashboardState?.monthNoticeMap || {},
+        monthUploadFileMap: storedPromoDashboardState?.monthUploadFileMap || {},
+        monthUploadDownloadUrlMap: {},
+        monthExcelUpdatedAtMap: storedPromoDashboardState?.monthExcelUpdatedAtMap || {},
+        monthGeneratedAtMap: storedPromoDashboardState?.monthGeneratedAtMap || {},
+        monthApprovedAtMap: storedPromoDashboardState?.monthApprovedAtMap || {},
+        monthUploadModeMap: storedPromoDashboardState?.monthUploadModeMap || {},
         adminPanelOpen: false,
         previewItemId: null,
         showTemplatePreview: false,
-        showAdminPreviewList: false,
-        uploadedAgencyStatusFileName: "업로드 전",
-        uploadedAgencyStatusUrl: "",
-        uploadedAgencyStatusUpdatedAt: "",
-        uploadedRefundFileName: "업로드 전",
-        uploadedRefundUrl: "",
-        uploadedRefundUpdatedAt: ""
+        showAdminPreviewList: false
       };
+
+      function getAvailableMonths() {
+        const monthSet = new Set(monthOptions);
+        state.promotions.forEach((item) => {
+          if (item?.month) monthSet.add(normalizeMonthValue(item.month));
+        });
+        Object.keys(state.monthMetaMap || {}).forEach((month) => {
+          if (month) monthSet.add(normalizeMonthValue(month));
+        });
+        return [...monthSet].sort((a, b) => b.localeCompare(a, "ko"));
+      }
+
+      function syncMonthScopedUploadState(monthValue) {
+        const month = normalizeMonthValue(monthValue || state.selectedMonth);
+        const defaultMeta = {
+          ...createDefaultUploadMeta(),
+          month,
+          generatedTitle: toPromotionTitle(month)
+        };
+
+        state.uploadMeta = state.monthMetaMap[month]
+          ? { ...defaultMeta, ...state.monthMetaMap[month] }
+          : defaultMeta;
+        state.uploadBlocks = Array.isArray(state.monthBlocksMap[month]) && state.monthBlocksMap[month].length
+          ? state.monthBlocksMap[month]
+          : createDefaultUploadBlocks();
+        state.uploadNoticeLines = Array.isArray(state.monthNoticeMap[month]) && state.monthNoticeMap[month].length
+          ? state.monthNoticeMap[month]
+          : createDefaultNoticeLines();
+        state.selectedUploadFileName = state.monthUploadFileMap[month] || "업로드된 파일 없음";
+        state.selectedUploadDownloadUrl = state.monthUploadDownloadUrlMap[month] || "";
+        state.excelUpdatedAt = state.monthExcelUpdatedAtMap[month] || "";
+        state.generatedAt = state.monthGeneratedAtMap[month] || "";
+        state.approvedAt = state.monthApprovedAtMap[month] || "";
+        state.uploadMode = state.monthUploadModeMap[month] || "template";
+      }
+
+      function getNextPromotionId(items = state.promotions) {
+        return items.reduce((maxId, item) => Math.max(maxId, Number(item.id) || 0), 0) + 1;
+      }
+
+      function mergeUploadedPromotionsByMonth(parsed, month, updatedAt) {
+        const targetMonth = normalizeMonthValue(month);
+        const preservedPromotions = state.promotions.filter((item) => item.month !== targetMonth);
+        const preservedIdSet = new Set(preservedPromotions.map((item) => Number(item.id)));
+        const nextTemplateForms = Object.fromEntries(
+          Object.entries(state.templateForms || {}).filter(([itemId]) => preservedIdSet.has(Number(itemId)))
+        );
+        const nextPromotions = [...preservedPromotions];
+        const idMap = new Map();
+        let nextId = getNextPromotionId(preservedPromotions);
+
+        parsed.promotions.forEach((item) => {
+          const newId = nextId++;
+          idMap.set(Number(item.id), newId);
+          nextPromotions.push({
+            ...item,
+            id: newId,
+            month: targetMonth,
+            generated: false,
+            updatedAt
+          });
+        });
+
+        Object.entries(parsed.templateForms || {}).forEach(([itemId, templateData]) => {
+          const mappedId = idMap.get(Number(itemId));
+          if (mappedId) {
+            nextTemplateForms[mappedId] = templateData;
+          }
+        });
+
+        return {
+          promotions: nextPromotions,
+          templateForms: nextTemplateForms
+        };
+      }
+
+      syncMonthScopedUploadState(state.selectedMonth);
 
       function getStatusClass(status) {
         if (status === "확정") return "confirmed";
@@ -1894,6 +2281,21 @@
           error: data.filter((item) => item.status === "오류").length,
           updatedToday: data.filter((item) => item.updatedAt.startsWith("2026-06-16")).length
         };
+      }
+
+      function getLatestUpdatedAt(data) {
+        if (!Array.isArray(data) || !data.length) return "";
+        return data
+          .map((item) => normalizeCellText(item.updatedAt))
+          .filter(Boolean)
+          .sort((a, b) => b.localeCompare(a))[0] || "";
+      }
+
+      function formatFinalAppliedDate(value) {
+        const normalized = normalizeCellText(value);
+        const match = normalized.match(/(\d{4})-(\d{2})-(\d{2})/);
+        if (!match) return "0000.00.00";
+        return `${match[1]}.${match[2]}.${match[3]}`;
       }
 
       function getNowStamp() {
@@ -1944,269 +2346,11 @@
         const previewData = getPreviewTemplateData();
         if (previewData) return previewData;
 
+        const monthTemplateItem = state.promotions.find((item) => item.month === state.selectedMonth && state.templateForms[item.id]);
+        if (monthTemplateItem) return state.templateForms[monthTemplateItem.id];
+
         const firstTemplateItem = state.promotions.find((item) => state.templateForms[item.id]);
         return firstTemplateItem ? state.templateForms[firstTemplateItem.id] : getBaseTemplateData();
-      }
-
-      function splitTemplateList(value) {
-        return String(value || "")
-          .split(",")
-          .map((item) => normalizeCellText(item))
-          .filter(Boolean);
-      }
-
-      function splitTemplateRows(value) {
-        return String(value || "")
-          .split(/\n+/)
-          .map((row) => normalizeCellText(row))
-          .filter(Boolean);
-      }
-
-      function splitTemplateRowCells(rowText) {
-        const separator = rowText.includes("|") ? "|" : ",";
-        return rowText
-          .split(separator)
-          .map((cell) => normalizeCellText(cell))
-          .filter((cell, index, array) => cell || index < array.length - 1);
-      }
-
-      function splitFooterLines(value) {
-        return String(value || "")
-          .split("/")
-          .map((line) => normalizeCellText(line))
-          .filter(Boolean)
-          .slice(0, 3);
-      }
-
-      function wrapSvgLine(text, maxChars = 34) {
-        const source = normalizeCellText(text);
-        if (!source) return [];
-        if (source.length <= maxChars) return [source];
-
-        const words = source.split(" ");
-        if (words.length === 1) {
-          const lines = [];
-          for (let index = 0; index < source.length; index += maxChars) {
-            lines.push(source.slice(index, index + maxChars));
-          }
-          return lines;
-        }
-
-        const lines = [];
-        let current = "";
-        words.forEach((word) => {
-          const next = current ? `${current} ${word}` : word;
-          if (next.length <= maxChars) {
-            current = next;
-            return;
-          }
-          if (current) lines.push(current);
-          current = word;
-        });
-        if (current) lines.push(current);
-        return lines;
-      }
-
-      function renderSvgMultiline(text, x, y, options = {}) {
-        const lines = Array.isArray(text) ? text : wrapSvgLine(text, options.maxChars || 34);
-        const fontSize = options.fontSize || 22;
-        const lineHeight = options.lineHeight || fontSize + 10;
-        const fill = options.fill || "#17324d";
-        const fontWeight = options.fontWeight || 400;
-        const anchor = options.anchor || "start";
-        const family = "Malgun Gothic, Segoe UI, sans-serif";
-
-        return lines.map((line, index) => `
-          <text
-            x="${x}"
-            y="${y + (index * lineHeight)}"
-            text-anchor="${anchor}"
-            font-size="${fontSize}"
-            font-family="${family}"
-            fill="${fill}"
-            font-weight="${fontWeight}"
-          >${escapeSvgText(line)}</text>
-        `).join("");
-      }
-
-      function buildTemplateSections(templateData) {
-        return [1, 2, 3, 4]
-          .map((index) => {
-            const title = normalizeCellText(templateData[`section${index}Title`]);
-            const round = normalizeCellText(templateData[`section${index}Round`]);
-            const max = normalizeCellText(templateData[`section${index}Max`]);
-            const headers = splitTemplateList(templateData[`section${index}Headers`]);
-            const rows = splitTemplateRows(templateData[`section${index}Rows`]).map(splitTemplateRowCells);
-            const note = normalizeCellText(templateData[`section${index}Note`]);
-            if (!title && !headers.length && !rows.length) return null;
-            return { title, round, max, headers, rows, note, index };
-          })
-          .filter(Boolean);
-      }
-
-      function buildTemplatePreviewSvg(templateData) {
-        const data = templateData || getBaseTemplateData() || {};
-        const sections = buildTemplateSections(data);
-        const footerLines = splitFooterLines(data.footerBanner);
-        let cursorY = 212;
-
-        const sectionMarkup = sections.map((section) => {
-          const headerHeight = 54;
-          const tableTop = cursorY + headerHeight + 18;
-          const rowCount = Math.max(section.rows.length, 1);
-          const noteLines = section.note ? wrapSvgLine(section.note, 92) : [];
-          const rowHeight = section.index === 3 ? 56 : 52;
-          const tableHeight = 52 + (rowCount * rowHeight);
-          const noteHeight = noteLines.length ? (noteLines.length * 26) + 24 : 0;
-          const cardHeight = headerHeight + 18 + tableHeight + noteHeight + 26;
-
-          const columns = Math.max(section.headers.length, section.rows[0]?.length || 1);
-          const maxBoxWidth = section.max ? 152 : 0;
-          const tableX = 46 + maxBoxWidth;
-          const tableWidth = 988 - maxBoxWidth;
-          const cellWidth = tableWidth / Math.max(columns, 1);
-
-          let grid = "";
-          if (section.max) {
-            grid += `
-              <rect x="46" y="${tableTop}" width="${maxBoxWidth}" height="${tableHeight}" rx="16" fill="#0f6fe9" stroke="#f5d829" stroke-width="4"/>
-              ${renderSvgMultiline(section.max, 122, tableTop + 82, { fontSize: 30, lineHeight: 34, fill: "#ffe600", fontWeight: 800, anchor: "middle", maxChars: 8 })}
-            `;
-          }
-
-          grid += `
-            <rect x="${tableX}" y="${tableTop}" width="${tableWidth}" height="${tableHeight}" rx="16" fill="#ffffff" stroke="#bfd8ff" stroke-width="2"/>
-          `;
-
-          for (let columnIndex = 0; columnIndex < columns; columnIndex += 1) {
-            const x = tableX + (columnIndex * cellWidth);
-            grid += `<line x1="${x}" y1="${tableTop}" x2="${x}" y2="${tableTop + tableHeight}" stroke="#c8daf7" stroke-width="2"/>`;
-          }
-          grid += `<line x1="${tableX + tableWidth}" y1="${tableTop}" x2="${tableX + tableWidth}" y2="${tableTop + tableHeight}" stroke="#c8daf7" stroke-width="2"/>`;
-
-          grid += `<rect x="${tableX}" y="${tableTop}" width="${tableWidth}" height="52" fill="#f2f7ff"/>`;
-          grid += `<line x1="${tableX}" y1="${tableTop + 52}" x2="${tableX + tableWidth}" y2="${tableTop + 52}" stroke="#c8daf7" stroke-width="2"/>`;
-
-          section.headers.forEach((header, headerIndex) => {
-            const textX = tableX + (headerIndex * cellWidth) + (cellWidth / 2);
-            grid += renderSvgMultiline(header, textX, tableTop + 33, {
-              fontSize: 20,
-              lineHeight: 24,
-              fill: "#49576f",
-              fontWeight: 700,
-              anchor: "middle",
-              maxChars: 10
-            });
-          });
-
-          section.rows.forEach((row, rowIndex) => {
-            const lineY = tableTop + 52 + (rowIndex * rowHeight);
-            grid += `<line x1="${tableX}" y1="${lineY}" x2="${tableX + tableWidth}" y2="${lineY}" stroke="#c8daf7" stroke-width="2"/>`;
-            row.forEach((cell, cellIndex) => {
-              const cellX = tableX + (cellIndex * cellWidth) + (cellWidth / 2);
-              grid += renderSvgMultiline(cell, cellX, lineY + 32, {
-                fontSize: 22,
-                lineHeight: 26,
-                fill: cellIndex === 0 ? "#1f3d63" : "#1671e8",
-                fontWeight: cellIndex === 0 ? 700 : 800,
-                anchor: "middle",
-                maxChars: 10
-              });
-            });
-          });
-
-          if (noteLines.length) {
-            grid += renderSvgMultiline(noteLines, 58, tableTop + tableHeight + 28, {
-              fontSize: 16,
-              lineHeight: 22,
-              fill: "#243f61",
-              fontWeight: 600,
-              maxChars: 92
-            });
-          }
-
-          const markup = `
-            <g>
-              <rect x="28" y="${cursorY}" width="1024" height="${cardHeight}" rx="24" fill="rgba(255,255,255,0.92)" stroke="#8ac0ff" stroke-width="2"/>
-              <rect x="28" y="${cursorY}" width="1024" height="${headerHeight}" rx="24" fill="#0f75ea"/>
-              <text x="540" y="${cursorY + 36}" text-anchor="middle" font-size="32" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffe600" font-weight="800">${escapeSvgText(section.title)}</text>
-              <text x="1008" y="${cursorY + 36}" text-anchor="end" font-size="28" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="800">${escapeSvgText(section.round)}</text>
-              ${grid}
-            </g>
-          `;
-          cursorY += cardHeight + 22;
-          return markup;
-        }).join("");
-
-        const footerY = cursorY;
-        const footerHeight = 116 + (footerLines.length * 28);
-        const canvasHeight = footerY + footerHeight + 32;
-        const headerProduct = renderSvgMultiline(data.subTitle, 42, 112, {
-          fontSize: 22,
-          lineHeight: 28,
-          fill: "#e9f6ff",
-          fontWeight: 700,
-          maxChars: 44
-        });
-        const branchNoteLines = wrapSvgLine(data.branchNote, 10);
-
-        return `
-          <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="${canvasHeight}" viewBox="0 0 1080 ${canvasHeight}">
-            <defs>
-              <linearGradient id="skyBg" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="#0f7ef3"/>
-                <stop offset="100%" stop-color="#6bc6ff"/>
-              </linearGradient>
-            </defs>
-            <rect width="1080" height="${canvasHeight}" fill="url(#skyBg)"/>
-            <rect x="0" y="0" width="1080" height="154" fill="#0c74eb"/>
-            <rect x="820" y="22" width="226" height="110" rx="18" fill="#ffffff" />
-            <text x="38" y="66" font-size="38" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="800">${escapeSvgText(data.brandName || "삼성생명")}</text>
-            <text x="250" y="66" font-size="54" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffe600" font-weight="900">${escapeSvgText(data.mainTitle || "26.6월 프로모션")}</text>
-            ${headerProduct}
-            ${renderSvgMultiline(data.branchName || "GA코리아", 933, 68, { fontSize: 28, lineHeight: 32, fill: "#14243d", fontWeight: 800, anchor: "middle", maxChars: 10 })}
-            ${renderSvgMultiline(branchNoteLines, 933, 102, { fontSize: 24, lineHeight: 28, fill: "#14243d", fontWeight: 800, anchor: "middle", maxChars: 12 })}
-
-            <g>
-              <rect x="28" y="154" width="1024" height="44" rx="22" fill="#ffffff" opacity="0.96"/>
-              <rect x="42" y="164" width="90" height="26" rx="13" fill="#2fb357"/>
-              <text x="87" y="182" text-anchor="middle" font-size="16" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="800">${escapeSvgText(data.summaryLabel || "익월")}</text>
-              <rect x="44" y="168" width="130" height="88" rx="0" fill="#ffe54f" stroke="#d6b900" stroke-width="3"/>
-              <text x="108" y="226" text-anchor="middle" font-size="30" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#164996" font-weight="900">${escapeSvgText(data.summaryMax || "500%")}</text>
-              <text x="540" y="186" text-anchor="middle" font-size="28" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffe600" font-weight="900">${escapeSvgText(data.summaryTitle || "정규 시상")}</text>
-              <text x="420" y="242" text-anchor="middle" font-size="60" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#156fe7" font-weight="900">${escapeSvgText(data.summaryLeft || "300%")}</text>
-              <text x="646" y="240" text-anchor="middle" font-size="52" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ff3152" font-weight="900">+</text>
-              <rect x="676" y="206" width="126" height="28" rx="14" fill="#ef2f3f"/>
-              <text x="739" y="225" text-anchor="middle" font-size="14" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="800">${escapeSvgText(data.summaryPill || "")}</text>
-              <text x="922" y="242" text-anchor="middle" font-size="60" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#156fe7" font-weight="900">${escapeSvgText(data.summaryRight || "700%")}</text>
-            </g>
-
-            ${sectionMarkup}
-
-            <g>
-              <rect x="28" y="${footerY}" width="1024" height="${footerHeight}" rx="22" fill="#ffffff" opacity="0.96"/>
-              <rect x="48" y="${footerY + 24}" width="130" height="58" rx="16" fill="#246fe4"/>
-              <text x="113" y="${footerY + 61}" text-anchor="middle" font-size="26" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="800">유의사항</text>
-              ${renderSvgMultiline(footerLines.map((line, index) => `${index + 1}. ${line}`), 210, footerY + 58, {
-                fontSize: 19,
-                lineHeight: 30,
-                fill: "#182c47",
-                fontWeight: 600,
-                maxChars: 78
-              })}
-            </g>
-          </svg>
-        `;
-      }
-
-      function buildTemplatePreviewUrl(templateData) {
-        const svg = buildTemplatePreviewSvg(templateData);
-        return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-      }
-
-      function getTemplatePreviewImageSrc(templateData = getActiveTemplateData()) {
-        if (!templateData) return "";
-        return buildTemplatePreviewUrl(templateData);
       }
 
       function syncTemplateFrame(frame, templateData) {
@@ -2254,6 +2398,19 @@
           const target = compactCellText(candidate);
           const index = normalizedHeaders.findIndex((header) => header.includes(target));
           if (index >= 0) return index;
+        }
+        return fallbackIndex;
+      }
+
+      function findColumnIndexAcrossRows(rows, candidates, startIndex = 0, endIndex = 8, fallbackIndex = -1) {
+        if (!Array.isArray(rows) || !rows.length) return fallbackIndex;
+        for (let rowIndex = startIndex; rowIndex < Math.min(rows.length, endIndex); rowIndex += 1) {
+          const row = (rows[rowIndex] || []).map(normalizeCellText);
+          const fallback = row.length;
+          const index = findColumnIndex(row, candidates, fallback);
+          if (index >= 0 && index < row.length) {
+            return index;
+          }
         }
         return fallbackIndex;
       }
@@ -2312,6 +2469,114 @@
         return workbook.SheetNames.find((name) => compactCellText(name).includes(compactKeyword)) || "";
       }
 
+      function normalizeUploadStatus(value, hasMetrics = false) {
+        const normalized = compactCellText(value).toUpperCase();
+        if (["○", "O", "확정"].includes(normalized)) return "확정";
+        if (["X", "미확정"].includes(normalized)) return "미확정";
+        if (normalized.includes("오류")) return "오류";
+        return hasMetrics ? "확정" : "미확정";
+      }
+
+      function normalizeDivisionName(value) {
+        return normalizeCellText(value).replace(/^GA/, "");
+      }
+
+      function normalizeBranchName(value) {
+        return normalizeCellText(value)
+          .replace(/^GA/, "")
+          .replace(/(직할)?지점$/, "")
+          .replace(/지사$/, "")
+          .trim();
+      }
+
+      function normalizeBranchMatchKey(value) {
+        return compactCellText(normalizeBranchName(value));
+      }
+
+      function normalizeDivisionName(value) {
+        return normalizeCellText(value)
+          .replace(/^GA\s*/i, "")
+          .trim();
+      }
+
+      function normalizeBranchName(value) {
+        return normalizeCellText(value)
+          .replace(/^GA\s*/i, "")
+          .replace(/\s+/g, "")
+          .replace(/직할지점$/u, "")
+          .replace(/직할지사$/u, "")
+          .replace(/지점$/u, "")
+          .replace(/지사$/u, "")
+          .trim();
+      }
+
+      function findSimpleDataHeaderInfo(rows) {
+        const defaultInfo = {
+          headerIndex: 3,
+          statusIndex: 0,
+          codeIndex: 1,
+          agencyIndex: 2,
+          branchIndex: -1,
+          dataStartIndex: 6
+        };
+
+        if (!Array.isArray(rows) || !rows.length) {
+          return defaultInfo;
+        }
+
+        const headerIndex = rows.findIndex((row) => {
+          const cells = (row || []).map(compactCellText);
+          return cells.some((cell) => cell.includes("코드"))
+            && cells.some((cell) => cell.includes("GA명") || cell.includes("GA지사"));
+        });
+
+        if (headerIndex < 0) {
+          return defaultInfo;
+        }
+
+        const headerRow = (rows[headerIndex] || []).map(normalizeCellText);
+        const statusIndex = findColumnIndex(headerRow, ["최종확정여부", "확정여부", "상태"], 0);
+        const codeIndex = findColumnIndex(headerRow, ["코드", "등록코드"], 1);
+        const agencyIndex = findColumnIndex(headerRow, ["GA지사", "GA명", "대리점명", "조직명"], 2);
+        const branchIndex = (() => {
+          const fallback = headerRow.length;
+          const index = findColumnIndex(headerRow, ["관리지점", "관리지점명", "관리지사", "담당지점", "지점", "담당지사", "지사"], fallback);
+          return index >= headerRow.length ? -1 : index;
+        })();
+
+        let dataStartIndex = headerIndex + 1;
+        while (dataStartIndex < rows.length) {
+          const row = rows[dataStartIndex] || [];
+          const code = normalizeCellText(row[codeIndex]);
+          const agency = normalizeCellText(row[agencyIndex]);
+          const status = normalizeCellText(row[statusIndex]);
+          const hasAnyCell = row.some((cell) => normalizeCellText(cell));
+          const isHeaderLike = ["코드", "GA명", "GA지사", "최종확정여부", "확정여부", "상태"].includes(code)
+            || ["코드", "GA명", "GA지사", "최종확정여부", "확정여부", "상태"].includes(agency)
+            || ["코드", "GA명", "GA지사", "최종확정여부", "확정여부", "상태"].includes(status);
+
+          if (!hasAnyCell || isHeaderLike) {
+            dataStartIndex += 1;
+            continue;
+          }
+
+          if (code || agency) {
+            break;
+          }
+
+          dataStartIndex += 1;
+        }
+
+        return {
+          headerIndex,
+          statusIndex,
+          codeIndex,
+          agencyIndex,
+          branchIndex,
+          dataStartIndex
+        };
+      }
+
       function buildTableLookup(rows, dataStartIndex) {
         const lookup = new Map();
         rows.slice(dataStartIndex).forEach((row) => {
@@ -2324,17 +2589,49 @@
       }
 
       function buildOrgLookup(rows) {
-        const lookup = new Map();
-        rows.slice(1).forEach((row) => {
-          const registrationCode = normalizeCellText(row[7]);
-          if (!registrationCode || lookup.has(registrationCode)) return;
-          lookup.set(registrationCode, {
-            divisionName: normalizeCellText(row[3]).replace(/^GA/, ""),
-            branchName: normalizeCellText(row[4]).replace(/^GA/, ""),
-            organizationName: normalizeCellText(row[6])
-          });
+        const byCode = new Map();
+        const byAgency = new Map();
+        const byBranch = new Map();
+        if (!Array.isArray(rows) || !rows.length) {
+          return { byCode, byAgency, byBranch };
+        }
+
+        const headerRow = (rows[0] || []).map(normalizeCellText);
+        const hasHeader = headerRow.some((cell) => [
+          "대리점등록번호", "등록번호", "등록코드", "코드", "지점코드", "지역단", "지점", "지점조직명", "GA명", "GA", "대리점명", "조직명"
+        ].includes(compactCellText(cell)));
+
+        const codeIndex = hasHeader ? findColumnIndex(headerRow, ["대리점등록번호", "등록번호", "등록코드", "코드", "지점코드", "조직코드", "본점코드"], 12) : 12;
+        const divisionIndex = hasHeader ? findColumnIndex(headerRow, ["지역단조직명", "지역단", "지역", "지역단명", "division"], 3) : 3;
+        const branchIndex = hasHeader ? findColumnIndex(headerRow, ["지점조직명", "지점명", "지점", "지사", "branch"], 4) : 4;
+        const agencyIndex = hasHeader ? findColumnIndex(headerRow, ["조직명", "GA명", "GA", "대리점명"], 6) : 6;
+
+        const sourceRows = hasHeader ? rows.slice(1) : rows;
+        sourceRows.forEach((row) => {
+          const registrationCode = normalizeCellText(row[codeIndex]);
+          const agencyName = normalizeCellText(row[agencyIndex]);
+          const info = {
+            divisionName: normalizeDivisionName(row[divisionIndex]),
+            branchName: normalizeBranchName(row[branchIndex]),
+            organizationName: agencyName
+          };
+
+          if (registrationCode && !byCode.has(registrationCode)) {
+            byCode.set(registrationCode, info);
+          }
+
+          const agencyKey = normalizeAgencyMatchKey(agencyName);
+          if (agencyKey && !byAgency.has(agencyKey)) {
+            byAgency.set(agencyKey, info);
+          }
+
+          const branchKey = normalizeBranchMatchKey(info.branchName);
+          if (branchKey && !byBranch.has(branchKey)) {
+            byBranch.set(branchKey, info);
+          }
         });
-        return lookup;
+
+        return { byCode, byAgency, byBranch };
       }
 
       function createDefaultUploadMeta() {
@@ -2369,6 +2666,99 @@
         const match = normalized.match(/(\d{4})\.(\d{2})/);
         if (!match) return `${normalized} 프로모션`;
         return `${match[1].slice(2)}.${String(Number(match[2]))}월 프로모션`;
+      }
+
+      function normalizeLegacyBlockTitle(value, fallback = "") {
+        const text = normalizeCellText(value || fallback)
+          .replace(/_/g, " ")
+          .replace(/^[0-9]+\s*[\.\-_)]+\s*/u, "")
+          .replace(/^[①②③④⑤⑥⑦⑧⑨⑩]\s*/u, "")
+          .replace(/\s+/g, " ")
+          .trim();
+        return text || normalizeCellText(fallback);
+      }
+
+      function getBlockDisplay(blocks, index, fallbackTitle = "", fallbackRound = "[13??") {
+        const rawText = normalizeLegacyBlockTitle((blocks || [])[index], fallbackTitle);
+        if (!rawText) {
+          return { title: "", round: "" };
+        }
+
+        const roundMatch = rawText.match(/(\[[^\]]+\])/u);
+        return {
+          title: rawText.replace(/\[[^\]]+\]/gu, "").trim(),
+          round: roundMatch ? roundMatch[1].trim() : fallbackRound
+        };
+      }
+
+      function clearTemplateSection(data, sectionNumber) {
+        const fields = [
+          `section${sectionNumber}Title`,
+          `section${sectionNumber}Round`,
+          `section${sectionNumber}Max`,
+          `section${sectionNumber}Headers`,
+          `section${sectionNumber}Rows`,
+          `section${sectionNumber}Note`
+        ];
+        fields.forEach((field) => {
+          if (field in data) {
+            data[field] = "";
+          }
+        });
+      }
+
+      function applyTemplateBlockLayout(data, blocks, fallbacks = []) {
+        [1, 2, 3, 4].forEach((sectionNumber) => {
+          const fallback = fallbacks[sectionNumber - 1] || {};
+          const block = getBlockDisplay(blocks, sectionNumber, fallback.title || "", fallback.round || "[13??");
+          if (!block.title) {
+            clearTemplateSection(data, sectionNumber);
+            return;
+          }
+
+          data[`section${sectionNumber}Title`] = block.title;
+          if (`section${sectionNumber}Round` in data) {
+            data[`section${sectionNumber}Round`] = block.round;
+          }
+        });
+      }
+
+      function isExplicitMonthSource(value) {
+        const text = String(value ?? "").trim();
+        if (!text) return false;
+        return /(20\d{2})\D{0,3}(\d{1,2})/.test(text) || /(^|[^0-9])(\d{1,2})\s*월/.test(text);
+      }
+
+      function findMonthValueInRows(rows) {
+        if (!Array.isArray(rows)) return "";
+        for (const row of rows.slice(0, 20)) {
+          for (const cell of (row || []).slice(0, 8)) {
+            if (isExplicitMonthSource(cell)) {
+              return normalizeMonthValue(cell);
+            }
+          }
+        }
+        return "";
+      }
+
+      function extractMonthValueFromWorkbook(workbook, fileName = "") {
+        if (isExplicitMonthSource(fileName)) {
+          return normalizeMonthValue(fileName);
+        }
+
+        for (const name of workbook?.SheetNames || []) {
+          if (isExplicitMonthSource(name)) {
+            return normalizeMonthValue(name);
+          }
+        }
+
+        for (const name of workbook?.SheetNames || []) {
+          const rows = sheetToRows(workbook.Sheets[name]);
+          const month = findMonthValueInRows(rows);
+          if (month) return month;
+        }
+
+        return "";
       }
 
       function buildTargetProductsFromRows(rows, indexes = [5, 6]) {
@@ -2456,69 +2846,46 @@
         }) || null;
       }
 
-      function normalizeOrgMatchKey(value) {
-        return normalizeCellText(value)
-          .replace(/^ga/i, "")
-          .replace(/\s+/g, "")
-          .toLowerCase();
-      }
+      function findOrgInfo(orgLookup, code, agency) {
+        if (!orgLookup) return null;
 
-      function ensureGaPrefix(value) {
-        const text = normalizeCellText(value);
-        if (!text) return "";
-        return /^ga/i.test(text) ? text : `GA${text}`;
-      }
+        const codeKey = normalizeCellText(code);
+        if (codeKey && orgLookup.byCode instanceof Map && orgLookup.byCode.has(codeKey)) {
+          return orgLookup.byCode.get(codeKey);
+        }
 
-      function findHeaderRowIndex(rows, requiredGroups = []) {
-        for (let rowIndex = 0; rowIndex < Math.min(rows.length, 12); rowIndex += 1) {
-          const headers = (rows[rowIndex] || []).map(compactCellText);
-          const isMatch = requiredGroups.every((candidates) =>
-            candidates.some((candidate) => headers.some((header) => header.includes(compactCellText(candidate))))
-          );
-          if (isMatch) {
-            return rowIndex;
+        const agencyKey = normalizeAgencyMatchKey(agency);
+        if (agencyKey && orgLookup.byAgency instanceof Map) {
+          if (orgLookup.byAgency.has(agencyKey)) {
+            return orgLookup.byAgency.get(agencyKey);
+          }
+
+          for (const [storedKey, info] of orgLookup.byAgency.entries()) {
+            if (storedKey.includes(agencyKey) || agencyKey.includes(storedKey)) {
+              return info;
+            }
           }
         }
-        return -1;
+
+        return null;
       }
 
-      function buildSimpleOrgLookup(workbook) {
-        const orgSheetName = findSheetName(workbook, "조직");
-        if (!orgSheetName) return new Map();
+      function findOrgInfoByBranch(orgLookup, branch) {
+        if (!orgLookup || !(orgLookup.byBranch instanceof Map)) return null;
+        const branchKey = normalizeBranchMatchKey(branch);
+        if (!branchKey) return null;
 
-        const rows = sheetToRows(workbook.Sheets[orgSheetName]);
-        const headerIndex = findHeaderRowIndex(rows, [["지점", "지점명", "지사", "지사명"], ["지역단", "지역단명"]]);
-        if (headerIndex < 0) return new Map();
+        if (orgLookup.byBranch.has(branchKey)) {
+          return orgLookup.byBranch.get(branchKey);
+        }
 
-        const headers = rows[headerIndex] || [];
-        const branchIndex = findColumnIndex(headers, ["지점명", "지점", "지사명", "지사"], -1);
-        const regionIndex = findColumnIndex(headers, ["지역단명", "지역단"], -1);
-        const lookup = new Map();
+        for (const [storedKey, info] of orgLookup.byBranch.entries()) {
+          if (storedKey.includes(branchKey) || branchKey.includes(storedKey)) {
+            return info;
+          }
+        }
 
-        rows.slice(headerIndex + 1).forEach((row) => {
-          const branch = normalizeCellText(row[branchIndex]);
-          if (!branch) return;
-          lookup.set(normalizeOrgMatchKey(branch), {
-            branch,
-            region: normalizeCellText(row[regionIndex]) || "미지정지역단"
-          });
-        });
-
-        return lookup;
-      }
-
-      function getSimpleWorkbookStatus(row, confirmIndex, pendingIndex) {
-        const confirmValue = compactCellText(row[confirmIndex]);
-        const pendingValue = compactCellText(row[pendingIndex]);
-        const yesSet = new Set(["○", "o", "ok", "y", "yes", "1"]);
-        const noSet = new Set(["x", "×", "미확정", "n", "no", "0"]);
-
-        if (yesSet.has(confirmValue)) return "확정";
-        if (noSet.has(confirmValue)) return "미확정";
-        if (yesSet.has(pendingValue)) return "미확정";
-
-        const hasMetrics = row.some((cell, index) => index > Math.max(confirmIndex, pendingIndex) && normalizeCellText(cell));
-        return hasMetrics ? "확정" : "미확정";
+        return null;
       }
 
       function isSimpleInputWorkbook(workbook) {
@@ -2555,6 +2922,8 @@
 
       function buildSimpleWorkbookDataset(workbook, meta, blocks, noticeLines, rows) {
         const dataSheetName = findSheetName(workbook, "데이터");
+        const orgSheetName = findSheetName(workbook, "조직") || findSheetName(workbook, "GA지사현황");
+        const orgLookup = orgSheetName ? buildOrgLookup(sheetToRows(workbook.Sheets[orgSheetName])) : null;
         if (!dataSheetName) {
           const sampleItem = {
             id: 1,
@@ -2581,44 +2950,52 @@
           };
         }
 
-        const dataSheetRows = sheetToRows(workbook.Sheets[dataSheetName]);
-        const headerIndex = findHeaderRowIndex(dataSheetRows, [["코드"], ["ga명", "대리점명", "대리점"]]);
-        const headerRow = headerIndex >= 0 ? (dataSheetRows[headerIndex] || []) : [];
-        const orgLookup = buildSimpleOrgLookup(workbook);
-        const confirmIndex = findColumnIndex(headerRow, ["최종확정여부", "확정여부", "확정"], 0);
-        const pendingIndex = findColumnIndex(headerRow, ["미확정"], confirmIndex);
-        const codeIndex = findColumnIndex(headerRow, ["코드"], Math.max(confirmIndex + 1, 1));
-        const agencyIndex = findColumnIndex(headerRow, ["ga명", "대리점명", "대리점"], Math.max(codeIndex + 1, 2));
-        const branchIndex = findColumnIndex(headerRow, ["지점명", "지점", "지사명", "지사"], -1);
-        const dataRows = dataSheetRows
-          .slice(headerIndex >= 0 ? headerIndex + 1 : 7)
-          .filter((row) => normalizeCellText((row || [])[codeIndex] || "") || normalizeCellText((row || [])[agencyIndex] || ""));
+        const rawDataRows = sheetToRows(workbook.Sheets[dataSheetName]);
+        const dataHeaderInfo = findSimpleDataHeaderInfo(rawDataRows);
+        const dataRows = rawDataRows
+          .slice(dataHeaderInfo.dataStartIndex)
+          .filter((row) => (
+            normalizeCellText((row || [])[dataHeaderInfo.codeIndex] || "")
+            || normalizeCellText((row || [])[dataHeaderInfo.agencyIndex] || "")
+          ));
 
         const promotions = [];
         const templateForms = {};
 
         dataRows.forEach((row) => {
-          const code = normalizeCellText(row[codeIndex]) || `SIMPLE-${promotions.length + 1}`;
-          const agency = ensureGaPrefix(normalizeCellText(row[agencyIndex]));
+          const code = normalizeCellText(row[dataHeaderInfo.codeIndex]) || `SIMPLE-${promotions.length + 1}`;
+          const agency = normalizeCellText(row[dataHeaderInfo.agencyIndex]);
           if (!agency) return;
 
           const matched = findAgencySeedInfo(agency);
-          const branchCell = branchIndex >= 0 ? normalizeCellText(row[branchIndex]) : "";
-          const orgInfo = orgLookup.get(normalizeOrgMatchKey(branchCell));
-          const status = getSimpleWorkbookStatus(row, confirmIndex, pendingIndex);
+          const branchFromData = dataHeaderInfo.branchIndex >= 0
+            ? normalizeBranchName(row[dataHeaderInfo.branchIndex])
+            : "";
+          const orgInfo = findOrgInfo(orgLookup, code, agency);
+          const branchName = branchFromData || orgInfo?.branchName || normalizeBranchName(matched?.branch || "") || "전체대리점";
+          const branchMatchedOrg = findOrgInfoByBranch(orgLookup, branchName);
+          const resolvedRegion = branchMatchedOrg?.divisionName || orgInfo?.divisionName || matched?.region || "업로드대상";
+          const resolvedBranch = branchMatchedOrg?.branchName || orgInfo?.branchName || branchName;
+          const hasMetrics = row.some((cell, index) => (
+            ![dataHeaderInfo.statusIndex, dataHeaderInfo.codeIndex, dataHeaderInfo.agencyIndex].includes(index)
+            && normalizeCellText(cell)
+          ));
+          const status = normalizeUploadStatus(row[dataHeaderInfo.statusIndex], hasMetrics);
           const itemId = promotions.length + 1;
           const item = {
             id: itemId,
             code,
-            agency,
-            region: orgInfo?.region || matched?.region || "업로드대상",
-            branch: orgInfo?.branch || branchCell || matched?.branch || "전체대리점",
+            agency: agency || orgInfo?.organizationName || branchMatchedOrg?.organizationName || "업로드대상",
+            region: resolvedRegion,
+            branch: resolvedBranch,
             rm: matched?.rm || "본사담당자",
             product: meta.targetProducts || matched?.product || "프로모션",
             happyType: "",
             month: meta.month,
             status,
-            errorReason: status === "미확정" ? "프로모션 수치 데이터 미입력" : "",
+            errorReason: status === "미확정"
+              ? "프로모션 수치 데이터 미입력"
+              : (status === "오류" ? "업로드 데이터 확인 필요" : ""),
             generated: false,
             updatedAt: getNowStamp(),
             noticeFile: `${agency}_안내장.jpg`
@@ -2645,6 +3022,11 @@
 
         const rows = sheetToRows(workbook.Sheets[secondSheetName]);
         const { meta, blocks } = parseSimpleMetaAndBlocks(rows);
+        const detectedMonth = extractMonthValueFromWorkbook(workbook, fileName);
+        if (detectedMonth) {
+          meta.month = detectedMonth;
+          meta.generatedTitle = toPromotionTitle(detectedMonth);
+        }
         const noticeLines = extractNoticeLines(workbook);
         const dataset = buildSimpleWorkbookDataset(workbook, meta, blocks, noticeLines, rows);
 
@@ -2669,7 +3051,7 @@
         return meta;
       }
 
-      function extractUploadBlocksFromLegacyWorkbook(workbook, mainRows) {
+      /* function extractUploadBlocksFromLegacyWorkbook(workbook, mainRows) {
         const blocks = ["정규시상"];
         if (findSheetName(workbook, "기본가동")) blocks.push("기본가동프로모션");
         if (findSheetName(workbook, "5~6월브릿지")) blocks.push("5~6월 브릿지");
@@ -2786,6 +3168,17 @@
         const promotions = [];
         const templateForms = {};
         const dataRows = mainRows.slice(7).filter((row) => normalizeCellText(row[2]) || normalizeCellText(row[4]));
+        const mainHeaderRows = mainRows.slice(0, 7);
+        const legacyBranchIndex = (() => {
+          const headerRow = mainHeaderRows.find((row) => Array.isArray(row) && row.some((cell) => {
+            const text = compactCellText(cell);
+            return text.includes("관리지점") || text.includes("담당지점") || text === "지점";
+          })) || [];
+          if (!headerRow.length) return 24;
+          const fallback = headerRow.length;
+          const index = findColumnIndex(headerRow.map(normalizeCellText), ["관리지점", "관리지점명", "관리지사", "담당지점", "지점", "담당지사", "지사"], fallback);
+          return index >= headerRow.length ? 24 : index;
+        })();
 
         dataRows.forEach((row, index) => {
           const code = normalizeCellText(row[2]);
@@ -2793,14 +3186,16 @@
           if (!code || !agency) return;
 
           const key = buildPromotionKey(code, agency);
-          const orgInfo = orgLookup.get(code);
+          const orgInfo = orgLookup.byCode instanceof Map ? orgLookup.byCode.get(code) : null;
           const basicRow = basicLookup.get(key);
           const bridge56Row = bridge56Lookup.get(key);
           const bridge67Row = bridge67Lookup.get(key);
           const finalConfirm = normalizeCellText(row[7]);
-          const fallbackBranch = normalizeCellText(row[24]);
-          const region = orgInfo?.divisionName || fallbackBranch || "미지정";
-          const branch = orgInfo?.branchName || fallbackBranch || "미지정";
+          const fallbackBranch = normalizeBranchName(row[legacyBranchIndex] || row[24]);
+          const branchSeed = orgInfo?.branchName || fallbackBranch || "미지정";
+          const branchMatchedOrg = orgInfo?.divisionName ? orgInfo : findOrgInfoByBranch(orgLookup, branchSeed);
+          const region = branchMatchedOrg?.divisionName || orgInfo?.divisionName || "미지정";
+          const branch = branchMatchedOrg?.branchName || branchSeed;
 
           let status = "확정";
           let errorReason = "";
@@ -2867,6 +3262,492 @@
         };
       }
 
+      function extractUploadBlocksFromLegacyWorkbook(workbook, mainRows) {
+        const blocks = [normalizeLegacyBlockTitle("정규 시상", "정규 시상")];
+        const basicSheetName = findSheetName(workbook, "湲곕낯媛??);
+        const bridge56SheetName = findSheetName(workbook, "5~6?붾툕由우?");
+        const bridge67SheetName = findSheetName(workbook, "6~7?붾툕由우?");
+        const goldSheetName = findSheetName(workbook, "gold")
+          || findSheetName(workbook, "golden")
+          || findSheetName(workbook, "summer");
+
+        if (basicSheetName) blocks.push(normalizeLegacyBlockTitle(basicSheetName, "기본가동프로모션"));
+        if (bridge56SheetName) blocks.push(normalizeLegacyBlockTitle(bridge56SheetName, "5~6월 브릿지"));
+        if (bridge67SheetName) blocks.push(normalizeLegacyBlockTitle(bridge67SheetName, "6~7월 브릿지"));
+
+        const hasGoldLikeData = mainRows.some((row) => normalizeCellText(row[22]) || normalizeCellText(row[23]));
+        if (goldSheetName || hasGoldLikeData) {
+          blocks.push(normalizeLegacyBlockTitle(goldSheetName || "Gold 시상", "Gold 시상"));
+        }
+
+        return blocks.filter(Boolean);
+      }
+
+      function buildTemplateDataFromSimpleConfig(item, meta, blocks, noticeLines, rows = []) {
+        const createInitialFormData = window.PromoTemplateData?.createInitialFormData;
+        if (!createInitialFormData) return null;
+        const applySheetRowsToData = window.PromoTemplateData?.applySheetRowsToData;
+
+        const data = createInitialFormData();
+        data.promoDate = `${meta.month}월`;
+        data.brandName = "삼성생명";
+        data.mainTitle = meta.generatedTitle || toPromotionTitle(meta.month);
+        data.subTitle = `대상상품, ${meta.targetProducts || createDefaultUploadMeta().targetProducts}`;
+        data.branchName = item.agency;
+        data.branchNote = `(${item.branch || item.region || "미지정"})`;
+        data.summaryLabel = "익월";
+        data.summaryTitle = `${getBlockDisplay(blocks, 0, "정규 시상", "").title || "정규 시상"} (${meta.period || "시상기간 확인"})`;
+
+        const detailedData = applySheetRowsToData ? applySheetRowsToData(data, rows) : data;
+        applyTemplateBlockLayout(detailedData, blocks, [
+          { title: "기본가동프로모션", round: "[13회]" },
+          { title: "5~6월 브릿지", round: "[13회]" },
+          { title: "6~7월 브릿지", round: "[13회]" },
+          { title: "Gold 시상", round: "[13회]" }
+        ]);
+        detailedData.footerBanner = noticeLines.join(" / ");
+        return detailedData;
+      }
+
+      function buildTemplateDataFromRows(item, basicRow, bridge56Row, bridge67Row, headerRows = {}, uploadMeta = createDefaultUploadMeta(), noticeLines = createDefaultNoticeLines(), uploadBlocks = []) {
+        const createInitialFormData = window.PromoTemplateData?.createInitialFormData;
+        if (!createInitialFormData) return null;
+
+        const data = createInitialFormData();
+        const monthLabel = uploadMeta.generatedTitle || toPromotionTitle(item.month);
+        const amountHeaders = ["5만↑", "10만↑", "20만↑", "30만↑", "50만↑", "100만↑"];
+        const basicHeaders = getHeaderCells(headerRows.basic, 6, 12, amountHeaders);
+        const bridge56Headers = getHeaderCells(headerRows.bridge56, 3, 9, amountHeaders);
+        const bridge67Headers = getHeaderCells(headerRows.bridge67, 3, 9, amountHeaders);
+
+        data.promoDate = `${item.month}월`;
+        data.brandName = "삼성생명";
+        data.mainTitle = monthLabel;
+        data.subTitle = `대상상품, ${uploadMeta.targetProducts || item.product || "프로모션"}`;
+        data.branchName = item.agency;
+        data.branchNote = `(${item.branch})`;
+
+        data.summaryLabel = "기준";
+        data.summaryMax = normalizeCellText((basicRow || [])[2]);
+        data.summaryTitle = `${getBlockDisplay(uploadBlocks, 0, "정규 시상", "").title || "정규 시상"} (${uploadMeta.period || item.status})`;
+        data.summaryLeft = normalizeCellText((bridge56Row || [])[2]);
+        data.summaryPill = uploadMeta.period || item.status;
+        data.summaryRight = normalizeCellText((bridge67Row || [])[2]);
+
+        applyTemplateBlockLayout(data, uploadBlocks, [
+          { title: "기본가동프로모션", round: "[13회]" },
+          { title: "5~6월 브릿지", round: "[13회]" },
+          { title: "6~7월 브릿지", round: "[13회]" },
+          { title: "", round: "" }
+        ]);
+
+        if (data.section1Title && basicRow) {
+          data.section1Max = normalizeCellText(basicRow[5] || basicRow[2]);
+          data.section1Headers = ["실적", ...basicHeaders].join(",");
+          data.section1Rows = [
+            ["1~13일", ...basicRow.slice(6, 12).map(normalizeCellText)].join("|"),
+            ["14~28일", ...basicRow.slice(12, 18).map(normalizeCellText)].join("|")
+          ].join("\n");
+        } else {
+          clearTemplateSection(data, 1);
+        }
+
+        if (data.section2Title && bridge56Row) {
+          data.section2Max = normalizeCellText(bridge56Row[2]);
+          data.section2Headers = ["실적", ...bridge56Headers].join(",");
+          data.section2Rows = [
+            [...bridge56Row.slice(3, 9).map(normalizeCellText)].join("|"),
+            [...bridge56Row.slice(9, 15).map(normalizeCellText)].join("|")
+          ].filter((row) => row.replace(/\|/g, "").trim()).join("\n");
+          data.section2Note = noticeLines[0] || "업로드 기준 수치 자동 반영";
+        } else {
+          clearTemplateSection(data, 2);
+        }
+
+        if (data.section3Title && bridge67Row) {
+          data.section3Headers = ["실적", ...bridge67Headers].join(",");
+          data.section3Rows = [
+            [...bridge67Row.slice(3, 9).map(normalizeCellText)].join("|"),
+            [...bridge67Row.slice(9, 15).map(normalizeCellText)].join("|")
+          ].filter((row) => row.replace(/\|/g, "").trim()).join("\n");
+        } else {
+          clearTemplateSection(data, 3);
+        }
+
+        clearTemplateSection(data, 4);
+        data.footerBanner = noticeLines.join(" / ") || `${item.rm} · ${item.product}`;
+        return data;
+      }
+
+      function parsePromotionWorkbook(fileName, workbook) {
+        if (isSimpleInputWorkbook(workbook)) {
+          return parseSimplePromotionWorkbook(fileName, workbook);
+        }
+
+        const mainSheetName = findSheetName(workbook, "6??吏?먮퀎 ?대떦 遺꾨쪟_?꾩껜");
+        const basicSheetName = findSheetName(workbook, "湲곕낯媛??);
+        const bridge56SheetName = findSheetName(workbook, "5~6?붾툕由우?");
+        const bridge67SheetName = findSheetName(workbook, "6~7?붾툕由우?");
+        const orgSheetName = findSheetName(workbook, "議곗쭅");
+
+        if (!mainSheetName || !orgSheetName) {
+          throw new Error("?꾩닔 ?쒗듃瑜?李얠? 紐삵뻽?듬땲?? 6??吏?먮퀎 ?대떦 遺꾨쪟_?꾩껜, 議곗쭅 ?쒗듃瑜??뺤씤?댁＜?몄슂.");
+        }
+
+        const monthValue = getMonthDisplayFromWorkbook(workbook);
+        const mainRows = sheetToRows(workbook.Sheets[mainSheetName]);
+        const basicRows = basicSheetName ? sheetToRows(workbook.Sheets[basicSheetName]) : [];
+        const bridge56Rows = bridge56SheetName ? sheetToRows(workbook.Sheets[bridge56SheetName]) : [];
+        const bridge67Rows = bridge67SheetName ? sheetToRows(workbook.Sheets[bridge67SheetName]) : [];
+        const orgRows = sheetToRows(workbook.Sheets[orgSheetName]);
+        const headerRows = {
+          basic: basicRows[4] || [],
+          bridge56: bridge56Rows[4] || [],
+          bridge67: bridge67Rows[4] || []
+        };
+
+        const basicLookup = basicSheetName ? buildTableLookup(basicRows, 6) : new Map();
+        const bridge56Lookup = bridge56SheetName ? buildTableLookup(bridge56Rows, 6) : new Map();
+        const bridge67Lookup = bridge67SheetName ? buildTableLookup(bridge67Rows, 6) : new Map();
+        const orgLookup = buildOrgLookup(orgRows);
+        const uploadMeta = extractUploadMetaFromLegacyWorkbook(workbook, monthValue, mainRows);
+        const uploadBlocks = extractUploadBlocksFromLegacyWorkbook(workbook, mainRows);
+        const uploadNoticeLines = extractNoticeLines(workbook);
+
+        const promotions = [];
+        const templateForms = {};
+        const dataRows = mainRows.slice(7).filter((row) => normalizeCellText(row[2]) || normalizeCellText(row[4]));
+        const mainHeaderRows = mainRows.slice(0, 7);
+        const legacyBranchIndex = (() => {
+          const headerRow = mainHeaderRows.find((row) => Array.isArray(row) && row.some((cell) => {
+            const text = compactCellText(cell);
+            return text.includes("愿由ъ???) || text.includes("?대떦吏??) || text === "吏??;
+          })) || [];
+          if (!headerRow.length) return 24;
+          const fallback = headerRow.length;
+          const index = findColumnIndex(headerRow.map(normalizeCellText), ["愿由ъ???, "愿由ъ??먮챸", "愿由ъ???, "?대떦吏??, "吏??, "?대떦吏??, "吏??], fallback);
+          return index >= headerRow.length ? 24 : index;
+        })();
+
+        dataRows.forEach((row, index) => {
+          const code = normalizeCellText(row[2]);
+          const agency = normalizeCellText(row[4]);
+          if (!code || !agency) return;
+
+          const key = buildPromotionKey(code, agency);
+          const orgInfo = orgLookup.byCode instanceof Map ? orgLookup.byCode.get(code) : null;
+          const basicRow = basicLookup.get(key);
+          const bridge56Row = bridge56Lookup.get(key);
+          const bridge67Row = bridge67Lookup.get(key);
+          const finalConfirm = normalizeCellText(row[7]);
+          const fallbackBranch = normalizeBranchName(row[legacyBranchIndex] || row[24]);
+          const branchSeed = orgInfo?.branchName || fallbackBranch || "誘몄???;
+          const branchMatchedOrg = orgInfo?.divisionName ? orgInfo : findOrgInfoByBranch(orgLookup, branchSeed);
+          const region = branchMatchedOrg?.divisionName || orgInfo?.divisionName || "誘몄???;
+          const branch = branchMatchedOrg?.branchName || branchSeed;
+          const requiredRows = [
+            { enabled: Boolean(getBlockDisplay(uploadBlocks, 1, basicSheetName ? "기본가동프로모션" : "", "").title), row: basicRow },
+            { enabled: Boolean(getBlockDisplay(uploadBlocks, 2, bridge56SheetName ? "5~6월 브릿지" : "", "").title), row: bridge56Row },
+            { enabled: Boolean(getBlockDisplay(uploadBlocks, 3, bridge67SheetName ? "6~7월 브릿지" : "", "").title), row: bridge67Row }
+          ];
+
+          let status = "?뺤젙";
+          let errorReason = "";
+          let templateData = null;
+
+          if (!branch || branch === "誘몄???) {
+            status = "?ㅻ쪟";
+            errorReason = "議곗쭅 留ㅽ븨 ?놁쓬";
+          } else if (requiredRows.some((entry) => entry.enabled && !entry.row)) {
+            status = "誘명솗??;
+          } else if (finalConfirm !== "??) {
+            status = "誘명솗??;
+          } else {
+            try {
+              templateData = buildTemplateDataFromRows({
+                agency,
+                region,
+                branch,
+                product: normalizeCellText(row[5]) || "?꾨줈紐⑥뀡",
+                happyType: normalizeCellText(row[6]),
+                rm: normalizeCellText(row[25]) || "誘몃같??,
+                month: monthValue,
+                status
+              }, basicRow, bridge56Row, bridge67Row, headerRows, uploadMeta, uploadNoticeLines, uploadBlocks);
+            } catch (error) {
+              console.error("?덈궡???곗씠??蹂???ㅽ뙣", { agency, code, error });
+              status = "?ㅻ쪟";
+              errorReason = "?덈궡???곗씠??蹂???ㅽ뙣";
+            }
+          }
+
+          const itemId = index + 1;
+          promotions.push({
+            id: itemId,
+            code,
+            agency,
+            region,
+            branch,
+            rm: normalizeCellText(row[25]) || "誘몃같??,
+            product: normalizeCellText(row[5]) || "?꾨줈紐⑥뀡",
+            happyType: normalizeCellText(row[6]),
+            month: monthValue,
+            status,
+            errorReason,
+            generated: false,
+            updatedAt: getNowStamp(),
+            noticeFile: `${agency}_?덈궡??png`
+          });
+
+          if (templateData) {
+            templateForms[itemId] = templateData;
+          }
+        });
+
+        return {
+          promotions,
+          templateForms,
+          monthValue,
+          fileName,
+          uploadMeta,
+          uploadBlocks,
+          uploadNoticeLines,
+          uploadMode: "legacy"
+        };
+      }
+
+      */
+
+      function extractUploadBlocksFromLegacyWorkbook(workbook, mainRows) {
+        const blocks = ["정규 시상"];
+        const basicSheetName = findSheetName(workbook, "기본가동");
+        const bridge56SheetName = findSheetName(workbook, "5~6브릿지");
+        const bridge67SheetName = findSheetName(workbook, "6~7브릿지");
+        if (basicSheetName) blocks.push(normalizeLegacyBlockTitle(basicSheetName, "기본가동프로모션"));
+        if (bridge56SheetName) blocks.push(normalizeLegacyBlockTitle(bridge56SheetName, "5~6월 브릿지"));
+        if (bridge67SheetName) blocks.push(normalizeLegacyBlockTitle(bridge67SheetName, "6~7월 브릿지"));
+        return blocks.filter(Boolean);
+      }
+
+      function buildTemplateDataFromSimpleConfig(item, meta, blocks, noticeLines, rows = []) {
+        const createInitialFormData = window.PromoTemplateData?.createInitialFormData;
+        if (!createInitialFormData) return null;
+        const applySheetRowsToData = window.PromoTemplateData?.applySheetRowsToData;
+        const data = createInitialFormData();
+        data.promoDate = `${meta.month}월`;
+        data.brandName = "삼성생명";
+        data.mainTitle = meta.generatedTitle || toPromotionTitle(meta.month);
+        data.subTitle = `대상상품, ${meta.targetProducts || createDefaultUploadMeta().targetProducts}`;
+        data.branchName = item.agency;
+        data.branchNote = `(${item.branch || item.region || "미지정"})`;
+        data.summaryLabel = "익월";
+        data.summaryTitle = `${getBlockDisplay(blocks, 0, "정규 시상", "").title || "정규 시상"} (${meta.period || "시상기간 확인"})`;
+        const detailedData = applySheetRowsToData ? applySheetRowsToData(data, rows) : data;
+        applyTemplateBlockLayout(detailedData, blocks, [
+          { title: "기본가동프로모션", round: "[13회]" },
+          { title: "5~6월 브릿지", round: "[13회]" },
+          { title: "6~7월 브릿지", round: "[13회]" },
+          { title: "Gold 시상", round: "[13회]" }
+        ]);
+        detailedData.footerBanner = noticeLines.join(" / ");
+        return detailedData;
+      }
+
+      function buildTemplateDataFromRows(item, basicRow, bridge56Row, bridge67Row, headerRows = {}, uploadMeta = createDefaultUploadMeta(), noticeLines = createDefaultNoticeLines(), uploadBlocks = []) {
+        const createInitialFormData = window.PromoTemplateData?.createInitialFormData;
+        if (!createInitialFormData) return null;
+        const data = createInitialFormData();
+        const monthLabel = uploadMeta.generatedTitle || toPromotionTitle(item.month);
+        const amountHeaders = ["5만↑", "10만↑", "20만↑", "30만↑", "50만↑", "100만↑"];
+        const basicHeaders = getHeaderCells(headerRows.basic, 6, 12, amountHeaders);
+        const bridge56Headers = getHeaderCells(headerRows.bridge56, 3, 9, amountHeaders);
+        const bridge67Headers = getHeaderCells(headerRows.bridge67, 3, 9, amountHeaders);
+
+        data.promoDate = `${item.month}월`;
+        data.brandName = "삼성생명";
+        data.mainTitle = monthLabel;
+        data.subTitle = `대상상품, ${uploadMeta.targetProducts || item.product || "프로모션"}`;
+        data.branchName = item.agency;
+        data.branchNote = `(${item.branch})`;
+        data.summaryLabel = "기준";
+        data.summaryMax = normalizeCellText((basicRow || [])[2]);
+        data.summaryTitle = `${getBlockDisplay(uploadBlocks, 0, "정규 시상", "").title || "정규 시상"} (${uploadMeta.period || item.status})`;
+        data.summaryLeft = normalizeCellText((bridge56Row || [])[2]);
+        data.summaryPill = uploadMeta.period || item.status;
+        data.summaryRight = normalizeCellText((bridge67Row || [])[2]);
+
+        applyTemplateBlockLayout(data, uploadBlocks, [
+          { title: "기본가동프로모션", round: "[13회]" },
+          { title: "5~6월 브릿지", round: "[13회]" },
+          { title: "6~7월 브릿지", round: "[13회]" },
+          { title: "", round: "" }
+        ]);
+
+        if (data.section1Title && basicRow) {
+          data.section1Max = normalizeCellText(basicRow[5] || basicRow[2]);
+          data.section1Headers = ["실적", ...basicHeaders].join(",");
+          data.section1Rows = [
+            ["1~13일", ...basicRow.slice(6, 12).map(normalizeCellText)].join("|"),
+            ["14~28일", ...basicRow.slice(12, 18).map(normalizeCellText)].join("|")
+          ].join("\n");
+        } else {
+          clearTemplateSection(data, 1);
+        }
+
+        if (data.section2Title && bridge56Row) {
+          data.section2Max = normalizeCellText(bridge56Row[2]);
+          data.section2Headers = ["실적", ...bridge56Headers].join(",");
+          data.section2Rows = [
+            [...bridge56Row.slice(3, 9).map(normalizeCellText)].join("|"),
+            [...bridge56Row.slice(9, 15).map(normalizeCellText)].join("|")
+          ].filter((row) => row.replace(/\|/g, "").trim()).join("\n");
+          data.section2Note = noticeLines[0] || "업로드 기준 수치 자동 반영";
+        } else {
+          clearTemplateSection(data, 2);
+        }
+
+        if (data.section3Title && bridge67Row) {
+          data.section3Headers = ["실적", ...bridge67Headers].join(",");
+          data.section3Rows = [
+            [...bridge67Row.slice(3, 9).map(normalizeCellText)].join("|"),
+            [...bridge67Row.slice(9, 15).map(normalizeCellText)].join("|")
+          ].filter((row) => row.replace(/\|/g, "").trim()).join("\n");
+        } else {
+          clearTemplateSection(data, 3);
+        }
+
+        clearTemplateSection(data, 4);
+        data.footerBanner = noticeLines.join(" / ") || `${item.rm} / ${item.product}`;
+        return data;
+      }
+
+      function parsePromotionWorkbook(fileName, workbook) {
+        if (isSimpleInputWorkbook(workbook)) {
+          return parseSimplePromotionWorkbook(fileName, workbook);
+        }
+
+        const mainSheetName = findSheetName(workbook, "지점별담당분류_전체");
+        const basicSheetName = findSheetName(workbook, "기본가동");
+        const bridge56SheetName = findSheetName(workbook, "5~6브릿지");
+        const bridge67SheetName = findSheetName(workbook, "6~7브릿지");
+        const orgSheetName = findSheetName(workbook, "조직");
+        if (!mainSheetName || !orgSheetName) {
+          throw new Error("필수 시트를 찾지 못했습니다. 지점별 담당분류_전체와 조직 시트를 확인해주세요.");
+        }
+
+        const monthValue = getMonthDisplayFromWorkbook(workbook);
+        const mainRows = sheetToRows(workbook.Sheets[mainSheetName]);
+        const basicRows = basicSheetName ? sheetToRows(workbook.Sheets[basicSheetName]) : [];
+        const bridge56Rows = bridge56SheetName ? sheetToRows(workbook.Sheets[bridge56SheetName]) : [];
+        const bridge67Rows = bridge67SheetName ? sheetToRows(workbook.Sheets[bridge67SheetName]) : [];
+        const orgRows = sheetToRows(workbook.Sheets[orgSheetName]);
+        const headerRows = {
+          basic: basicRows[4] || [],
+          bridge56: bridge56Rows[4] || [],
+          bridge67: bridge67Rows[4] || []
+        };
+
+        const basicLookup = basicSheetName ? buildTableLookup(basicRows, 6) : new Map();
+        const bridge56Lookup = bridge56SheetName ? buildTableLookup(bridge56Rows, 6) : new Map();
+        const bridge67Lookup = bridge67SheetName ? buildTableLookup(bridge67Rows, 6) : new Map();
+        const orgLookup = buildOrgLookup(orgRows);
+        const uploadMeta = extractUploadMetaFromLegacyWorkbook(workbook, monthValue, mainRows);
+        const uploadBlocks = extractUploadBlocksFromLegacyWorkbook(workbook, mainRows);
+        const uploadNoticeLines = extractNoticeLines(workbook);
+        const promotions = [];
+        const templateForms = {};
+        const dataRows = mainRows.slice(7).filter((row) => normalizeCellText(row[2]) || normalizeCellText(row[4]));
+        const mainHeaderRows = mainRows.slice(0, 7);
+        const legacyBranchIndex = (() => {
+          const headerRow = mainHeaderRows.find((row) => Array.isArray(row) && row.some((cell) => {
+            const text = compactCellText(cell);
+            return text.includes("관리지점") || text.includes("담당지점") || text === "지점";
+          })) || [];
+          if (!headerRow.length) return 24;
+          const fallback = headerRow.length;
+          const index = findColumnIndex(headerRow.map(normalizeCellText), ["관리지점", "관리지점명", "담당지점", "지점"], fallback);
+          return index >= headerRow.length ? 24 : index;
+        })();
+
+        dataRows.forEach((row, index) => {
+          const code = normalizeCellText(row[2]);
+          const agency = normalizeCellText(row[4]);
+          if (!code || !agency) return;
+          const key = buildPromotionKey(code, agency);
+          const orgInfo = orgLookup.byCode instanceof Map ? orgLookup.byCode.get(code) : null;
+          const basicRow = basicLookup.get(key);
+          const bridge56Row = bridge56Lookup.get(key);
+          const bridge67Row = bridge67Lookup.get(key);
+          const finalConfirm = normalizeCellText(row[7]);
+          const fallbackBranch = normalizeBranchName(row[legacyBranchIndex] || row[24]);
+          const branchSeed = orgInfo?.branchName || fallbackBranch || "미지정";
+          const branchMatchedOrg = orgInfo?.divisionName ? orgInfo : findOrgInfoByBranch(orgLookup, branchSeed);
+          const region = branchMatchedOrg?.divisionName || orgInfo?.divisionName || "미지정";
+          const branch = branchMatchedOrg?.branchName || branchSeed;
+          const requiredRows = [
+            { enabled: Boolean(getBlockDisplay(uploadBlocks, 1, basicSheetName ? "기본가동프로모션" : "", "").title), row: basicRow },
+            { enabled: Boolean(getBlockDisplay(uploadBlocks, 2, bridge56SheetName ? "5~6월 브릿지" : "", "").title), row: bridge56Row },
+            { enabled: Boolean(getBlockDisplay(uploadBlocks, 3, bridge67SheetName ? "6~7월 브릿지" : "", "").title), row: bridge67Row }
+          ];
+
+          let status = "확정";
+          let errorReason = "";
+          let templateData = null;
+          if (!branch || branch === "미지정") {
+            status = "오류";
+            errorReason = "조직 매핑 없음";
+          } else if (requiredRows.some((entry) => entry.enabled && !entry.row)) {
+            status = "미확정";
+          } else if (finalConfirm !== "O") {
+            status = "미확정";
+          } else {
+            templateData = buildTemplateDataFromRows({
+              agency,
+              region,
+              branch,
+              product: normalizeCellText(row[5]) || "프로모션",
+              happyType: normalizeCellText(row[6]),
+              rm: normalizeCellText(row[25]) || "미배정",
+              month: monthValue,
+              status
+            }, basicRow, bridge56Row, bridge67Row, headerRows, uploadMeta, uploadNoticeLines, uploadBlocks);
+          }
+
+          const itemId = index + 1;
+          promotions.push({
+            id: itemId,
+            code,
+            agency,
+            region,
+            branch,
+            rm: normalizeCellText(row[25]) || "미배정",
+            product: normalizeCellText(row[5]) || "프로모션",
+            happyType: normalizeCellText(row[6]),
+            month: monthValue,
+            status,
+            errorReason,
+            generated: false,
+            updatedAt: getNowStamp(),
+            noticeFile: `${agency}_안내장.png`
+          });
+
+          if (templateData) {
+            templateForms[itemId] = templateData;
+          }
+        });
+
+        return {
+          promotions,
+          templateForms,
+          monthValue,
+          fileName,
+          uploadMeta,
+          uploadBlocks,
+          uploadNoticeLines,
+          uploadMode: "legacy"
+        };
+      }
+
       function renderTemplatePreviewModal() {
         if (!state.showTemplatePreview) return "";
 
@@ -2883,7 +3764,7 @@
               <iframe
                 id="templatePreviewFrame"
                 class="preview-frame"
-                src="./template-package/promo-template.html?preview=1"
+                src="./template-package/promo-template.html?preview=1&readonly=1"
                 title="표준안내장 템플릿 미리보기"
               ></iframe>
             </div>
@@ -3098,7 +3979,7 @@
         const storageKey = `promo-template-download-${item.id}-${Date.now()}`;
         window.localStorage.setItem(storageKey, JSON.stringify(templateData));
 
-        const downloadUrl = `./template-package/promo-template.html?preview=1&autodownload=1&storageKey=${encodeURIComponent(storageKey)}&fileName=${encodeURIComponent(`${item.agency}_안내장.jpg`)}`;
+        const downloadUrl = `./template-package/promo-template.html?preview=1&readonly=1&autodownload=1&storageKey=${encodeURIComponent(storageKey)}&fileName=${encodeURIComponent(`${item.agency}_안내장.jpg`)}`;
         const openedWindow = window.open(downloadUrl, "_blank");
         if (!openedWindow) {
           throw new Error("브라우저가 다운로드 창 열기를 차단했습니다.");
@@ -3196,8 +4077,8 @@
                 </select>
               </div>
               <div class="search-filter-field">
-                <label for="agencyKeyword">대리점명</label>
-                <input id="agencyKeyword" class="search-filter-control" type="text" value="${state.agencyKeyword}" placeholder="대리점코드 예: GA001" aria-label="대리점명 입력">
+                <label for="agencyKeyword">GA지사</label>
+                <input id="agencyKeyword" class="search-filter-control" type="text" value="${state.agencyKeyword}" placeholder="GA지사명 입력" aria-label="GA지사명 입력">
               </div>
               <button id="applyAgencySearch" class="search-filter-button" type="button">조회</button>
             </div>
@@ -3219,6 +4100,7 @@
           }
           return item;
         });
+        saveStoredPromoDashboardState();
         renderApp();
       }
 
@@ -3303,7 +4185,7 @@
       function renderMonthTabs() {
         return `
           <div class="month-tabs" aria-label="월별 조회">
-            ${monthOptions.map((month) => `
+            ${getAvailableMonths().map((month) => `
               <button
                 class="month-tab ${state.selectedMonth === month ? "active" : ""}"
                 type="button"
@@ -3317,9 +4199,7 @@
       }
 
       function renderHeader() {
-        const roleText = state.currentUser.role === "hq"
-          ? "본사담당자가 관리자 권한으로 프로모션 업로드, 표준안내장 생성 후 승인 관리합니다."
-          : "영업관리자는 기본으로 소속 지점 기준으로 열리고, 필요 시 전체 대리점 조회로 전환할 수 있습니다.";
+        const roleText = "프로모션 업로드, 안내장 생성, 승인 결과를 한 화면에서 실시간으로 확인할 수 있습니다.";
 
         return `
           <section class="dashboard-card dashboard-header">
@@ -3335,6 +4215,9 @@
               </div>
 
               <div class="header-actions">
+                <div class="header-date-box">
+                  <span class="header-date-value">기준일 ${getHeaderDisplayDate()}</span>
+                </div>
                 <button id="logoutButton" class="ghost-button" type="button">로그아웃</button>
               </div>
             </div>
@@ -3363,24 +4246,23 @@
                 <tr>
                   <th>${headerButton("region", "지역단")}</th>
                   <th>${headerButton("branch", "지점")}</th>
-                  <th>${headerButton("agency", "GA명")}</th>
+                  <th>${headerButton("agency", "GA지사")}</th>
                   <th>${headerButton("status", "상태")}</th>
-                  <th>이미지</th>
-                  <th>${headerButton("updatedAt", "반영")}</th>
+                  <th>안내장</th>
                 </tr>
               </thead>
               <tbody>
                 ${data.map((item) => `
                   <tr>
-                    <td>${item.region}</td>
-                    <td>${item.branch}</td>
+                    <td class="region-cell">${item.region}</td>
+                    <td class="branch-cell">${item.branch}</td>
                     <td class="agency-cell">
                       <strong>${item.agency}</strong>
                     </td>
-                    <td>
+                    <td class="status-cell">
                       <span class="traffic ${getStatusClass(item.status)}">${item.status}</span>
                     </td>
-                    <td>
+                    <td class="notice-cell">
                       <div class="notice-links">
                         <button
                           class="notice-link ${canOpenImagePreview(item) ? "" : "disabled"}"
@@ -3389,7 +4271,7 @@
                           data-preview-enabled="${canOpenImagePreview(item) ? "true" : "false"}"
                           data-preview-status="${item.status}"
                           onclick="return window.handleGenerateImageClick(this)"
-                        >이미지생성</button>
+                        >미리보기</button>
                         <button
                           class="notice-link ${isDownloadEnabled(item) ? "" : "disabled"}"
                           type="button"
@@ -3397,10 +4279,9 @@
                           data-download-enabled="${isDownloadEnabled(item) ? "true" : "false"}"
                           data-download-status="${item.status}"
                           onclick="return window.handleDownloadClick(this)"
-                        >이미지저장</button>
+                        >다운로드</button>
                       </div>
                     </td>
-                    <td>${item.updatedAt}</td>
                   </tr>
                 `).join("")}
               </tbody>
@@ -3463,13 +4344,14 @@
         const isOpen = true;
         const adminSummary = getSummary(data);
         const previewItems = getGeneratedPreviewItems(data);
+        const sampleTemplateDownloadUrl = state.sampleTemplateDownloadUrl || "./outputs/ga-promotion-template/6월_프로모션_입력샘플_20260617.xlsx";
+        const sampleTemplateFileName = state.sampleTemplateFileName || "6월_프로모션_입력샘플_20260617.xlsx";
 
         return `
           <section class="panel">
             <div class="panel-head">
               <div>
                 <h2>관리자페이지</h2>
-                <p>어제 저장한 운영 대시보드에 오늘 정한 이미지 생성과 쉬운 파일 업로드 기준을 반영한 관리자 화면입니다.</p>
               </div>
             </div>
             ${isOpen
@@ -3498,19 +4380,19 @@
                       <div class="admin-action-card">
                         <h4>엑셀 파일 업로드</h4>
                         <div class="admin-upload-row upload-emphasis">
-                          <a class="admin-main-button alt button-link" href="./outputs/ga-promotion-template/6월_프로모션_입력샘플_20260617.xlsx" download>업로드양식 다운로드</a>
-                          <label class="admin-file-field">
+                          <a class="admin-main-button alt button-link" href="${sampleTemplateDownloadUrl}" download="${sampleTemplateFileName}">샘플양식 다운로드</a>
+                          <label class="admin-file-field is-picker">
+                            <span id="excelFileInputLabel">엑셀파일 업로드</span>
                             <input id="excelFileInput" type="file" aria-label="엑셀 파일 업로드">
                           </label>
-                          <button id="uploadConfirmButton" class="admin-main-button" type="button">업로드 반영</button>
+                          <button id="uploadConfirmButton" class="admin-main-button" type="button" disabled>업로드 반영</button>
                         </div>
-                        <p>관리자 화면에서 업로드양식을 먼저 내려받아 작성한 뒤 바로 올릴 수 있습니다. ${state.selectedUploadFileName} 업로드 기준으로 반영하며, 쉬운 입력 샘플은 2번째 시트와 유의사항 시트를 자동으로 읽습니다.</p>
                       </div>
 
                       <div class="admin-action-card">
                         <h4>안내장/이미지 생성</h4>
-                        <div class="admin-upload-row">
-                          <button id="generateNoticesButton" class="admin-main-button" type="button" style="width:100%;">표준안내장 미리보기 생성</button>
+                        <div class="admin-single-action">
+                          <button id="generateNoticesButton" class="admin-main-button" type="button">표준안내장 생성</button>
                         </div>
                         <p>업로드된 기준월, 블록명, 유의사항을 반영해 표준안내장 시안과 이미지 다운로드 기준을 준비합니다.</p>
                       </div>
@@ -3527,7 +4409,8 @@
                       <div class="admin-action-card">
                         <h4>권한 사번 업로드</h4>
                         <div class="admin-upload-row upload-emphasis">
-                          <label class="admin-file-field">
+                          <label class="admin-file-field is-picker">
+                            <span id="hqEmployeeFileInputLabel">권한 파일 선택</span>
                             <input id="hqEmployeeFileInput" type="file" accept=".xlsx,.xls,.csv" aria-label="권한 사번 업로드">
                           </label>
                           <button id="hqEmployeeUploadButton" class="admin-main-button" type="button">권한 반영</button>
@@ -3568,15 +4451,14 @@
 
                     <div class="admin-action-card">
                       <h4>샘플 및 표준템플릿</h4>
-                      <div class="admin-upload-row">
-                        <button id="openTemplatePreviewButton" class="admin-main-button" type="button" style="width:100%;">표준안내장 보기</button>
-                        <a class="admin-main-button alt button-link" href="./outputs/ga-promotion-template/6월_프로모션_입력샘플_20260617.xlsx" download>입력샘플 다운로드</a>
+                      <div class="admin-single-action">
+                        <button id="openTemplatePreviewButton" class="admin-main-button" type="button">표준안내장 보기</button>
                       </div>
-                      <p>표준안내장 화면과 오늘 만든 쉬운 업로드 샘플을 함께 확인할 수 있습니다.</p>
+                      <p>표준안내장 화면을 바로 확인할 수 있습니다.</p>
                       <iframe
                         id="embeddedTemplateFrame"
                         class="inline-template-frame"
-                        src="./template-package/promo-template.html?preview=1"
+                        src="./template-package/promo-template.html?preview=1&readonly=1"
                         title="표준안내장 템플릿 화면"
                       ></iframe>
                     </div>
@@ -3588,6 +4470,10 @@
       }
 
       function renderFileReferencePanel() {
+        const refundDownloadButton = state.refundDownloadUrl
+          ? `<a class="resource-button button-link" href="${state.refundDownloadUrl}" download="${state.refundFileName || "상품별_예상해약환급금.xlsx"}">엑셀 다운로드</a>`
+          : `<button class="resource-button disabled" type="button" disabled>업로드 필요</button>`;
+
         return `
           <section class="panel">
             <div class="panel-head">
@@ -3600,17 +4486,17 @@
               <div class="resource-grid">
                 <div class="resource-card">
                   <div>
-                    <strong>전체대리점 엑셀다운로드</strong>
-                    <span>${state.selectedUploadFileName} · 최근 반영 ${state.excelUpdatedAt}</span>
+                    <strong>전체대리점 프로모션현황</strong>
+                    <span>${state.selectedUploadFileName || "업로드된 파일 없음"} · ${state.excelUpdatedAt ? `실시간 반영 ${state.excelUpdatedAt}` : "업로드 필요"}</span>
                   </div>
-                  <a class="resource-button button-link" href="./promo-source.xlsx" download>다운로드</a>
+                  <a class="resource-button button-link" href="${getCurrentUploadDownloadUrl()}" download="${state.selectedUploadFileName || "전체대리점_프로모션현황.xlsx"}">엑셀 다운로드</a>
                 </div>
                 <div class="resource-card">
                   <div>
-                    <strong>입력샘플 엑셀 다운로드</strong>
-                    <span>쉬운 업로드 기준 샘플 파일</span>
+                    <strong>상품별 예상해약환급금 엑셀</strong>
+                    <span>${state.refundFileName || "업로드된 파일 없음"}${state.refundUpdatedAt ? ` · 실시간 반영 ${state.refundUpdatedAt}` : " · 업로드 필요"}</span>
                   </div>
-                  <a class="resource-button button-link" href="./outputs/ga-promotion-template/6월_프로모션_입력샘플_20260617.xlsx" download>다운로드</a>
+                  ${refundDownloadButton}
                 </div>
               </div>
             </div>
@@ -3639,7 +4525,7 @@
               <iframe
                 id="previewTemplateFrame"
                 class="preview-frame"
-                src="./template-package/promo-template.html?preview=1"
+                src="./template-package/promo-template.html?preview=1&readonly=1"
                 title="${previewItem.agency} 안내장 미리보기"
               ></iframe>
             </div>
@@ -3652,6 +4538,7 @@
         const filteredPromotions = applyFilters(monthScopedPromotions);
         const sortedPromotions = sortPromotions(filteredPromotions);
         const summary = getSummary(filteredPromotions);
+        const finalAppliedDate = formatFinalAppliedDate(getLatestUpdatedAt(monthScopedPromotions));
         const regionOptions = getRegionOptions(monthScopedPromotions);
         const branchSource = state.regionFilter === "all"
           ? monthScopedPromotions
@@ -3669,8 +4556,8 @@
                 <div class="panel-head">
                   <div>
                     <h2>대리점별 프로모션 현황</h2>
+                    <p class="panel-date">최종반영 ${finalAppliedDate}</p>
                   </div>
-                  <span class="panel-role-chip">${state.currentUser.role === "hq" ? "본사담당자용" : "영업관리자용"}</span>
                 </div>
                 ${renderPromotionSearchFilters(regionOptions, branchOptions)}
                 ${renderPromotionTable(sortedPromotions)}
@@ -3687,282 +4574,401 @@
         `;
       }
 
-      function buildNoticeHref(item, format) {
-        if (format !== "image") return "";
-        return getTemplatePreviewImageSrc(state.templateForms[item.id]);
+      function rememberUploadedFile(file, nameKey, urlKey, updatedKey) {
+        if (!file) return false;
+        if (state[urlKey] && state[urlKey].startsWith("blob:")) {
+          try {
+            URL.revokeObjectURL(state[urlKey]);
+          } catch (error) {
+            console.warn("기존 업로드 URL 해제 실패", error);
+          }
+        }
+
+        state[nameKey] = file.name;
+        state[urlKey] = URL.createObjectURL(file);
+        state[updatedKey] = getNowStamp();
+        return true;
       }
 
-      function loadImageFromUrl(url) {
-        return new Promise((resolve, reject) => {
-          const image = new Image();
-          image.onload = () => resolve(image);
-          image.onerror = () => reject(new Error("안내장 이미지를 불러오지 못했습니다."));
-          image.src = url;
+      function rememberMonthlyUploadFile(file, monthValue) {
+        if (!file) return false;
+        const month = normalizeMonthValue(monthValue || state.selectedMonth);
+        const previousUrl = state.monthUploadDownloadUrlMap[month];
+        if (previousUrl && previousUrl.startsWith("blob:")) {
+          try {
+            URL.revokeObjectURL(previousUrl);
+          } catch (error) {
+            console.warn("기존 월별 업로드 URL 해제 실패", error);
+          }
+        }
+
+        const nextUrl = URL.createObjectURL(file);
+        state.monthUploadDownloadUrlMap[month] = nextUrl;
+        state.selectedUploadDownloadUrl = nextUrl;
+        return true;
+      }
+
+      function getCurrentUploadDownloadUrl() {
+        return state.selectedUploadDownloadUrl || "./promo-source.xlsx";
+      }
+
+      function findSimpleDataHeaderInfo(rows) {
+        const defaultInfo = {
+          headerIndex: 3,
+          statusIndex: 0,
+          codeIndex: 1,
+          agencyIndex: 2,
+          branchIndex: -1,
+          dataStartIndex: 6
+        };
+
+        if (!Array.isArray(rows) || !rows.length) {
+          return defaultInfo;
+        }
+
+        const statusCandidates = ["\uCD5C\uC885\uD655\uC815\uC5EC\uBD80", "\uD655\uC815\uC5EC\uBD80", "\uC0C1\uD0DC"];
+        const codeCandidates = ["\uCF54\uB4DC", "\uB4F1\uB85D\uCF54\uB4DC"];
+        const agencyCandidates = ["GA\uC9C0\uC0AC", "GA\uBA85", "\uB300\uB9AC\uC810\uBA85", "\uC870\uC9C1\uBA85"];
+        const branchCandidates = ["\uAD00\uB9AC\uC9C0\uC810", "\uAD00\uB9AC\uC9C0\uC810\uBA85", "\uAD00\uB9AC\uC9C0\uC0AC", "\uB2F4\uB2F9\uC9C0\uC810", "\uC9C0\uC810", "\uB2F4\uB2F9\uC9C0\uC0AC", "\uC9C0\uC0AC"];
+        const headerKeywords = [...statusCandidates, ...codeCandidates, ...agencyCandidates];
+
+        const headerIndex = rows.findIndex((row) => {
+          const cells = (row || []).map(compactCellText);
+          return cells.some((cell) => codeCandidates.some((candidate) => cell.includes(compactCellText(candidate))))
+            && cells.some((cell) => agencyCandidates.some((candidate) => cell.includes(compactCellText(candidate))));
         });
-      }
 
-      async function downloadNoticeAsJpg(item) {
-        const previewUrl = buildNoticeHref(item, "image");
-        if (!previewUrl) {
-          throw new Error("표준안내장 데이터가 없어 다운로드할 수 없습니다.");
+        if (headerIndex < 0) {
+          return defaultInfo;
         }
 
-        const image = await loadImageFromUrl(previewUrl);
-        const canvas = document.createElement("canvas");
-        canvas.width = image.naturalWidth || 1080;
-        canvas.height = image.naturalHeight || 1600;
-        const context = canvas.getContext("2d");
-        context.fillStyle = "#ffffff";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const headerRow = (rows[headerIndex] || []).map(normalizeCellText);
+        const statusIndex = findColumnIndex(headerRow, statusCandidates, 0);
+        const codeIndex = findColumnIndex(headerRow, codeCandidates, 1);
+        const agencyIndex = findColumnIndex(headerRow, agencyCandidates, 2);
+        const branchIndex = (() => {
+          const sameRowIndex = findColumnIndex(headerRow, branchCandidates, headerRow.length);
+          if (sameRowIndex >= 0 && sameRowIndex < headerRow.length) {
+            return sameRowIndex;
+          }
+          return findColumnIndexAcrossRows(rows, branchCandidates, Math.max(0, headerIndex - 1), headerIndex + 3, -1);
+        })();
 
-        const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.96));
-        if (!blob) {
-          throw new Error("JPEG 파일 생성에 실패했습니다.");
+        let dataStartIndex = headerIndex + 1;
+        while (dataStartIndex < rows.length) {
+          const row = rows[dataStartIndex] || [];
+          const code = normalizeCellText(row[codeIndex]);
+          const agency = normalizeCellText(row[agencyIndex]);
+          const status = normalizeCellText(row[statusIndex]);
+          const hasAnyCell = row.some((cell) => normalizeCellText(cell));
+          const isHeaderLike = headerKeywords.includes(code) || headerKeywords.includes(agency) || headerKeywords.includes(status);
+
+          if (!hasAnyCell || isHeaderLike) {
+            dataStartIndex += 1;
+            continue;
+          }
+
+          if (code || agency) {
+            break;
+          }
+
+          dataStartIndex += 1;
         }
 
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = `${item.agency}_안내장.jpg`;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+        return {
+          headerIndex,
+          statusIndex,
+          codeIndex,
+          agencyIndex,
+          branchIndex,
+          dataStartIndex
+        };
       }
 
-      function renderTemplatePreviewModal() {
-        if (!state.showTemplatePreview) return "";
-        const previewSrc = getTemplatePreviewImageSrc();
+      function resolveOrgMapping(orgLookup, code, agency, branchSeed) {
+        const orgInfo = findOrgInfo(orgLookup, code, agency);
+        const normalizedBranchSeed = normalizeBranchName(branchSeed);
+        const branchInfo = normalizedBranchSeed ? findOrgInfoByBranch(orgLookup, normalizedBranchSeed) : null;
+
+        return {
+          orgInfo,
+          branchInfo,
+          region: branchInfo?.divisionName || orgInfo?.divisionName || "",
+          branch: branchInfo?.branchName || orgInfo?.branchName || normalizedBranchSeed || "",
+          agency: agency || orgInfo?.organizationName || branchInfo?.organizationName || ""
+        };
+      }
+
+      function buildSimpleWorkbookDataset(workbook, meta, blocks, noticeLines, rows) {
+        const dataSheetName = findSheetName(workbook, "\uB370\uC774\uD130");
+        const orgSheetName = findSheetName(workbook, "\uC870\uC9C1") || findSheetName(workbook, "GA\uC9C0\uC0AC\uD604\uD669");
+        const orgLookup = orgSheetName ? buildOrgLookup(sheetToRows(workbook.Sheets[orgSheetName])) : null;
+
+        if (!dataSheetName) {
+          const sampleItem = {
+            id: 1,
+            code: "SAMPLE",
+            agency: "\uC5C5\uB85C\uB4DC\uC0D8\uD50C",
+            region: "\uC548\uB0B4\uD15C\uD50C",
+            branch: "\uC785\uB825\uAE30\uC900",
+            rm: "\uBCF8\uC0AC\uB2F4\uB2F9\uC790",
+            product: meta.targetProducts || "\uD504\uB85C\uBAA8\uC158",
+            happyType: "",
+            month: meta.month,
+            status: "\uD655\uC815",
+            errorReason: "",
+            generated: false,
+            updatedAt: getNowStamp(),
+            noticeFile: "upload_sample_notice.jpg"
+          };
+
+          return {
+            promotions: [sampleItem],
+            templateForms: {
+              1: buildTemplateDataFromSimpleConfig(sampleItem, meta, blocks, noticeLines, rows)
+            }
+          };
+        }
+
+        const rawDataRows = sheetToRows(workbook.Sheets[dataSheetName]);
+        const dataHeaderInfo = findSimpleDataHeaderInfo(rawDataRows);
+        const dataRows = rawDataRows
+          .slice(dataHeaderInfo.dataStartIndex)
+          .filter((row) => (
+            normalizeCellText((row || [])[dataHeaderInfo.codeIndex] || "")
+            || normalizeCellText((row || [])[dataHeaderInfo.agencyIndex] || "")
+          ));
+
+        const promotions = [];
+        const templateForms = {};
+
+        dataRows.forEach((row) => {
+          const code = normalizeCellText(row[dataHeaderInfo.codeIndex]) || `SIMPLE-${promotions.length + 1}`;
+          const agency = normalizeCellText(row[dataHeaderInfo.agencyIndex]);
+          if (!agency) return;
+
+          const matched = findAgencySeedInfo(agency);
+          const branchFromData = dataHeaderInfo.branchIndex >= 0
+            ? normalizeBranchName(row[dataHeaderInfo.branchIndex])
+            : "";
+          const branchSeed = branchFromData || normalizeBranchName(matched?.branch || "") || "\uC804\uCCB4\uB300\uB9AC\uC810";
+          const mapping = resolveOrgMapping(orgLookup, code, agency, branchSeed);
+          const resolvedRegion = mapping.region || matched?.region || "\uC5C5\uB85C\uB4DC\uB300\uC0C1";
+          const resolvedBranch = mapping.branch || branchSeed;
+          const hasMetrics = row.some((cell, index) => (
+            ![dataHeaderInfo.statusIndex, dataHeaderInfo.codeIndex, dataHeaderInfo.agencyIndex].includes(index)
+            && normalizeCellText(cell)
+          ));
+          const status = normalizeUploadStatus(row[dataHeaderInfo.statusIndex], hasMetrics);
+          const itemId = promotions.length + 1;
+          const item = {
+            id: itemId,
+            code,
+            agency: mapping.agency || agency || "\uC5C5\uB85C\uB4DC\uB300\uC0C1",
+            region: resolvedRegion,
+            branch: resolvedBranch,
+            rm: matched?.rm || "\uBCF8\uC0AC\uB2F4\uB2F9\uC790",
+            product: meta.targetProducts || matched?.product || "\uD504\uB85C\uBAA8\uC158",
+            happyType: "",
+            month: meta.month,
+            status,
+            errorReason: status === "\uBBF8\uD655\uC815"
+              ? "\uD504\uB85C\uBAA8\uC158 \uC218\uCE58 \uB370\uC774\uD130 \uBBF8\uC785\uB825"
+              : (status === "\uC624\uB958" ? "\uC5C5\uB85C\uB4DC \uB370\uC774\uD130 \uD655\uC778 \uD544\uC694" : ""),
+            generated: false,
+            updatedAt: getNowStamp(),
+            noticeFile: `${agency}_\uC548\uB0B4\uC7A5.jpg`
+          };
+
+          promotions.push(item);
+
+          if (status === "\uD655\uC815") {
+            templateForms[itemId] = buildTemplateDataFromSimpleConfig(item, meta, blocks, noticeLines, rows);
+          }
+        });
+
+        return {
+          promotions,
+          templateForms
+        };
+      }
+
+      function getHeaderDisplayDate() {
+        return formatFinalAppliedDate(state.excelUpdatedAt || getNowStamp());
+      }
+
+      function renderHeader() {
+        const roleText = "프로모션 업로드, 안내장 생성, 승인 결과를 한 화면에서 실시간으로 확인할 수 있습니다.";
 
         return `
-          <div id="templatePreviewModal" class="preview-modal">
-            <div class="preview-dialog">
-              <div class="preview-dialog-head">
-                <div>
-                  <h3>표준안내장 이미지 미리보기</h3>
-                  <p>현재 업로드 기준으로 생성되는 표준안내장 이미지를 바로 확인할 수 있습니다.</p>
+          <section class="dashboard-card dashboard-header">
+            <div class="header-top">
+              <div class="header-titleblock">
+                <div class="brand-badge">SAMSUNG LIFE</div>
+                <h1>GA 프로모션 ON</h1>
+                <div class="header-subtitles">
+                  <span class="header-subtitle">대리점별 프로모션 협의현황</span>
+                  <span class="header-subtitle">확정건만 다운로드 가능</span>
                 </div>
-                <button id="closeTemplatePreviewModal" class="ghost-button" type="button">닫기</button>
+                <p class="header-copy">${roleText}</p>
               </div>
-              <div class="preview-image-surface">
-                ${previewSrc
-                  ? `<img id="templatePreviewImage" class="preview-image" src="${previewSrc}" alt="표준안내장 이미지 미리보기">`
-                  : `<div class="empty-box">표준안내장 미리보기 이미지가 없습니다.</div>`}
-              </div>
-            </div>
-          </div>
-        `;
-      }
 
-      function renderPreviewModal() {
-        const previewItem = getPreviewItem();
-        if (!previewItem) return "";
-        const previewSrc = buildNoticeHref(previewItem, "image");
-
-        return `
-          <div id="previewModal" class="preview-modal">
-            <div class="preview-dialog">
-              <div class="preview-dialog-head">
-                <div>
-                  <h3>대리점 이미지 미리보기</h3>
-                  <p>${previewItem.agency} · ${previewItem.region} · ${previewItem.branch}</p>
+              <div class="header-actions">
+                <div class="header-date-box">
+                  <span class="header-date-value">기준일 ${getHeaderDisplayDate()}</span>
                 </div>
-                <button id="closePreviewModal" class="ghost-button" type="button">닫기</button>
-              </div>
-              <div class="preview-image-surface">
-                ${previewSrc
-                  ? `<img class="preview-image" src="${previewSrc}" alt="${previewItem.agency} 안내장 이미지">`
-                  : `<div class="empty-box">미리보기 이미지를 생성하지 못했습니다.</div>`}
+                <button id="logoutButton" class="ghost-button" type="button">로그아웃</button>
               </div>
             </div>
-          </div>
-        `;
-      }
 
-      function renderPromotionTable(data) {
-        if (!data.length) {
-          return `<div class="empty-box">${state.selectedMonth} 기준으로 표시할 프로모션 현황이 없습니다.</div>`;
-        }
-
-        const sortLabel = state.sortDirection === "desc" ? "↓" : "↑";
-        const headerButton = (field, label) => `
-          <button class="sort-header-button ${state.sortField === field ? "active" : ""}" type="button" data-sort-field="${field}">
-            ${label}${state.sortField === field ? ` ${sortLabel}` : ""}
-          </button>
-        `;
-
-        return `
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>${headerButton("region", "지역단")}</th>
-                  <th>${headerButton("branch", "지점")}</th>
-                  <th>${headerButton("agency", "GA명")}</th>
-                  <th>${headerButton("status", "상태")}</th>
-                  <th>이미지</th>
-                  <th>${headerButton("updatedAt", "반영")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${data.map((item) => `
-                  <tr>
-                    <td>${item.region}</td>
-                    <td>${item.branch}</td>
-                    <td class="agency-cell"><strong>${item.agency}</strong></td>
-                    <td><span class="traffic ${getStatusClass(item.status)}">${item.status}</span></td>
-                    <td>
-                      <div class="notice-links">
-                        <button
-                          class="notice-link ${canOpenImagePreview(item) ? "" : "disabled"}"
-                          type="button"
-                          data-preview-id="${item.id}"
-                          data-preview-enabled="${canOpenImagePreview(item) ? "true" : "false"}"
-                          data-preview-status="${item.status}"
-                          onclick="return window.handleGenerateImageClick(this)"
-                        >미리보기</button>
-                        <button
-                          class="notice-link ${isDownloadEnabled(item) ? "" : "disabled"}"
-                          type="button"
-                          data-download-id="${item.id}"
-                          data-download-enabled="${isDownloadEnabled(item) ? "true" : "false"}"
-                          data-download-status="${item.status}"
-                          onclick="return window.handleDownloadClick(this)"
-                        >다운로드</button>
-                      </div>
-                    </td>
-                    <td>${item.updatedAt}</td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        `;
-      }
-
-      function renderResourceCard(title, fileName, updatedAt, href = "") {
-        const buttonMarkup = href
-          ? `<a class="resource-button button-link" href="${href}" download>다운로드</a>`
-          : `<button class="resource-button" type="button" disabled>업로드 전</button>`;
-
-        return `
-          <div class="resource-card">
-            <div>
-              <strong>${title}</strong>
-              <span>${fileName || "업로드 전"}${updatedAt ? ` · ${updatedAt}` : ""}</span>
-            </div>
-            ${buttonMarkup}
-          </div>
-        `;
-      }
-
-      function renderFileReferencePanel() {
-        return `
-          <section class="panel">
-            <div class="panel-head">
-              <div>
-                <h2>기타자료실</h2>
-                <p>관리자가 업로드한 참고 파일을 이 영역에서 바로 확인합니다.</p>
-              </div>
-            </div>
-            <div class="resource-room">
-              <div class="resource-grid">
-                ${renderResourceCard("전체대리점 프로모션현황", state.uploadedAgencyStatusFileName, state.uploadedAgencyStatusUpdatedAt, state.uploadedAgencyStatusUrl)}
-                ${renderResourceCard("상품별 예상 해약환급금", state.uploadedRefundFileName, state.uploadedRefundUpdatedAt, state.uploadedRefundUrl)}
-              </div>
-            </div>
+            ${renderMonthTabs()}
           </section>
         `;
       }
 
-      function renderAdminUploadItem(label, inputId, buttonId, fileName) {
+      function renderPromotionPage() {
+        const monthScopedPromotions = getMonthScopedPromotions();
+        const filteredPromotions = applyFilters(monthScopedPromotions);
+        const sortedPromotions = sortPromotions(filteredPromotions);
+        const summary = getSummary(filteredPromotions);
+        const finalAppliedDate = formatFinalAppliedDate(getLatestUpdatedAt(monthScopedPromotions));
+        const regionOptions = getRegionOptions(monthScopedPromotions);
+        const branchSource = state.regionFilter === "all"
+          ? monthScopedPromotions
+          : monthScopedPromotions.filter((item) => item.region === state.regionFilter);
+        const branchOptions = getBranchOptions(branchSource);
+
         return `
-          <div class="sub-upload-card">
-            <strong>${label}</strong>
-            <span>${fileName || "업로드 전"}</span>
-            <div class="sub-upload-row">
-              <label class="admin-file-field compact">
-                <input id="${inputId}" type="file" aria-label="${label} 업로드">
-              </label>
-              <button id="${buttonId}" class="admin-main-button alt" type="button">업로드 반영</button>
+          <main class="screen dashboard-screen">
+            <div class="dashboard-shell">
+              ${renderHeader()}
+              ${renderSummaryCards(summary)}
+              ${renderDashboardBoard(filteredPromotions)}
+
+              <section class="panel">
+                <div class="panel-head">
+                  <div>
+                    <h2>대리점별 프로모션 협의현황</h2>
+                    <p class="panel-date">최종반영 ${finalAppliedDate}</p>
+                  </div>
+                </div>
+                ${renderPromotionSearchFilters(regionOptions, branchOptions)}
+                ${renderPromotionTable(sortedPromotions)}
+              </section>
+
+              <section class="stack-section">
+                ${renderFileReferencePanel()}
+                ${renderAdminPanel(monthScopedPromotions)}
+              </section>
             </div>
-          </div>
+            ${renderPreviewModal()}
+            ${renderTemplatePreviewModal()}
+          </main>
         `;
       }
 
       function renderAdminPanel(data) {
         const isHqUser = state.currentUser.role === "hq";
         if (!isHqUser) return "";
+
         const adminSummary = getSummary(data);
         const previewItems = getGeneratedPreviewItems(data);
-        const templatePreviewSrc = getTemplatePreviewImageSrc();
+        const sampleTemplateDownloadUrl = state.sampleTemplateDownloadUrl || "./outputs/ga-promotion-template/6월_프로모션_입력샘플_20260617.xlsx";
+        const sampleTemplateFileName = state.sampleTemplateFileName || "6월_프로모션_입력샘플_20260617.xlsx";
 
         return `
           <section class="panel">
             <div class="panel-head">
               <div>
                 <h2>관리자페이지</h2>
-                <p>업로드양식 반영, 표준안내장 이미지 생성, 전체 승인, 권한 업로드를 한 화면에서 관리합니다.</p>
               </div>
             </div>
 
             <div class="admin-dashboard">
               <div class="admin-kpi-grid">
-                <div class="admin-kpi-card"><span>전체</span><strong>${adminSummary.total}건</strong></div>
-                <div class="admin-kpi-card"><span>확정</span><strong>${adminSummary.confirmed}건</strong></div>
-                <div class="admin-kpi-card"><span>미확정</span><strong>${adminSummary.pending}건</strong></div>
-                <div class="admin-kpi-card"><span>확정 비율</span><strong>${adminSummary.total ? Math.round((adminSummary.confirmed / adminSummary.total) * 100) : 0}%</strong></div>
+                <div class="admin-kpi-card">
+                  <span>전체</span>
+                  <strong>${adminSummary.total}건</strong>
+                </div>
+                <div class="admin-kpi-card">
+                  <span>확정</span>
+                  <strong>${adminSummary.confirmed}건</strong>
+                </div>
+                <div class="admin-kpi-card">
+                  <span>미확정</span>
+                  <strong>${adminSummary.pending}건</strong>
+                </div>
+                <div class="admin-kpi-card">
+                  <span>확정 비율</span>
+                  <strong>${adminSummary.total ? Math.round((adminSummary.confirmed / adminSummary.total) * 100) : 0}%</strong>
+                </div>
               </div>
 
-              <div class="admin-action-grid admin-action-grid-wide">
-                <div class="admin-action-card">
-                  <h4>업로드양식</h4>
-                  <div class="admin-upload-row upload-emphasis">
-                    <a class="admin-main-button alt button-link" href="./outputs/ga-promotion-template/6월_프로모션_입력샘플_20260617.xlsx" download>업로드양식 다운로드</a>
-                    <label class="admin-file-field">
-                      <input id="excelFileInput" type="file" aria-label="프로모션 엑셀 업로드">
+              <div class="admin-action-grid">
+                <div class="admin-action-card upload-card-wide">
+                  <h4>엑셀업로드</h4>
+                  <div class="admin-upload-row upload-emphasis upload-main-row">
+                    <a class="admin-main-button alt button-link" href="${sampleTemplateDownloadUrl}" download="${sampleTemplateFileName}">업로드양식 다운로드</a>
+                    <label class="admin-file-field is-picker">
+                      <span id="excelFileInputLabel">엑셀파일 업로드</span>
+                      <input id="excelFileInput" type="file" aria-label="엑셀파일 업로드">
                     </label>
-                    <button id="uploadConfirmButton" class="admin-main-button" type="button">업로드 반영</button>
+                    <button id="uploadConfirmButton" class="admin-main-button" type="button" disabled>업로드 반영</button>
                   </div>
-                  <p>2번째 시트는 프로모션입력, 데이터 시트는 전체 대리점 현황, 조직 시트는 지점별 지역단 매핑 기준으로 반영합니다.</p>
                 </div>
 
                 <div class="admin-action-card">
-                  <h4>기타자료 업로드</h4>
-                  <div class="admin-sub-upload-grid">
-                    ${renderAdminUploadItem("전체대리점 프로모션현황", "agencyStatusFileInput", "agencyStatusUploadButton", state.uploadedAgencyStatusFileName)}
-                    ${renderAdminUploadItem("상품별 예상 해약환급금", "refundFileInput", "refundUploadButton", state.uploadedRefundFileName)}
+                  <h4>안내장 이미지 생성</h4>
+                  <div class="admin-single-action">
+                    <button id="generateNoticesButton" class="admin-main-button" type="button">표준안내장 생성</button>
                   </div>
-                  <p>기타자료실에는 참고용 파일만 노출되며, 업로드한 파일명과 최신 반영 일시를 함께 표시합니다.</p>
                 </div>
 
                 <div class="admin-action-card">
-                  <h4>표준안내장 이미지 생성</h4>
-                  <div class="admin-upload-row">
-                    <button id="generateNoticesButton" class="admin-main-button" type="button" style="width:100%;">표준안내장 이미지 생성</button>
-                  </div>
-                  <p>확정 데이터만 이미지 생성 대상으로 준비되며, 전체 승인 전까지는 다운로드가 비활성화됩니다.</p>
-                </div>
-
-                <div class="admin-action-card">
-                  <h4>전체 승인</h4>
+                  <h4>전체승인</h4>
                   <div class="admin-approve-row">
                     <input class="admin-password-field" type="password" value="${state.currentUser.employeeId}" aria-label="승인 비밀번호">
                     <button id="approveAllButton" class="admin-main-button alt" type="button" ${state.generatedAt ? "" : "disabled"}>전체 승인</button>
                   </div>
-                  <p>최종 확정된 건만 다운로드 가능하며, 미확정은 수치 미입력 상태로 비활성화됩니다.</p>
                 </div>
 
                 <div class="admin-action-card">
                   <h4>권한 사번 업로드</h4>
                   <div class="admin-upload-row upload-emphasis">
-                    <label class="admin-file-field">
+                    <label class="admin-file-field is-picker">
+                      <span id="hqEmployeeFileInputLabel">권한 파일 선택</span>
                       <input id="hqEmployeeFileInput" type="file" accept=".xlsx,.xls,.csv" aria-label="권한 사번 업로드">
                     </label>
                     <button id="hqEmployeeUploadButton" class="admin-main-button" type="button">권한 반영</button>
                   </div>
-                  <p>본사담당자가 첫 번째 시트의 사번, 이름, 권한, 조직 열을 업로드해 로그인 대상자를 갱신합니다.</p>
+                </div>
+
+                <div class="admin-action-card upload-card-wide">
+                  <h4>기타자료실 업로드</h4>
+                  <div class="admin-resource-upload-list">
+                    <div class="admin-resource-upload-item">
+                      <strong>전체대리점 프로모션현황</strong>
+                      <span class="mini-note">${state.selectedUploadFileName || "업로드된 파일 없음"}</span>
+                      <div class="admin-upload-row upload-emphasis compact-actions">
+                        <label class="admin-file-field is-picker">
+                          <span id="resourcePromoFileInputLabel">파일 선택</span>
+                          <input id="resourcePromoFileInput" type="file" accept=".xlsx,.xls,.csv" aria-label="전체대리점 프로모션현황 파일 선택">
+                        </label>
+                        <button id="resourcePromoUploadButton" class="admin-main-button" type="button">업로드 반영</button>
+                      </div>
+                    </div>
+                    <div class="admin-resource-upload-item">
+                      <strong>상품별 예상해약환급금 엑셀</strong>
+                      <span class="mini-note">${state.refundFileName || "업로드된 파일 없음"}</span>
+                      <div class="admin-upload-row upload-emphasis compact-actions">
+                        <label class="admin-file-field is-picker">
+                          <span id="refundFileInputLabel">파일 선택</span>
+                          <input id="refundFileInput" type="file" accept=".xlsx,.xls,.csv" aria-label="상품별 예상해약환급금 엑셀 파일 선택">
+                        </label>
+                        <button id="refundUploadButton" class="admin-main-button" type="button">업로드 반영</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -3975,9 +4981,9 @@
                 <div class="admin-preview-head">
                   <div>
                     <h4>대리점 이미지 미리보기</h4>
-                    <p>안내장 이미지 생성 후 관리자만 생성 대상 목록을 열어 미리보기할 수 있습니다.</p>
+                    <p>생성된 안내장은 관리자만 먼저 확인할 수 있습니다.</p>
                   </div>
-                  <button id="toggleAdminPreviewList" class="ghost-button" type="button">${state.showAdminPreviewList ? "접기" : "열기"}</button>
+                  <button id="toggleAdminPreviewList" class="ghost-button" type="button">${state.showAdminPreviewList ? "접기" : "펼치기"}</button>
                 </div>
                 ${state.showAdminPreviewList
                   ? `<div class="admin-preview-list">
@@ -3991,42 +4997,56 @@
                             <button class="preview-button" type="button" data-preview-id="${item.id}">미리보기</button>
                           </div>
                         `).join("")
-                        : `<div class="empty-box">이미지 생성 후 미리보기 대상이 여기에 표시됩니다.</div>`}
+                        : `<div class="empty-box">안내장 생성 후 미리보기 목록이 표시됩니다.</div>`}
                     </div>`
                   : ""}
               </div>
 
               <div class="admin-action-card">
                 <h4>표준안내장 보기</h4>
-                <div class="admin-upload-row">
-                  <button id="openTemplatePreviewButton" class="admin-main-button" type="button" style="width:100%;">표준안내장 보기</button>
+                <div class="admin-single-action">
+                  <button id="openTemplatePreviewButton" class="admin-main-button" type="button">표준안내장 보기</button>
                 </div>
-                <p>현재 반영된 업로드 기준으로 생성되는 안내장 이미지만 보여줍니다.</p>
-                <div class="inline-template-preview">
-                  ${templatePreviewSrc
-                    ? `<img class="template-preview-image" src="${templatePreviewSrc}" alt="표준안내장 이미지">`
-                    : `<div class="empty-box">표준안내장 미리보기 이미지를 생성하지 못했습니다.</div>`}
-                </div>
+                <iframe
+                  id="embeddedTemplateFrame"
+                  class="inline-template-frame"
+                  src="./template-package/promo-template.html?preview=1&readonly=1"
+                  title="표준안내장 화면"
+                ></iframe>
               </div>
             </div>
           </section>
         `;
       }
 
-      function rememberUploadedFile(file, nameKey, urlKey, updatedKey) {
-        if (!file) return false;
-        if (state[urlKey]) {
-          try {
-            URL.revokeObjectURL(state[urlKey]);
-          } catch (error) {
-            console.warn("기존 업로드 URL 해제 실패", error);
-          }
+      function getMonthDisplayFromWorkbook(workbook, fileName = "") {
+        const detectedMonth = extractMonthValueFromWorkbook(workbook, fileName);
+        if (detectedMonth) return detectedMonth;
+        return createDefaultUploadMeta().month;
+      }
+
+      function bindFilePickerLabel(inputId, labelId, emptyText, buttonId) {
+        const input = document.getElementById(inputId);
+        const label = document.getElementById(labelId);
+        const button = buttonId ? document.getElementById(buttonId) : null;
+        if (!input || !label) return;
+
+        const resolvedEmptyText = inputId === "excelFileInput" ? "파일 선택" : emptyText;
+        if (inputId === "excelFileInput") {
+          input.setAttribute("aria-label", "엑셀 파일 선택");
         }
 
-        state[nameKey] = file.name;
-        state[urlKey] = URL.createObjectURL(file);
-        state[updatedKey] = getNowStamp();
-        return true;
+        const syncLabel = () => {
+          const file = input.files && input.files[0] ? input.files[0] : null;
+          label.textContent = file ? file.name : resolvedEmptyText;
+          label.title = file ? file.name : resolvedEmptyText;
+          if (button) {
+            button.disabled = !file;
+          }
+        };
+
+        syncLabel();
+        input.addEventListener("change", syncLabel);
       }
 
       function handleLogin() {
@@ -4119,6 +5139,8 @@
             state.branchFilter = "all";
             state.agencyKeyword = "";
             state.agencyQuery = "";
+            syncMonthScopedUploadState(state.selectedMonth);
+            saveStoredPromoDashboardState();
             renderApp();
           });
         });
@@ -4193,6 +5215,12 @@
           });
         }
 
+        bindFilePickerLabel("excelFileInput", "excelFileInputLabel", "엑셀 파일 선택", "uploadConfirmButton");
+        bindFilePickerLabel("sampleTemplateFileInput", "sampleTemplateFileInputLabel", "샘플양식 선택");
+        bindFilePickerLabel("hqEmployeeFileInput", "hqEmployeeFileInputLabel", "권한 파일 선택");
+        bindFilePickerLabel("resourcePromoFileInput", "resourcePromoFileInputLabel", "파일 선택");
+        bindFilePickerLabel("refundFileInput", "refundFileInputLabel", "파일 선택");
+
         const hqEmployeeUploadButton = document.getElementById("hqEmployeeUploadButton");
         if (hqEmployeeUploadButton) {
           hqEmployeeUploadButton.addEventListener("click", async () => {
@@ -4229,6 +5257,69 @@
           });
         }
 
+        const sampleTemplateUploadButton = document.getElementById("sampleTemplateUploadButton");
+        if (sampleTemplateUploadButton) {
+          sampleTemplateUploadButton.addEventListener("click", () => {
+            const fileInput = document.getElementById("sampleTemplateFileInput");
+            const file = fileInput && fileInput.files && fileInput.files[0]
+              ? fileInput.files[0]
+              : null;
+
+            if (!file) {
+              window.alert("샘플양식으로 사용할 파일을 먼저 선택해주세요.");
+              return;
+            }
+
+            rememberUploadedFile(file, "sampleTemplateFileName", "sampleTemplateDownloadUrl", "sampleTemplateUpdatedAt");
+            renderApp();
+            window.alert(`${file.name} 샘플양식이 반영되었습니다. 관리자 카드에서 바로 다시 다운로드할 수 있습니다.`);
+          });
+        }
+
+        const resourcePromoUploadButton = document.getElementById("resourcePromoUploadButton");
+        if (resourcePromoUploadButton) {
+          resourcePromoUploadButton.addEventListener("click", () => {
+            const fileInput = document.getElementById("resourcePromoFileInput");
+            const file = fileInput && fileInput.files && fileInput.files[0]
+              ? fileInput.files[0]
+              : null;
+
+            if (!file) {
+              window.alert("전체대리점 프로모션현황 파일을 먼저 선택해주세요.");
+              return;
+            }
+
+            rememberMonthlyUploadFile(file, state.selectedMonth);
+            const nextStamp = getNowStamp();
+            state.selectedUploadFileName = file.name;
+            state.excelUpdatedAt = nextStamp;
+            state.monthUploadFileMap[state.selectedMonth] = file.name;
+            state.monthExcelUpdatedAtMap[state.selectedMonth] = nextStamp;
+            saveStoredPromoDashboardState();
+            renderApp();
+            window.alert("전체대리점 프로모션현황 파일이 실시간 반영되었습니다.");
+          });
+        }
+
+        const refundUploadButton = document.getElementById("refundUploadButton");
+        if (refundUploadButton) {
+          refundUploadButton.addEventListener("click", () => {
+            const fileInput = document.getElementById("refundFileInput");
+            const file = fileInput && fileInput.files && fileInput.files[0]
+              ? fileInput.files[0]
+              : null;
+
+            if (!file) {
+              window.alert("상품별 예상해약환급금 엑셀 파일을 먼저 선택해주세요.");
+              return;
+            }
+
+            rememberUploadedFile(file, "refundFileName", "refundDownloadUrl", "refundUpdatedAt");
+            renderApp();
+            window.alert("상품별 예상해약환급금 엑셀 파일이 실시간 반영되었습니다.");
+          });
+        }
+
         const uploadConfirmButton = document.getElementById("uploadConfirmButton");
         if (uploadConfirmButton) {
           uploadConfirmButton.addEventListener("click", async () => {
@@ -4253,23 +5344,29 @@
               const parsed = parsePromotionWorkbook(file.name, workbook);
               const nextStamp = getNowStamp();
 
-              state.selectedUploadFileName = parsed.fileName;
-              state.selectedMonth = parsed.monthValue || state.selectedMonth;
-              state.excelUpdatedAt = nextStamp;
-              state.generatedAt = "";
-              state.approvedAt = "";
-              state.uploadMeta = parsed.uploadMeta || createDefaultUploadMeta();
-              state.uploadBlocks = parsed.uploadBlocks || createDefaultUploadBlocks();
-              state.uploadNoticeLines = parsed.uploadNoticeLines || createDefaultNoticeLines();
-              state.uploadMode = parsed.uploadMode || "legacy";
+              const targetMonth = normalizeMonthValue(parsed.monthValue || state.selectedMonth);
+              const merged = mergeUploadedPromotionsByMonth(parsed, targetMonth, nextStamp);
+
+              state.selectedMonth = targetMonth;
               state.previewItemId = null;
               state.showTemplatePreview = false;
-              state.templateForms = parsed.templateForms;
-              state.promotions = parsed.promotions.map((item) => ({
-                ...item,
-                generated: false,
-                updatedAt: nextStamp
-              }));
+              state.templateForms = merged.templateForms;
+              state.promotions = merged.promotions;
+              state.monthMetaMap[targetMonth] = {
+                ...(parsed.uploadMeta || createDefaultUploadMeta()),
+                month: targetMonth,
+                generatedTitle: toPromotionTitle(targetMonth)
+              };
+              state.monthBlocksMap[targetMonth] = parsed.uploadBlocks || createDefaultUploadBlocks();
+              state.monthNoticeMap[targetMonth] = parsed.uploadNoticeLines || createDefaultNoticeLines();
+              state.monthUploadFileMap[targetMonth] = parsed.fileName;
+              rememberMonthlyUploadFile(file, targetMonth);
+              state.monthExcelUpdatedAtMap[targetMonth] = nextStamp;
+              state.monthGeneratedAtMap[targetMonth] = "";
+              state.monthApprovedAtMap[targetMonth] = "";
+              state.monthUploadModeMap[targetMonth] = parsed.uploadMode || "legacy";
+              syncMonthScopedUploadState(targetMonth);
+              saveStoredPromoDashboardState();
               renderApp();
               if (parsed.uploadMode === "simple") {
                 window.alert(`입력 샘플 업로드가 완료되었습니다. 블록 ${state.uploadBlocks.length}개와 유의사항 ${state.uploadNoticeLines.length}줄이 반영되었습니다.`);
@@ -4283,44 +5380,10 @@
           });
         }
 
-        const agencyStatusUploadButton = document.getElementById("agencyStatusUploadButton");
-        if (agencyStatusUploadButton) {
-          agencyStatusUploadButton.addEventListener("click", () => {
-            const fileInput = document.getElementById("agencyStatusFileInput");
-            const file = fileInput && fileInput.files && fileInput.files[0]
-              ? fileInput.files[0]
-              : null;
-            if (!file) {
-              window.alert("전체대리점 프로모션현황 파일을 먼저 선택해주세요.");
-              return;
-            }
-
-            rememberUploadedFile(file, "uploadedAgencyStatusFileName", "uploadedAgencyStatusUrl", "uploadedAgencyStatusUpdatedAt");
-            renderApp();
-          });
-        }
-
-        const refundUploadButton = document.getElementById("refundUploadButton");
-        if (refundUploadButton) {
-          refundUploadButton.addEventListener("click", () => {
-            const fileInput = document.getElementById("refundFileInput");
-            const file = fileInput && fileInput.files && fileInput.files[0]
-              ? fileInput.files[0]
-              : null;
-            if (!file) {
-              window.alert("상품별 예상 해약환급금 파일을 먼저 선택해주세요.");
-              return;
-            }
-
-            rememberUploadedFile(file, "uploadedRefundFileName", "uploadedRefundUrl", "uploadedRefundUpdatedAt");
-            renderApp();
-          });
-        }
-
         const generateNoticesButton = document.getElementById("generateNoticesButton");
         if (generateNoticesButton) {
           generateNoticesButton.addEventListener("click", () => {
-            const readyCount = state.promotions.filter((item) => canGenerateItem(item)).length;
+            const readyCount = state.promotions.filter((item) => item.month === state.selectedMonth && canGenerateItem(item)).length;
             if (!readyCount) {
               window.alert("생성 가능한 확정 데이터가 없습니다. 먼저 엑셀 업로드를 반영해주세요.");
               return;
@@ -4328,13 +5391,16 @@
 
             const nextStamp = getNowStamp();
             state.generatedAt = nextStamp;
+            state.monthGeneratedAtMap[state.selectedMonth] = nextStamp;
+            state.monthApprovedAtMap[state.selectedMonth] = "";
             state.approvedAt = "";
             state.previewItemId = null;
             state.promotions = state.promotions.map((item) => ({
               ...item,
-              generated: canGenerateItem(item),
-              updatedAt: canGenerateItem(item) ? nextStamp : item.updatedAt
+              generated: item.month === state.selectedMonth ? canGenerateItem(item) : item.generated,
+              updatedAt: item.month === state.selectedMonth && canGenerateItem(item) ? nextStamp : item.updatedAt
             }));
+            saveStoredPromoDashboardState();
             renderApp();
           });
         }
@@ -4344,6 +5410,8 @@
           approveAllButton.addEventListener("click", () => {
             if (!state.generatedAt) return;
             state.approvedAt = getNowStamp();
+            state.monthApprovedAtMap[state.selectedMonth] = state.approvedAt;
+            saveStoredPromoDashboardState();
             renderApp();
           });
         }
