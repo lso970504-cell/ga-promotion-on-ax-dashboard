@@ -1,0 +1,38 @@
+﻿{
+  "workbookPath": "C:\\Users\\user\\Desktop\\6월 프로모션 총괄판(260529)_공지5.xlsx",
+  "query": "GA코리아",
+  "matchCount": 1,
+  "matches": [
+    {
+      "sheetName": "6월_지점별 담당 분류_전체",
+      "rowNumber": 28,
+      "branchAssigned": "O",
+      "registrationCode": "2009098136",
+      "internalCode": "50000075",
+      "gaName": "(주)GA코리아",
+      "pureType": "표준",
+      "happyType": "표준",
+      "finalConfirm": "○",
+      "happyFiveYearNextMonth": "500%",
+      "happySevenYearNextMonth": "450%",
+      "plusOneNextMonth": "300%",
+      "plusOne13th": "700%",
+      "cancerNextMonth": "300%",
+      "cancer13th": "300%",
+      "pureNextMonthBase": "400%",
+      "agencyAdvance": "0%",
+      "branchManager": "100%",
+      "baseOperationPromo": "○",
+      "marketingLinked": "○",
+      "bridgeMayJune": "○",
+      "bridgeJuneJuly": "○",
+      "bridgeJuneAugust": "○",
+      "agencyExtraReward": "13회 20%",
+      "preferredPlanReward": "",
+      "managingBranch": "강북직할",
+      "promoManager": "(RM)_김진수",
+      "branchCount": "74",
+      "divisionCount": "10"
+    }
+  ]
+}

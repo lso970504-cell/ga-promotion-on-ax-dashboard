@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로모션 표준 템플릿</title>
+    <style>
+      :root {
+        --blue-950: #0d3d93;
+        --blue-900: #0f57c2;
+        --blue-700: #1f76f5;
+        --blue-500: #41a1ff;
+        --sky-100: #ebf7ff;
+        --line: #b8d6ff;
+        --panel: #f6fbff;
+        --yellow: #fff13a;
+        --navy: #053274;
+        --text: #173155;
+        --white: #ffffff;
+        --shadow: 0 18px 40px rgba(10, 45, 105, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(65, 161, 255, 0.24), transparent 28rem),
+          linear-gradient(180deg, #d9eeff 0%, #eef7ff 100%);
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+        gap: 24px;
+        min-height: 100vh;
+        padding: 24px;
+      }
+
+      .editor {
+        align-self: start;
+        position: sticky;
+        top: 24px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 24px;
+        padding: 22px 20px 24px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+      }
+
+      .editor h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+
+      .editor p {
+        margin: 8px 0 0;
+        color: #4c648a;
+        line-height: 1.55;
+      }
+
+      .group {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid #dbeaff;
+      }
+
+      .group h2 {
+        margin: 0 0 12px;
+        font-size: 16px;
+        color: var(--navy);
+      }
+
+      .field {
+        display: grid;
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .field label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #365178;
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        border: 1px solid #c9ddfb;
+        border-radius: 14px;
+        padding: 12px 14px;
+        background: #fbfdff;
+        color: var(--text);
+      }
+
+      .field textarea {
+        min-height: 74px;
+        resize: vertical;
+      }
+
+      .hint {
+        margin-top: 16px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: #edf6ff;
+        font-size: 13px;
+        line-height: 1.55;
+        color: #3d5780;
+      }
+
+      .upload-status {
+        min-height: 20px;
+        margin: 10px 0 0;
+        font-size: 13px;
+        font-weight: 700;
+        color: #28518a;
+      }
+
+      .preview-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .board {
+        width: min(980px, 100%);
+        position: relative;
+        background:
+          radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 22rem),
+          linear-gradient(180deg, #0d5fcc 0%, #27a0ff 58%, #35b7ff 100%);
+        border-radius: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        box-shadow: 0 28px 60px rgba(10, 45, 105, 0.2);
+        overflow: hidden;
+      }
+
+      .board::before,
+      .board::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+      }
+
+      .board::before {
+        width: 260px;
+        height: 260px;
+        top: -90px;
+        right: -70px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .board::after {
+        width: 220px;
+        height: 220px;
+        bottom: -90px;
+        left: -60px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .board-inner {
+        position: relative;
+        z-index: 1;
+        padding: 22px 22px 20px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 8px;
+        align-items: start;
+      }
+
+      .hero-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 148px;
+        gap: 14px;
+        align-items: start;
+      }
+
+      .title-cluster {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 8px 16px;
+      }
+
+      .brand-line {
+        display: contents;
+      }
+
+      .brand-name {
+        color: var(--white);
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        text-shadow: 0 2px 0 rgba(2, 38, 92, 0.28);
+      }
+
+      .main-title {
+        color: var(--yellow);
+        font-size: 54px;
+        font-weight: 900;
+        line-height: 0.98;
+        letter-spacing: -0.05em;
+        text-shadow: 0 4px 0 rgba(4, 45, 108, 0.35);
+      }
+
+      .sub-title {
+        color: var(--yellow);
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        text-shadow: 0 2px 0 rgba(4, 45, 108, 0.2);
+      }
+
+      .branch-card {
+        display: grid;
+        align-content: start;
+        justify-items: center;
+        gap: 2px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(242, 247, 255, 0.94) 100%);
+        border: 2px solid rgba(7, 68, 147, 0.28);
+        border-radius: 18px;
+        width: 148px;
+        min-height: 104px;
+        padding: 4px 14px 12px;
+        text-align: center;
+        color: #20283a;
+        font-weight: 900;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.92),
+          0 10px 22px rgba(5, 40, 99, 0.14);
+      }
+
+      .branch-name {
+        font-size: 24px;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        margin-top: 0;
+      }
+
+      .branch-note {
+        font-size: 18px;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+
+      .summary-header {
+        margin-top: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--yellow);
+        font-weight: 900;
+      }
+
+      .summary-label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 64px;
+        height: 36px;
+        padding: 0 14px;
+        border-radius: 14px 14px 0 0;
+        background: linear-gradient(180deg, #39b85b 0%, #179744 100%);
+        color: #fff;
+        font-size: 17px;
+        box-shadow: 0 10px 18px rgba(7, 73, 39, 0.2);
+      }
+
+      .summary-title {
+        font-size: 30px;
+        letter-spacing: -0.03em;
+      }
+
+      .summary-bar {
+        display: grid;
+        grid-template-columns: 146px minmax(0, 1fr) 58px minmax(0, 1fr);
+        align-items: stretch;
+        border: 3px solid rgba(123, 191, 255, 0.95);
+        background: #ffffff;
+        border-radius: 0 0 18px 18px;
+        overflow: hidden;
+        box-shadow: 0 16px 32px rgba(5, 59, 128, 0.14);
+      }
+
+      .summary-cell {
+        display: grid;
+        place-items: center;
+        min-height: 82px;
+        font-weight: 900;
+      }
+
+      .summary-cell.highlight {
+        background: linear-gradient(180deg, #0f57c2 0%, #156cea 100%);
+        color: var(--yellow);
+        border-right: 3px solid rgba(123, 191, 255, 0.95);
+      }
+
+      .summary-big {
+        font-size: 40px;
+        letter-spacing: -0.05em;
+      }
+
+      .summary-unit {
+        font-size: 26px;
+        margin-left: 4px;
+      }
+
+      .summary-percent {
+        color: #1267d3;
+        font-size: 48px;
+        letter-spacing: -0.05em;
+      }
+
+      .summary-plus {
+        background: #ffffff;
+        color: #ec1f2e;
+        font-size: 46px;
+        position: relative;
+      }
+
+      .summary-plus-box {
+        display: grid;
+        justify-items: center;
+        gap: 4px;
+      }
+
+      .summary-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 24px;
+        padding: 0 10px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #ff3636 0%, #cf1111 100%);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1;
+        white-space: nowrap;
+        box-shadow: 0 6px 14px rgba(178, 17, 17, 0.24);
+      }
+
+      .section {
+        margin-top: 20px;
+        background: linear-gradient(180deg, rgba(227, 242, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 20%, rgba(238, 247, 255, 0.98) 100%);
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        box-shadow: 0 16px 34px rgba(9, 67, 143, 0.12);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 20px 12px;
+        background: linear-gradient(180deg, #0f65dd 0%, #0a56c0 100%);
+        color: #fff;
+      }
+
+      .section-title {
+        color: var(--yellow);
+        font-size: 30px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-align: center;
+      }
+
+      .section-round {
+        font-size: 17px;
+        font-weight: 900;
+        white-space: nowrap;
+        opacity: 0.96;
+      }
+
+      .section-body {
+        display: grid;
+        grid-template-columns: 136px minmax(0, 1fr);
+        gap: 0;
+      }
+
+      .max-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 148px;
+        background: linear-gradient(180deg, #0f57c2 0%, #2180ff 100%);
+        border-right: 3px solid rgba(137, 194, 255, 0.9);
+        color: var(--yellow);
+        padding: 12px 6px;
+        text-align: center;
+      }
+
+      .max-box .small {
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .max-box .value {
+        font-size: 44px;
+        line-height: 1;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        white-space: pre-line;
+      }
+
+      .max-box .unit {
+        font-size: 24px;
+        margin-left: 4px;
+      }
+
+      .table-wrap {
+        padding: 10px 12px 14px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        border: 1.5px solid var(--line);
+        text-align: center;
+        padding: 12px 8px;
+        font-weight: 800;
+        word-break: keep-all;
+      }
+
+      th {
+        background: linear-gradient(180deg, #fbfdff 0%, #f2f7fd 100%);
+        color: #555760;
+        font-size: 16px;
+      }
+
+      td {
+        color: #1b6fd9;
+        font-size: 18px;
+      }
+
+      td.stub,
+      th.stub {
+        color: #4f5f79;
+        background: #ffffff;
+      }
+
+      .section-note {
+        padding: 0 16px 16px;
+        color: #4b5f7f;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.45;
+      }
+
+      .footer-banner {
+        margin-top: 18px;
+        padding: 6px 0 2px;
+        text-align: center;
+        color: var(--yellow);
+        font-size: 21px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        text-shadow: 0 2px 0 rgba(4, 45, 108, 0.2);
+      }
+
+      .notice-box {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 116px minmax(0, 1fr);
+        gap: 12px;
+        align-items: stretch;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.98);
+        border: 2px solid rgba(137, 194, 255, 0.9);
+        border-radius: 18px;
+        box-shadow: 0 12px 24px rgba(8, 56, 121, 0.12);
+      }
+
+      .notice-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #0f65dd 0%, #0a56c0 100%);
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+      }
+
+      .notice-lines {
+        display: grid;
+        gap: 6px;
+        align-content: center;
+        color: #304769;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.45;
+      }
+
+      .notice-line {
+        display: grid;
+        grid-template-columns: 18px minmax(0, 1fr);
+        gap: 8px;
+        align-items: start;
+      }
+
+      .notice-line-index {
+        color: #0f57c2;
+      }
+
+      @media (max-width: 1280px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .editor {
+          position: static;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .board-inner {
+          padding: 14px;
+        }
+
+        .hero {
+          gap: 10px;
+        }
+
+        .hero-top {
+          grid-template-columns: 1fr;
+        }
+
+        .branch-card {
+          max-width: 180px;
+          justify-self: start;
+        }
+
+        .main-title {
+          font-size: 40px;
+        }
+
+        .sub-title {
+          font-size: 18px;
+        }
+
+        .summary-bar {
+          grid-template-columns: 108px minmax(0, 1fr) 46px minmax(0, 1fr);
+        }
+
+        .summary-big,
+        .summary-percent,
+        .max-box .value {
+          font-size: 34px;
+        }
+
+        .summary-pill {
+          font-size: 11px;
+          padding: 0 8px;
+        }
+
+        .section-title {
+          font-size: 24px;
+        }
+
+        .section-body {
+          grid-template-columns: 104px minmax(0, 1fr);
+        }
+
+        .notice-box {
+          grid-template-columns: 1fr;
+        }
+
+        .notice-badge {
+          min-height: 48px;
+          font-size: 20px;
+        }
+
+        th,
+        td {
+          padding: 10px 6px;
+          font-size: 14px;
+        }
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+        }
+
+        .layout {
+          display: block;
+          padding: 0;
+        }
+
+        .editor {
+          display: none;
+        }
+
+        .board {
+          width: 100%;
+          border-radius: 0;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="editor">
+        <h1>표준 템플릿 편집</h1>
+        <p>왼쪽 입력값을 바꾸면 오른쪽 프로모션 양식이 바로 바뀝니다.</p>
+
+        <section class="group">
+          <h2>엑셀 업로드</h2>
+          <div class="field">
+            <label for="excelFile">엑셀 파일</label>
+            <input id="excelFile" type="file" accept=".xlsx,.xls,.csv">
+          </div>
+          <p id="uploadStatus" class="upload-status"></p>
+          <div class="hint">
+            업로드 형식: A열에 항목명, B열부터 값 입력. `행 데이터`는 한 줄 또는 여러 줄을 그대로 올리면 자동으로 표 형식으로 반영됩니다.
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>상단 정보</h2>
+          <div class="field">
+            <label for="promoDate">프로모션 날짜</label>
+            <input id="promoDate" value="">
+          </div>
+          <div class="field">
+            <label for="brandName">회사명</label>
+            <input id="brandName" value="">
+          </div>
+          <div class="field">
+            <label for="mainTitle">제목</label>
+            <input id="mainTitle" value="">
+          </div>
+          <div class="field">
+            <label for="subTitle">서브 제목</label>
+            <input id="subTitle" value="">
+          </div>
+          <div class="field">
+            <label for="branchName">우측 지사명</label>
+            <input id="branchName" value="">
+          </div>
+          <div class="field">
+            <label for="branchNote">우측 보조 문구</label>
+            <input id="branchNote" value="">
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>상단 퍼센트</h2>
+          <div class="field">
+            <label for="summaryLabel">좌측 배지</label>
+            <input id="summaryLabel" value="">
+          </div>
+          <div class="field">
+            <label for="summaryMax">최대 퍼센트</label>
+            <input id="summaryMax" value="400%">
+          </div>
+          <div class="field">
+            <label for="summaryTitle">가운데 제목</label>
+            <input id="summaryTitle" value="">
+          </div>
+          <div class="field">
+            <label for="summaryLeft">가운데 왼쪽 %</label>
+            <input id="summaryLeft" value="100%">
+          </div>
+          <div class="field">
+            <label for="summaryPill">빨간 라벨</label>
+            <input id="summaryPill" value="">
+          </div>
+          <div class="field">
+            <label for="summaryRight">가운데 오른쪽 %</label>
+            <input id="summaryRight" value="100%">
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>첫 번째 표</h2>
+          <div class="field">
+            <label for="section1Title">블록 제목</label>
+            <input id="section1Title" value="">
+          </div>
+          <div class="field">
+            <label for="section1Round">회차 표기</label>
+            <input id="section1Round" value="[13회]">
+          </div>
+          <div class="field">
+            <label for="section1Max">좌측 최대값</label>
+            <input id="section1Max" value="400%">
+          </div>
+          <div class="field">
+            <label for="section1Headers">헤더들, 쉼표로 구분</label>
+            <input id="section1Headers" value="실적,5만 ↑,10만 ↑,20만 ↑,30만 ↑,50만 ↑,100만 ↑">
+          </div>
+          <div class="field">
+            <label for="section1Rows">행 데이터, 줄바꿈으로 구분, 각 줄은 | 로 칸 구분</label>
+            <textarea id="section1Rows">1~13회|5만|40만|80만|120만|250만|500만
+14~28회|5만|30만|60만|90만|200만|400만</textarea>
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>두 번째 표</h2>
+          <div class="field">
+            <label for="section2Title">블록 제목</label>
+            <input id="section2Title" value="">
+          </div>
+          <div class="field">
+            <label for="section2Round">회차 표기</label>
+            <input id="section2Round" value="[13회]">
+          </div>
+          <div class="field">
+            <label for="section2Max">좌측 최대값</label>
+            <input id="section2Max" value="400%">
+          </div>
+          <div class="field">
+            <label for="section2Headers">헤더들</label>
+            <input id="section2Headers" value="5만 ↑,10만 ↑,20만 ↑,30만 ↑,50만 ↑,100만 ↑">
+          </div>
+          <div class="field">
+            <label for="section2Rows">행 데이터</label>
+            <textarea id="section2Rows">10만|30만|60만|100만|200만|400만</textarea>
+          </div>
+          <div class="field">
+            <label for="section2Note">하단 주석</label>
+            <input id="section2Note" value="">
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>세 번째 표</h2>
+          <div class="field">
+            <label for="section3Title">블록 제목</label>
+            <input id="section3Title" value="">
+          </div>
+          <div class="field">
+            <label for="section3Round">회차 표기</label>
+            <input id="section3Round" value="[13회]">
+          </div>
+          <div class="field">
+            <label for="section3Headers">헤더들</label>
+            <input id="section3Headers" value="1/17~31,2/1~13,시상,2/14~28,3/1~6,시상">
+          </div>
+          <div class="field">
+            <label for="section3Rows">행 데이터</label>
+            <textarea id="section3Rows">10만 ↑,5만,60만,10만 ↑,5만,60만
+20만 ↑,5만,100만,20만 ↑,5만,100만
+30만 ↑,5만,150만,30만 ↑,5만,150만
+50만 ↑,5만,250만,50만 ↑,5만,250만</textarea>
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>네 번째 표</h2>
+          <div class="field">
+            <label for="section4Title">블록 제목</label>
+            <input id="section4Title" value="">
+          </div>
+          <div class="field">
+            <label for="section4Round">회차 표기</label>
+            <input id="section4Round" value="[13회]">
+          </div>
+          <div class="field">
+            <label for="section4Max">좌측 최대값</label>
+            <input id="section4Max" value="GOLD&#10;2돈">
+          </div>
+          <div class="field">
+            <label for="section4Headers">헤더들</label>
+            <input id="section4Headers" value="달성기준,12월,1월,2월">
+          </div>
+          <div class="field">
+            <label for="section4Rows">행 데이터</label>
+            <textarea id="section4Rows">①,10만,10만,10만
+②,1만,15만,15만</textarea>
+          </div>
+        </section>
+
+        <section class="group">
+          <h2>하단 문구</h2>
+          <div class="field">
+            <label for="footerBanner">하단 배너</label>
+            <input id="footerBanner" value="">
+          </div>
+        </section>
+
+        <div class="hint">
+          사용 팁: 각 입력값은 텍스트와 숫자를 모두 넣을 수 있습니다. 인쇄할 때는 `Ctrl+P`를 누르면 편집 패널은 자동으로 숨겨집니다.
+        </div>
+      </aside>
+
+      <div class="preview-wrap">
+        <div class="board">
+          <div class="board-inner">
+            <header class="hero">
+              <div class="hero-top">
+                <div class="title-cluster">
+                  <div class="brand-line">
+                    <div class="brand-name" data-bind="brandName"></div>
+                    <div class="main-title" id="mainTitlePreview"></div>
+                  </div>
+                </div>
+                <div class="branch-card">
+                  <div class="branch-name" data-bind="branchName"></div>
+                  <div class="branch-note" data-bind="branchNote"></div>
+                </div>
+              </div>
+              <div class="sub-title" data-bind="subTitle"></div>
+            </header>
+
+            <div class="summary-header">
+              <div class="summary-label" data-bind="summaryLabel"></div>
+              <div class="summary-title" data-bind="summaryTitle"></div>
+            </div>
+            <div class="summary-bar">
+              <div class="summary-cell highlight">
+                <div>
+                  <span class="summary-big" data-bind="summaryMax"></span>
+                </div>
+              </div>
+              <div class="summary-cell">
+                <div class="summary-percent" data-bind="summaryLeft"></div>
+              </div>
+              <div class="summary-cell summary-plus">
+                <div class="summary-plus-box">
+                  <div>+</div>
+                  <div class="summary-pill" data-bind="summaryPill"></div>
+                </div>
+              </div>
+              <div class="summary-cell">
+                <div class="summary-percent" data-bind="summaryRight"></div>
+              </div>
+            </div>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="section-title" data-bind="section1Title"></div>
+                <div class="section-round" data-bind="section1Round"></div>
+              </div>
+              <div class="section-body">
+                <div class="max-box">
+                  <div class="small">최대</div>
+                  <div class="value" data-bind="section1Max"></div>
+                </div>
+                <div class="table-wrap" id="tableSection1"></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="section-title" data-bind="section2Title"></div>
+                <div class="section-round" data-bind="section2Round"></div>
+              </div>
+              <div class="section-body">
+                <div class="max-box">
+                  <div class="small">최대</div>
+                  <div class="value" data-bind="section2Max"></div>
+                </div>
+                <div class="table-wrap" id="tableSection2"></div>
+              </div>
+              <div class="section-note" data-bind="section2Note"></div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="section-title" data-bind="section3Title"></div>
+                <div class="section-round" data-bind="section3Round"></div>
+              </div>
+              <div class="table-wrap" id="tableSection3"></div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="section-title" data-bind="section4Title"></div>
+                <div class="section-round" data-bind="section4Round"></div>
+              </div>
+              <div class="section-body">
+                <div class="max-box">
+                  <div class="value" data-bind="section4Max"></div>
+                </div>
+                <div class="table-wrap" id="tableSection4"></div>
+              </div>
+            </section>
+
+            <div class="notice-box">
+              <div class="notice-badge">유의사항</div>
+              <div class="notice-lines" id="noticeBox"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./node_modules/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="./promo-template-data.browser.js"></script>
+    <script>
+      const { applySheetRowsToData, createInitialFormData, formIds } = window.PromoTemplateData;
+
+      function getValue(id) {
+        return document.getElementById(id).value;
+      }
+
+      function setValue(id, value) {
+        document.getElementById(id).value = value ?? "";
+      }
+
+      function getFormData() {
+        return Object.fromEntries(formIds.map((id) => [id, getValue(id)]));
+      }
+
+      function setFormData(data) {
+        formIds.forEach((id) => {
+          setValue(id, data[id] ?? "");
+        });
+      }
+
+      function setBindings() {
+        document.querySelectorAll("[data-bind]").forEach((element) => {
+          element.textContent = getValue(element.dataset.bind);
+        });
+      }
+
+      function setComposedTitle() {
+        const promoDate = getValue("promoDate").trim();
+        const mainTitle = getValue("mainTitle").trim();
+        const preview = document.getElementById("mainTitlePreview");
+
+        if (!promoDate) {
+          preview.textContent = mainTitle;
+          return;
+        }
+
+        if (!mainTitle) {
+          preview.textContent = promoDate;
+          return;
+        }
+
+        preview.textContent = mainTitle.includes(promoDate)
+          ? mainTitle
+          : `${promoDate} ${mainTitle}`;
+      }
+
+      function splitCsv(text) {
+        return text
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean);
+      }
+
+      function splitRows(text) {
+        return text
+          .split("\n")
+          .map((row) => row.trim())
+          .filter(Boolean)
+          .map((row) => {
+            const divider = row.includes("|") ? "|" : ",";
+            return row.split(divider).map((cell) => cell.trim());
+          });
+      }
+
+      function renderTable(targetId, headersId, rowsId, includeStubHeader) {
+        const headers = splitCsv(getValue(headersId));
+        const rows = splitRows(getValue(rowsId));
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const headRow = document.createElement("tr");
+
+        headers.forEach((header, index) => {
+          const th = document.createElement("th");
+          th.textContent = header;
+          if (includeStubHeader && index === 0) {
+            th.className = "stub";
+          }
+          headRow.appendChild(th);
+        });
+
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        rows.forEach((row) => {
+          const tr = document.createElement("tr");
+          row.forEach((cell, index) => {
+            const td = document.createElement("td");
+            td.textContent = cell;
+            if (includeStubHeader && index === 0) {
+              td.className = "stub";
+            }
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+
+        table.appendChild(tbody);
+
+        const target = document.getElementById(targetId);
+        target.innerHTML = "";
+        target.appendChild(table);
+      }
+
+      function renderNoticeBox() {
+        const noticeBox = document.getElementById("noticeBox");
+        if (!noticeBox) {
+          return;
+        }
+
+        const lines = getValue("footerBanner")
+          .split("/")
+          .map((line) => line.trim())
+          .filter(Boolean);
+
+        noticeBox.innerHTML = lines.length
+          ? lines.map((line, index) => `
+              <div class="notice-line">
+                <span class="notice-line-index">${index + 1}.</span>
+                <span>${line}</span>
+              </div>
+            `).join("")
+          : `<div class="notice-line"><span class="notice-line-index">1.</span><span>유의사항을 입력하면 이 영역에 표시됩니다.</span></div>`;
+      }
+
+      function setStatus(message, isError = false) {
+        const status = document.getElementById("uploadStatus");
+        status.textContent = message;
+        status.style.color = isError ? "#c73434" : "#28518a";
+      }
+
+      async function applyExcelFile(file) {
+        if (!window.XLSX) {
+          setStatus("엑셀 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해주세요.", true);
+          return;
+        }
+
+        const buffer = await file.arrayBuffer();
+        const workbook = window.XLSX.read(buffer, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const rows = window.XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          raw: false,
+          defval: ""
+        });
+
+        const nextData = applySheetRowsToData(getFormData(), rows);
+        setFormData(nextData);
+        render();
+        setStatus(`엑셀 업로드 완료: ${file.name}`);
+      }
+
+      function render() {
+        setBindings();
+        setComposedTitle();
+        renderTable("tableSection1", "section1Headers", "section1Rows", true);
+        renderTable("tableSection2", "section2Headers", "section2Rows", false);
+        renderTable("tableSection3", "section3Headers", "section3Rows", false);
+        renderTable("tableSection4", "section4Headers", "section4Rows", true);
+        renderNoticeBox();
+      }
+
+      document.getElementById("excelFile").addEventListener("change", async (event) => {
+        const [file] = event.target.files;
+        if (!file) {
+          return;
+        }
+
+        try {
+          await applyExcelFile(file);
+        } catch (error) {
+          setStatus(`업로드 실패: ${error.message}`, true);
+        }
+      });
+
+      formIds.forEach((id) => {
+        document.getElementById(id).addEventListener("input", render);
+      });
+
+      setFormData(createInitialFormData());
+      render();
+      setStatus("엑셀 파일을 올리면 화면에 자동 반영됩니다.");
+    </script>
+  </body>
+</html>

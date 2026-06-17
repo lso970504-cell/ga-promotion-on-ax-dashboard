@@ -1,0 +1,3004 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA 프로모션 ON AX 대시보드</title>
+    <style>
+      :root {
+        --brand-950: #0a2a66;
+        --brand-900: #10387e;
+        --brand-700: #1a57b8;
+        --brand-500: #4d8dff;
+        --ink-900: #13233f;
+        --ink-700: #41506c;
+        --ink-500: #697997;
+        --line: #d8e1f0;
+        --surface: #f3f7fd;
+        --card: #ffffff;
+        --success: #18a957;
+        --warning: #f1b80b;
+        --danger: #da3848;
+        --shadow: 0 18px 42px rgba(14, 34, 73, 0.12);
+        --radius-xl: 28px;
+        --radius-lg: 20px;
+        --radius-md: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+        color: var(--ink-900);
+        background:
+          radial-gradient(circle at top right, rgba(77, 141, 255, 0.24), transparent 20rem),
+          linear-gradient(180deg, #eef4ff 0%, var(--surface) 100%);
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .app-shell {
+        min-height: 100vh;
+      }
+
+      .screen {
+        min-height: 100vh;
+      }
+
+      .login-screen {
+        display: grid;
+        place-items: center;
+        padding: 36px 28px;
+      }
+
+      .login-layout {
+        width: min(1100px, 100%);
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.82fr);
+        gap: 28px;
+      }
+
+      .hero-panel,
+      .login-card,
+      .dashboard-card,
+      .panel {
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-panel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 36px;
+        padding: 54px 48px;
+        background:
+          radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.18), transparent 22rem),
+          linear-gradient(145deg, rgba(8, 38, 95, 0.98), rgba(20, 94, 178, 0.92));
+        color: #fff;
+      }
+
+      .hero-panel::before,
+      .hero-panel::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .hero-panel::before {
+        width: 260px;
+        height: 260px;
+        top: -72px;
+        right: -72px;
+      }
+
+      .hero-panel::after {
+        width: 180px;
+        height: 180px;
+        bottom: -56px;
+        left: -56px;
+      }
+
+      .brand-badge {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .brand-badge::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: #fff;
+        box-shadow: 18px 0 0 rgba(255, 255, 255, 0.5);
+      }
+
+      .hero-title {
+        position: relative;
+        margin: 28px 0 18px;
+        font-size: clamp(38px, 5vw, 58px);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+      }
+
+      .hero-copy {
+        position: relative;
+        margin: 0;
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 18px;
+        line-height: 1.75;
+      }
+
+      .hero-note-list {
+        position: relative;
+        display: grid;
+        gap: 12px;
+        margin-top: 34px;
+        max-width: 470px;
+      }
+
+      .hero-note-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 56px;
+        padding: 14px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      .hero-note-item::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #ffffff;
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.18);
+        flex: 0 0 auto;
+      }
+
+      .login-card {
+        position: relative;
+        border-radius: 36px;
+        padding: 38px 34px 34px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(245, 249, 255, 0.98));
+      }
+
+      .login-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 100%;
+        height: 6px;
+        border-radius: 36px 36px 0 0;
+        background: linear-gradient(90deg, var(--brand-900), #3e8dff);
+      }
+
+      .card-label {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #eef4ff;
+        color: var(--brand-900);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .login-card h2 {
+        margin: 16px 0 8px;
+        font-size: 34px;
+        letter-spacing: -0.02em;
+      }
+
+      .login-card p {
+        margin: 0 0 20px;
+        color: var(--ink-700);
+        line-height: 1.6;
+      }
+
+      .login-intro {
+        font-size: 15px;
+      }
+
+      .field-group {
+        display: grid;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .field-group label {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .field {
+        width: 100%;
+        height: 58px;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fcfdff;
+        color: var(--ink-900);
+      }
+
+      .field:focus {
+        outline: 2px solid rgba(77, 141, 255, 0.28);
+        border-color: var(--brand-500);
+      }
+
+      .button-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .primary-button,
+      .secondary-button,
+      .ghost-button,
+      .status-button {
+        border: 0;
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      }
+
+      .primary-button:hover,
+      .secondary-button:hover,
+      .ghost-button:hover,
+      .status-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .primary-button {
+        min-width: 150px;
+        height: 52px;
+        padding: 0 18px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--brand-900), var(--brand-700));
+        color: #fff;
+        box-shadow: 0 12px 24px rgba(18, 70, 150, 0.22);
+      }
+
+      .secondary-button,
+      .ghost-button {
+        min-width: 150px;
+        height: 52px;
+        padding: 0 18px;
+        border-radius: 14px;
+        background: #eff4fb;
+        color: var(--brand-900);
+      }
+
+      .helper-box {
+        margin-top: 24px;
+        padding: 20px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, #f7faff, #eef4fd);
+        border: 1px solid #e1eaf7;
+      }
+
+      .helper-box h3 {
+        margin: 0 0 12px;
+        font-size: 14px;
+      }
+
+      .helper-box p {
+        margin: 6px 0;
+        font-size: 14px;
+      }
+
+      .login-subcopy {
+        display: block;
+        margin-top: 8px;
+        color: var(--ink-500);
+        font-size: 13px;
+      }
+
+      .error-text {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(218, 56, 72, 0.1);
+        color: #ba2332;
+        font-size: 14px;
+      }
+
+      .dashboard-screen {
+        padding: 24px;
+      }
+
+      .dashboard-shell {
+        width: min(1400px, 100%);
+        margin: 0 auto;
+        display: grid;
+        gap: 20px;
+      }
+
+      .dashboard-card,
+      .panel {
+        border-radius: var(--radius-xl);
+      }
+
+      .dashboard-card {
+        padding: 30px 32px;
+      }
+
+      .dashboard-header {
+        display: grid;
+        gap: 22px;
+        background:
+          linear-gradient(135deg, rgba(10, 42, 102, 0.98), rgba(18, 89, 177, 0.92)),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+        color: #fff;
+      }
+
+      .header-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .header-titleblock {
+        max-width: 860px;
+      }
+
+      .dashboard-header h1 {
+        margin: 10px 0 0;
+        font-size: clamp(36px, 4.6vw, 52px);
+        line-height: 1.04;
+        white-space: nowrap;
+        letter-spacing: -0.03em;
+      }
+
+      .header-subtitles {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      .header-subtitle {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .header-copy {
+        margin: 12px 0 0;
+        max-width: 740px;
+        color: rgba(255, 255, 255, 0.82);
+        line-height: 1.6;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .month-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .month-tab {
+        min-width: 92px;
+        height: 42px;
+        padding: 0 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.84);
+        cursor: pointer;
+        transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+      }
+
+      .month-tab:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      .month-tab.active {
+        background: #fff;
+        color: var(--brand-900);
+        font-weight: 700;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .summary-card {
+        padding: 22px 20px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+        border: 1px solid #e4ebf6;
+      }
+
+      .summary-card span {
+        display: block;
+        font-size: 13px;
+        color: var(--ink-500);
+      }
+
+      .summary-card strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 30px;
+        color: var(--brand-950);
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.95fr);
+        gap: 20px;
+      }
+
+      .stack-section {
+        display: grid;
+        gap: 20px;
+      }
+
+      .dashboard-board {
+        display: grid;
+        grid-template-columns: 1.15fr 0.95fr;
+        gap: 20px;
+      }
+
+      .board-card {
+        padding: 24px;
+        border-radius: 24px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 255, 0.98));
+        border: 1px solid #e4ebf6;
+      }
+
+      .board-card h2,
+      .board-card h3 {
+        margin: 0;
+      }
+
+      .board-card p {
+        margin: 10px 0 0;
+        color: var(--ink-700);
+        line-height: 1.6;
+      }
+
+      .board-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .board-stat {
+        padding: 18px;
+        border-radius: 20px;
+        background: #fff;
+        border: 1px solid #e7edf8;
+      }
+
+      .board-stat span {
+        display: block;
+        font-size: 12px;
+        color: var(--ink-500);
+      }
+
+      .board-stat strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 26px;
+        color: var(--brand-950);
+      }
+
+      .board-stat em {
+        display: block;
+        margin-top: 6px;
+        font-style: normal;
+        color: var(--ink-700);
+        font-size: 13px;
+      }
+
+      .timeline-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+        max-height: 338px;
+        overflow-y: auto;
+        padding-right: 6px;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid #e7edf8;
+      }
+
+      .timeline-time {
+        color: var(--brand-900);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .timeline-body strong {
+        display: block;
+        font-size: 14px;
+      }
+
+      .timeline-body span {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink-500);
+        font-size: 12px;
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .panel-head h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .panel-head p {
+        margin: 8px 0 0;
+        color: var(--ink-700);
+        line-height: 1.6;
+      }
+
+      .filter-stack {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .search-filter-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.15fr) 110px;
+        gap: 12px;
+        align-items: end;
+      }
+
+      .search-filter-grid.secondary {
+        grid-template-columns: minmax(0, 1fr) 220px;
+        justify-content: start;
+      }
+
+      .search-filter-field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .search-filter-field label {
+        color: var(--ink-700);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .search-filter-control {
+        width: 100%;
+        height: 56px;
+        padding: 0 18px;
+        border: 1px solid #dbe5f3;
+        border-radius: 18px;
+        background: #fff;
+        color: var(--brand-950);
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .search-filter-button {
+        width: 100%;
+        height: 56px;
+        border: 0;
+        border-radius: 18px;
+        background: #243f81;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .search-filter-toggle {
+        width: 100%;
+        height: 56px;
+        border: 1px solid #dbe5f3;
+        border-radius: 18px;
+        background: #fff;
+        color: var(--brand-900);
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid #e4ebf6;
+        border-radius: 18px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 920px;
+        background: #fff;
+      }
+
+      thead {
+        background: #f7faff;
+      }
+
+      th,
+      td {
+        padding: 16px 14px;
+        border-bottom: 1px solid #edf2fa;
+        text-align: left;
+        font-size: 14px;
+        vertical-align: middle;
+      }
+
+      th {
+        color: var(--ink-700);
+        font-weight: 700;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .agency-cell strong,
+      .file-list strong {
+        display: block;
+      }
+
+      .agency-cell span,
+      .file-list span,
+      .mini-note {
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+        color: var(--ink-500);
+      }
+
+      .traffic {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 13px;
+      }
+
+      .traffic::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+      }
+
+      .traffic.confirmed {
+        background: rgba(24, 169, 87, 0.1);
+        color: #127841;
+      }
+
+      .traffic.confirmed::before {
+        background: var(--success);
+        box-shadow: 0 0 0 5px rgba(24, 169, 87, 0.14);
+      }
+
+      .traffic.pending {
+        background: rgba(241, 184, 11, 0.14);
+        color: #8b6905;
+      }
+
+      .traffic.pending::before {
+        background: var(--warning);
+        box-shadow: 0 0 0 5px rgba(241, 184, 11, 0.14);
+      }
+
+      .traffic.error,
+      .traffic.rejected {
+        background: rgba(218, 56, 72, 0.12);
+        color: #a61f2d;
+      }
+
+      .traffic.error::before,
+      .traffic.rejected::before {
+        background: var(--danger);
+        box-shadow: 0 0 0 5px rgba(218, 56, 72, 0.14);
+      }
+
+      .status-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .status-button {
+        height: 34px;
+        padding: 0 12px;
+        border-radius: 10px;
+        background: #eff4fb;
+        color: var(--brand-950);
+      }
+
+      .download-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 132px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        background: #edf3fc;
+        color: var(--ink-700);
+      }
+
+      .download-chip.active {
+        background: rgba(16, 56, 126, 0.12);
+        color: var(--brand-950);
+      }
+
+      .notice-links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .notice-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 72px;
+        height: 34px;
+        padding: 0 12px;
+        border: 1px solid #d7e2f4;
+        border-radius: 999px;
+        background: #f8fbff;
+        color: var(--brand-900);
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .side-stack {
+        display: grid;
+        gap: 20px;
+      }
+
+      .role-card {
+        padding: 20px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, #f9fbff, #f2f7ff);
+        border: 1px solid #dfebfb;
+      }
+
+      .role-card h3,
+      .file-panel h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .role-card p,
+      .file-panel p {
+        margin: 10px 0 0;
+        color: var(--ink-700);
+        line-height: 1.6;
+      }
+
+      .bullet-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .bullet-item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: var(--ink-700);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .bullet-item::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        margin-top: 7px;
+        border-radius: 999px;
+        background: var(--brand-500);
+        flex: 0 0 auto;
+      }
+
+      .file-panel {
+        padding: 22px;
+        border-radius: 22px;
+        background: #fff;
+        border: 1px solid #e4ebf6;
+      }
+
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .resource-room {
+        padding: 8px 0 4px;
+      }
+
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .resource-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 22px;
+        border-radius: 22px;
+        background: #fff;
+        border: 1px solid #e3e9f3;
+        box-shadow: 0 10px 26px rgba(14, 34, 73, 0.04);
+      }
+
+      .resource-card strong {
+        display: block;
+        font-size: 16px;
+        color: var(--brand-950);
+      }
+
+      .resource-card span {
+        display: block;
+        margin-top: 6px;
+        color: var(--ink-500);
+        font-size: 13px;
+      }
+
+      .resource-button {
+        min-width: 100px;
+        height: 44px;
+        padding: 0 18px;
+        border: 1px solid #d5dff1;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--brand-900);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .file-box {
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 16px;
+        background: #f6f9ff;
+        border: 1px dashed #c9d8f1;
+      }
+
+      .file-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .file-item {
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: #f9fbff;
+        border: 1px solid #e7edf8;
+      }
+
+      .meta-bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .meta-box {
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: #f5f8fe;
+        color: var(--ink-700);
+        font-size: 13px;
+      }
+
+      .user-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 20px;
+        border-radius: 20px;
+        background: #f8fbff;
+        border: 1px solid #e2eaf7;
+      }
+
+      .user-strip strong {
+        display: block;
+        font-size: 17px;
+      }
+
+      .user-strip span {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink-500);
+        font-size: 13px;
+      }
+
+      .top-meta-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 18px;
+        background: #f8fbff;
+        border: 1px solid #e0e8f6;
+      }
+
+      .top-meta-strip span {
+        color: var(--ink-500);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .top-meta-strip strong {
+        color: var(--brand-950);
+        font-size: 14px;
+      }
+
+      .empty-box {
+        padding: 24px;
+        border-radius: 18px;
+        background: #f7faff;
+        color: var(--ink-700);
+        text-align: center;
+        border: 1px dashed #d5e0f2;
+      }
+
+      .admin-collapsed {
+        padding: 20px;
+        border-radius: 20px;
+        background: #f8fbff;
+        border: 1px dashed #cfdcf2;
+        color: var(--ink-700);
+        line-height: 1.6;
+      }
+
+      .admin-dashboard {
+        display: grid;
+        gap: 18px;
+      }
+
+      .admin-page-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .admin-page-head h3 {
+        margin: 0;
+        font-size: 20px;
+        color: var(--brand-950);
+      }
+
+      .admin-page-note {
+        color: var(--ink-500);
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .admin-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .admin-kpi-card {
+        padding: 22px 24px;
+        border-radius: 24px;
+        background: #fff;
+        border: 1px solid #dfe7f4;
+      }
+
+      .admin-kpi-card span {
+        display: block;
+        color: var(--ink-500);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .admin-kpi-card strong {
+        display: block;
+        margin-top: 12px;
+        color: var(--brand-950);
+        font-size: 34px;
+        letter-spacing: -0.03em;
+      }
+
+      .admin-action-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .admin-action-card {
+        padding: 22px;
+        border-radius: 24px;
+        background: #fff;
+        border: 1px solid #dfe7f4;
+      }
+
+      .admin-action-card h4 {
+        margin: 0;
+        color: var(--brand-950);
+        font-size: 18px;
+      }
+
+      .admin-action-card p {
+        margin: 14px 0 0;
+        color: var(--ink-500);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .admin-upload-row,
+      .admin-approve-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 18px;
+      }
+
+      .admin-upload-row.upload-emphasis {
+        gap: 14px;
+      }
+
+      .admin-file-field,
+      .admin-password-field {
+        flex: 1 1 auto;
+        height: 52px;
+        padding: 0 18px;
+        border: 1px solid #dbe5f3;
+        border-radius: 18px;
+        background: #fff;
+      }
+
+      .admin-file-field {
+        display: inline-flex;
+        align-items: center;
+        color: var(--ink-700);
+        font-size: 14px;
+        overflow: hidden;
+      }
+
+      .admin-file-field input {
+        width: 100%;
+      }
+
+      .admin-upload-row.upload-emphasis .admin-file-field {
+        height: 68px;
+        padding: 0 22px;
+        border-radius: 20px;
+        font-size: 15px;
+      }
+
+      .admin-upload-row.upload-emphasis .admin-main-button {
+        min-width: 190px;
+        height: 68px;
+        border-radius: 20px;
+        font-size: 17px;
+      }
+
+      .admin-main-button {
+        min-width: 170px;
+        height: 52px;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 18px;
+        background: #2e447f;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .admin-main-button.alt {
+        background: #4a67b2;
+      }
+
+      .admin-main-button:disabled {
+        background: #b3bfd8;
+        cursor: not-allowed;
+      }
+
+      .status-note {
+        display: inline-block;
+        min-width: 96px;
+        color: var(--ink-500);
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .admin-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .admin-meta-card {
+        padding: 18px 20px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, #ffffff, #f7faff);
+        border: 1px solid #e2e9f6;
+      }
+
+      .admin-meta-card span {
+        display: block;
+        color: var(--ink-500);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .admin-meta-card strong {
+        display: block;
+        margin-top: 10px;
+        color: var(--brand-950);
+        font-size: 16px;
+      }
+
+      .stage-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .stage-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid #e6edf8;
+      }
+
+      .stage-item strong {
+        display: block;
+        font-size: 15px;
+      }
+
+      .stage-item span {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink-500);
+        font-size: 12px;
+      }
+
+      .stage-value {
+        color: var(--brand-950);
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .admin-preview-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .admin-preview-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: #f8fbff;
+        border: 1px solid #e0e8f6;
+      }
+
+      .admin-preview-item strong {
+        display: block;
+        font-size: 15px;
+      }
+
+      .admin-preview-item span {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink-500);
+        font-size: 12px;
+      }
+
+      .preview-button {
+        min-width: 96px;
+        height: 40px;
+        border: 1px solid #d2def2;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--brand-900);
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .preview-modal {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(8, 21, 46, 0.48);
+        backdrop-filter: blur(4px);
+        z-index: 20;
+      }
+
+      .preview-dialog {
+        width: min(980px, 100%);
+        max-height: 90vh;
+        padding: 22px;
+        overflow: auto;
+        border-radius: 28px;
+        background: #fff;
+        box-shadow: 0 24px 48px rgba(8, 21, 46, 0.28);
+      }
+
+      .preview-dialog-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .preview-dialog-head h3 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .preview-dialog-head p {
+        margin: 8px 0 0;
+        color: var(--ink-700);
+        line-height: 1.6;
+      }
+
+      .preview-frame {
+        width: 100%;
+        min-height: 70vh;
+        border: 1px solid #dde7f5;
+        border-radius: 22px;
+        background: #f4f8ff;
+      }
+
+      @media (max-width: 1180px) {
+        .summary-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .login-layout,
+        .content-grid,
+        .dashboard-board,
+        .resource-grid,
+        .admin-kpi-grid,
+        .admin-meta-grid,
+        .admin-action-grid,
+        .search-filter-grid,
+        .search-filter-grid.secondary {
+          grid-template-columns: 1fr;
+        }
+
+        .header-top {
+          flex-direction: column;
+        }
+
+        .dashboard-header h1 {
+          white-space: normal;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .hero-grid,
+        .summary-grid,
+        .board-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .login-screen,
+        .dashboard-screen {
+          padding: 16px;
+        }
+
+        .hero-panel,
+        .login-card,
+        .dashboard-card,
+        .panel {
+          border-radius: 24px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero-grid,
+        .summary-grid,
+        .board-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-panel,
+        .login-card,
+        .dashboard-card,
+        .panel {
+          padding: 22px;
+        }
+
+        .button-row,
+        .header-actions,
+        .status-actions,
+        .resource-card,
+        .admin-upload-row,
+        .admin-approve-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .primary-button,
+        .secondary-button,
+        .ghost-button,
+        .status-button {
+          width: 100%;
+        }
+
+        .user-strip {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="app-shell"></div>
+    <script src="./template-package/xlsx.full.min.js"></script>
+    <script src="./promo-template-data.browser.js"></script>
+    <script src="file:///C:/Users/user/AppData/Local/Temp/promo-data.js"></script>
+    <script>
+      const users = [
+        { employeeId: "10001", name: "김본사", role: "hq", org: "본사 영업추진팀" },
+        { employeeId: "10002", name: "이승인", role: "hq", org: "본사 프로모션관리팀" },
+        { employeeId: "20001", name: "박금천", role: "branch", org: "금천" },
+        { employeeId: "30001", name: "최수원", role: "branch", org: "수원" }
+      ];
+
+      const monthOptions = ["2026.06", "2026.05", "2026.04", "2026.03", "2026.02", "2026.01"];
+
+      const seedPromotions = [
+        {
+          id: 1,
+          agency: "더블유에셋",
+          region: "서울",
+          branch: "강남지점",
+          rm: "정RM",
+          product: "기본가동",
+          month: "2026.06",
+          updatedAt: "2026-06-16 09:10",
+          status: "확정",
+          noticeFile: "Wasset_기본가동_0616.png"
+        },
+        {
+          id: 2,
+          agency: "더블유에셋",
+          region: "서울",
+          branch: "강남지점",
+          rm: "정RM",
+          product: "5~6월 브릿지",
+          month: "2026.06",
+          updatedAt: "2026-06-16 08:40",
+          status: "미확정",
+          noticeFile: "Wasset_브릿지_0616.png"
+        },
+        {
+          id: 3,
+          agency: "피플라이프",
+          region: "경기",
+          branch: "수원지점",
+          rm: "윤RM",
+          product: "6~7월 브릿지",
+          month: "2026.06",
+          updatedAt: "2026-06-15 17:20",
+          status: "오류",
+          errorReason: "조직 매핑 없음",
+          noticeFile: "Peoplelife_브릿지_0615.png"
+        },
+        {
+          id: 4,
+          agency: "인카금융서비스",
+          region: "대전",
+          branch: "대전지점",
+          rm: "강RM",
+          product: "기본가동",
+          month: "2026.06",
+          updatedAt: "2026-06-15 15:50",
+          status: "확정",
+          noticeFile: "Incar_기본가동_0615.png"
+        },
+        {
+          id: 5,
+          agency: "글로벌금융판매",
+          region: "부산",
+          branch: "부산지점",
+          rm: "송RM",
+          product: "기본가동",
+          month: "2026.06",
+          updatedAt: "2026-06-14 16:15",
+          status: "미확정",
+          noticeFile: "Global_기본가동_0614.png"
+        },
+        {
+          id: 6,
+          agency: "에이플러스에셋",
+          region: "대구",
+          branch: "대구지점",
+          rm: "한RM",
+          product: "5~6월 브릿지",
+          month: "2026.06",
+          updatedAt: "2026-06-14 13:30",
+          status: "오류",
+          errorReason: "필수 수치 누락",
+          noticeFile: "Aplus_브릿지_0614.png"
+        }
+      ];
+
+      function statusFromKey(statusKey) {
+        if (statusKey === "confirmed") return "확정";
+        if (statusKey === "error" || statusKey === "rejected") return "오류";
+        return "미확정";
+      }
+
+      function normalizeMonthValue(value) {
+        if (!value) return "2026.06";
+        const text = String(value);
+        const match = text.match(/(20\d{2})\D?(\d{1,2})/);
+        if (!match) return "2026.06";
+        return `${match[1]}.${match[2].padStart(2, "0")}`;
+      }
+
+      function normalizePromotion(item, index) {
+        const id = item.id ?? index + 1;
+        const month = normalizeMonthValue(item.month || item.updatedAt);
+        const status = item.status || statusFromKey(item.statusKey);
+
+        return {
+          ...item,
+          id,
+          agency: item.agency || `대리점 ${id}`,
+          region: item.region || item.branch || "미지정",
+          branch: item.branch || item.region || "미지정",
+          rm: item.rm || "미배정",
+          product: item.product || item.happyType || "프로모션",
+          month,
+          status,
+          errorReason: item.errorReason || (status === "오류" ? "오류 사유 확인 필요" : ""),
+          generated: Boolean(item.generated),
+          noticeFile: item.noticeFile || `promo_${id}.png`,
+          updatedAt: item.updatedAt || `${month.replace(".", "-")}-01 09:00`
+        };
+      }
+
+      function getInitialPromotions() {
+        if (Array.isArray(window.PROMO_SOURCE_DATA) && window.PROMO_SOURCE_DATA.length) {
+          return window.PROMO_SOURCE_DATA.map((item, index) => normalizePromotion(item, index));
+        }
+        return seedPromotions.map((item, index) => normalizePromotion(item, index));
+      }
+
+      const state = {
+        currentUser: null,
+        showAllAgencies: false,
+        statusFilter: "all",
+        regionFilter: "all",
+        branchFilter: "all",
+        agencyKeyword: "",
+        agencyQuery: "",
+        promotions: getInitialPromotions(),
+        selectedMonth: "2026.06",
+        period: "직전 6개월",
+        excelUpdatedAt: "2026-06-16 09:20",
+        generatedAt: "",
+        approvedAt: "",
+        selectedUploadFileName: "6월 프로모션 총괄판(260529)_공지4.xlsx",
+        templateForms: {},
+        adminPanelOpen: false,
+        previewItemId: null,
+        showTemplatePreview: false
+      };
+
+      function getStatusClass(status) {
+        if (status === "확정") return "confirmed";
+        if (status === "오류") return "error";
+        return "pending";
+      }
+
+      function getSummary(data) {
+        return {
+          total: data.length,
+          confirmed: data.filter((item) => item.status === "확정").length,
+          pending: data.filter((item) => item.status === "미확정").length,
+          error: data.filter((item) => item.status === "오류").length,
+          updatedToday: data.filter((item) => item.updatedAt.startsWith("2026-06-16")).length
+        };
+      }
+
+      function getNowStamp() {
+        const now = new Date();
+        const pad = (value) => String(value).padStart(2, "0");
+        return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+      }
+
+      function canGenerateItem(item) {
+        return item.status === "확정" && Boolean(state.templateForms[item.id]);
+      }
+
+      function isDownloadEnabled(item) {
+        return item.status === "확정" && item.generated && Boolean(state.approvedAt);
+      }
+
+      function getGeneratedPreviewItems(data) {
+        return data.filter((item) => item.generated);
+      }
+
+      function getPreviewItem() {
+        return state.promotions.find((item) => item.id === state.previewItemId) || null;
+      }
+
+      function getPreviewTemplateData() {
+        if (!state.previewItemId) return null;
+        return state.templateForms[state.previewItemId] || null;
+      }
+
+      function getActiveTemplateData() {
+        const previewData = getPreviewTemplateData();
+        if (previewData) return previewData;
+
+        const firstTemplateItem = state.promotions.find((item) => state.templateForms[item.id]);
+        return firstTemplateItem ? state.templateForms[firstTemplateItem.id] : null;
+      }
+
+      function syncTemplateFrame(frame, templateData) {
+        if (!frame || !templateData) return;
+
+        const payload = {
+          type: "promo-template-data",
+          data: templateData
+        };
+
+        const send = () => {
+          try {
+            if (frame.contentWindow) {
+              frame.contentWindow.postMessage(payload, "*");
+            }
+          } catch (error) {
+            console.error("템플릿 데이터 전송 실패", error);
+          }
+        };
+
+        frame.addEventListener("load", send, { once: true });
+        window.setTimeout(send, 120);
+      }
+
+      function normalizeCellText(value) {
+        return String(value ?? "").replace(/\r/g, " ").replace(/\n/g, " ").trim();
+      }
+
+      function compactCellText(value) {
+        return normalizeCellText(value).replace(/\s+/g, "");
+      }
+
+      function sheetToRows(sheet) {
+        if (!sheet || !window.XLSX) return [];
+        return window.XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          raw: false,
+          defval: ""
+        });
+      }
+
+      function buildPromotionKey(code, agency) {
+        return `${normalizeCellText(code)}||${normalizeCellText(agency)}`;
+      }
+
+      function findSheetName(workbook, keyword) {
+        if (!workbook) return "";
+        const compactKeyword = compactCellText(keyword);
+        return workbook.SheetNames.find((name) => compactCellText(name).includes(compactKeyword)) || "";
+      }
+
+      function buildTableLookup(rows, dataStartIndex) {
+        const lookup = new Map();
+        rows.slice(dataStartIndex).forEach((row) => {
+          const code = normalizeCellText(row[0]);
+          const agency = normalizeCellText(row[1]);
+          if (!code || !agency) return;
+          lookup.set(buildPromotionKey(code, agency), row);
+        });
+        return lookup;
+      }
+
+      function buildOrgLookup(rows) {
+        const lookup = new Map();
+        rows.slice(1).forEach((row) => {
+          const registrationCode = normalizeCellText(row[7]);
+          if (!registrationCode || lookup.has(registrationCode)) return;
+          lookup.set(registrationCode, {
+            divisionName: normalizeCellText(row[3]).replace(/^GA/, ""),
+            branchName: normalizeCellText(row[4]).replace(/^GA/, ""),
+            organizationName: normalizeCellText(row[6])
+          });
+        });
+        return lookup;
+      }
+
+      function getMonthDisplayFromWorkbook(workbook) {
+        const targetSheet = findSheetName(workbook, "6월_지점별 담당 분류_전체") || workbook.SheetNames[0] || "";
+        const match = normalizeCellText(targetSheet).match(/(\d{1,2})월/);
+        return match ? `2026.${match[1].padStart(2, "0")}` : state.selectedMonth;
+      }
+
+      function getHeaderCells(row, startIndex, endIndex, fallback = []) {
+        if (!Array.isArray(row)) return fallback;
+        const values = row.slice(startIndex, endIndex).map(normalizeCellText).filter(Boolean);
+        return values.length ? values : fallback;
+      }
+
+      function buildTemplateDataFromRows(item, basicRow, bridge56Row, bridge67Row, headerRows = {}) {
+        const createInitialFormData = window.PromoTemplateData?.createInitialFormData;
+        if (!createInitialFormData) return null;
+
+        const data = createInitialFormData();
+        const monthLabel = item.month.replace(".", ".") + " 프로모션 현황";
+        const amountHeaders = ["5만", "10만", "20만", "30만", "50만", "100만"];
+        const basicHeaders = getHeaderCells(headerRows.basic, 6, 12, amountHeaders);
+        const bridge56Headers = getHeaderCells(headerRows.bridge56, 3, 9, amountHeaders);
+        const bridge67Headers = getHeaderCells(headerRows.bridge67, 3, 9, amountHeaders);
+
+        data.promoDate = item.month.replace(".", ".") + "월";
+        data.brandName = "삼성생명";
+        data.mainTitle = monthLabel;
+        data.subTitle = "대리점별 표준안내장";
+        data.branchName = item.agency;
+        data.branchNote = `${item.region} / ${item.branch}`;
+
+        data.summaryLabel = "기준";
+        data.summaryMax = normalizeCellText(basicRow[2]);
+        data.summaryTitle = normalizeCellText(item.product || item.happyType || "프로모션");
+        data.summaryLeft = normalizeCellText(bridge56Row[2]);
+        data.summaryPill = item.status;
+        data.summaryRight = normalizeCellText(bridge67Row[2]);
+
+        data.section1Title = "기본가동";
+        data.section1Round = "[13회]";
+        data.section1Max = normalizeCellText(basicRow[5] || basicRow[2]);
+        data.section1Headers = ["실적", ...basicHeaders].join(",");
+        data.section1Rows = [
+          ["1~13회", ...basicRow.slice(6, 12).map(normalizeCellText)].join("|"),
+          ["14~28회", ...basicRow.slice(12, 18).map(normalizeCellText)].join("|")
+        ].join("\n");
+
+        data.section2Title = "5~6월브릿지";
+        data.section2Round = "[13회]";
+        data.section2Max = normalizeCellText(bridge56Row[2]);
+        data.section2Headers = ["실적", ...bridge56Headers].join(",");
+        data.section2Rows = [
+          ["1~13회", ...bridge56Row.slice(3, 9).map(normalizeCellText)].join("|"),
+          ["14~28회", ...bridge56Row.slice(9, 15).map(normalizeCellText)].join("|")
+        ].join("\n");
+        data.section2Note = "업로드 기준 수치 자동 반영";
+
+        data.section3Title = "6~7월브릿지";
+        data.section3Round = "[13회]";
+        data.section3Headers = ["실적", ...bridge67Headers].join(",");
+        data.section3Rows = [
+          ["1~13회", ...bridge67Row.slice(3, 9).map(normalizeCellText)].join("|"),
+          ["14~28회", ...bridge67Row.slice(9, 15).map(normalizeCellText)].join("|")
+        ].join("\n");
+
+        data.footerBanner = `${item.rm} · ${item.product}`;
+        return data;
+      }
+
+      function parsePromotionWorkbook(fileName, workbook) {
+        const mainSheetName = findSheetName(workbook, "6월_지점별 담당 분류_전체");
+        const basicSheetName = findSheetName(workbook, "기본가동");
+        const bridge56SheetName = findSheetName(workbook, "5~6월브릿지");
+        const bridge67SheetName = findSheetName(workbook, "6~7월브릿지");
+        const orgSheetName = findSheetName(workbook, "조직");
+
+        if (!mainSheetName || !basicSheetName || !bridge56SheetName || !bridge67SheetName || !orgSheetName) {
+          throw new Error("필수 시트를 찾지 못했습니다. 6월_지점별 담당 분류_전체, 기본가동, 5~6월브릿지, 6~7월브릿지, 조직 시트를 확인해주세요.");
+        }
+
+        const monthValue = getMonthDisplayFromWorkbook(workbook);
+        const mainRows = sheetToRows(workbook.Sheets[mainSheetName]);
+        const basicRows = sheetToRows(workbook.Sheets[basicSheetName]);
+        const bridge56Rows = sheetToRows(workbook.Sheets[bridge56SheetName]);
+        const bridge67Rows = sheetToRows(workbook.Sheets[bridge67SheetName]);
+        const orgRows = sheetToRows(workbook.Sheets[orgSheetName]);
+        const headerRows = {
+          basic: basicRows[4] || [],
+          bridge56: bridge56Rows[4] || [],
+          bridge67: bridge67Rows[4] || []
+        };
+
+        const basicLookup = buildTableLookup(basicRows, 6);
+        const bridge56Lookup = buildTableLookup(bridge56Rows, 6);
+        const bridge67Lookup = buildTableLookup(bridge67Rows, 6);
+        const orgLookup = buildOrgLookup(orgRows);
+
+        const promotions = [];
+        const templateForms = {};
+        const dataRows = mainRows.slice(7).filter((row) => normalizeCellText(row[2]) || normalizeCellText(row[4]));
+
+        dataRows.forEach((row, index) => {
+          const code = normalizeCellText(row[2]);
+          const agency = normalizeCellText(row[4]);
+          if (!code || !agency) return;
+
+          const key = buildPromotionKey(code, agency);
+          const orgInfo = orgLookup.get(code);
+          const basicRow = basicLookup.get(key);
+          const bridge56Row = bridge56Lookup.get(key);
+          const bridge67Row = bridge67Lookup.get(key);
+          const finalConfirm = normalizeCellText(row[7]);
+          const fallbackBranch = normalizeCellText(row[24]);
+          const region = orgInfo?.divisionName || fallbackBranch || "미지정";
+          const branch = orgInfo?.branchName || fallbackBranch || "미지정";
+
+          let status = "확정";
+          let errorReason = "";
+          let templateData = null;
+
+          if (!branch || branch === "미지정") {
+            status = "오류";
+            errorReason = "조직 매핑 없음";
+          } else if (!basicRow || !bridge56Row || !bridge67Row) {
+            status = "미확정";
+          } else if (finalConfirm !== "○") {
+            status = "미확정";
+          } else {
+            try {
+              templateData = buildTemplateDataFromRows({
+                agency,
+                region,
+                branch,
+                product: normalizeCellText(row[5]) || "프로모션",
+                happyType: normalizeCellText(row[6]),
+                rm: normalizeCellText(row[25]) || "미배정",
+                month: monthValue,
+                status
+              }, basicRow, bridge56Row, bridge67Row, headerRows);
+            } catch (error) {
+              console.error("안내장 데이터 변환 실패", { agency, code, error });
+              status = "오류";
+              errorReason = "안내장 데이터 변환 실패";
+            }
+          }
+
+          const itemId = index + 1;
+          promotions.push({
+            id: itemId,
+            code,
+            agency,
+            region,
+            branch,
+            rm: normalizeCellText(row[25]) || "미배정",
+            product: normalizeCellText(row[5]) || "프로모션",
+            happyType: normalizeCellText(row[6]),
+            month: monthValue,
+            status,
+            errorReason,
+            generated: false,
+            updatedAt: getNowStamp(),
+            noticeFile: `${agency}_안내장.png`
+          });
+
+          if (templateData) {
+            templateForms[itemId] = templateData;
+          }
+        });
+
+        return {
+          promotions,
+          templateForms,
+          monthValue,
+          fileName
+        };
+      }
+
+      function renderTemplatePreviewModal() {
+        if (!state.showTemplatePreview) return "";
+
+        return `
+          <div id="templatePreviewModal" class="preview-modal">
+            <div class="preview-dialog">
+              <div class="preview-dialog-head">
+                <div>
+                  <h3>표준안내장 템플릿 미리보기</h3>
+                  <p>사용자께서 주신 ZIP 패키지의 실제 템플릿 화면입니다.</p>
+                </div>
+                <button id="closeTemplatePreviewModal" class="ghost-button" type="button">닫기</button>
+              </div>
+              <iframe
+                id="templatePreviewFrame"
+                class="preview-frame"
+                src="./template-package/promo-template.html?preview=1"
+                title="표준안내장 템플릿 미리보기"
+              ></iframe>
+            </div>
+          </div>
+        `;
+      }
+
+      function buildUserFromEmployeeId(employeeId) {
+        const matchedUser = users.find((user) => user.employeeId === employeeId);
+        if (matchedUser) {
+          return matchedUser;
+        }
+
+        if (employeeId.startsWith("1")) {
+          return {
+            employeeId,
+            name: `본사사용자 ${employeeId}`,
+            role: "hq",
+            org: "본사 영업추진팀"
+          };
+        }
+
+        return {
+          employeeId,
+          name: `영업관리자 ${employeeId}`,
+          role: "branch",
+          org: employeeId.startsWith("3") ? "수원" : "금천"
+        };
+      }
+
+      function isFiveDigitNumber(value) {
+        return /^\d{5}$/.test(value);
+      }
+
+      function isBranchMatch(item, org) {
+        return [item.branch, item.region, item.agency, item.rm]
+          .filter(Boolean)
+          .some((value) => String(value).includes(org));
+      }
+
+      function getUserScopedPromotions() {
+        if (!state.currentUser) return [];
+        if (state.currentUser.role === "hq" || state.showAllAgencies) {
+          return state.promotions;
+        }
+
+        const scoped = state.promotions.filter((item) => isBranchMatch(item, state.currentUser.org));
+        return scoped.length ? scoped : state.promotions;
+      }
+
+      function getMonthScopedPromotions() {
+        return getUserScopedPromotions().filter((item) => item.month === state.selectedMonth);
+      }
+
+      function getRegionOptions(data) {
+        return [...new Set(data.map((item) => item.region).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ko"));
+      }
+
+      function getBranchOptions(data) {
+        return [...new Set(data.map((item) => item.branch).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ko"));
+      }
+
+      function applyFilters(data) {
+        let filtered = [...data];
+
+        if (state.regionFilter !== "all") {
+          filtered = filtered.filter((item) => item.region === state.regionFilter);
+        }
+
+        if (state.branchFilter !== "all") {
+          filtered = filtered.filter((item) => item.branch === state.branchFilter);
+        }
+
+        if (state.statusFilter !== "all") {
+          filtered = filtered.filter((item) => item.status === state.statusFilter);
+        }
+
+        if (state.agencyQuery) {
+          const keyword = state.agencyQuery.toLowerCase();
+          filtered = filtered.filter((item) => item.agency.toLowerCase().includes(keyword));
+        }
+
+        return filtered;
+      }
+
+      function escapeSvgText(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function buildNoticeHref(item, format) {
+        const title = `${item.agency} ${item.product} 안내장`;
+        if (format === "image") {
+          const safeTitle = escapeSvgText(title);
+          const safeAgency = escapeSvgText(item.agency);
+          const safeRegion = escapeSvgText(item.region);
+          const safeBranch = escapeSvgText(item.branch);
+          const safeProduct = escapeSvgText(item.product);
+          const safeMonth = escapeSvgText(item.month);
+          const safeStatus = escapeSvgText(item.status);
+          const safeRm = escapeSvgText(item.rm);
+          const svg = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600">
+              <rect width="100%" height="100%" fill="#eef3fb"/>
+              <rect x="18" y="18" width="1164" height="1564" rx="30" fill="#ffffff"/>
+              <rect x="18" y="18" width="1164" height="120" rx="30" fill="#0e49b5"/>
+              <rect x="834" y="32" width="330" height="92" rx="20" fill="#ffffff"/>
+              <text x="58" y="92" font-size="52" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="700">삼성생명 ${safeMonth} 프로모션</text>
+              <text x="999" y="90" text-anchor="middle" font-size="34" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f" font-weight="700">${safeAgency}</text>
+
+              <rect x="30" y="154" width="1140" height="58" rx="18" fill="#111111"/>
+              <text x="600" y="194" text-anchor="middle" font-size="34" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffe600" font-weight="700">${safeProduct} 프로모션 표준 안내장</text>
+
+              <rect x="36" y="230" width="540" height="236" rx="24" fill="#ffffff" stroke="#d7e2f3" stroke-width="3"/>
+              <rect x="36" y="230" width="540" height="48" rx="24" fill="#1662dc"/>
+              <text x="66" y="263" font-size="28" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="700">1. 기본 프로모션 정보</text>
+              <text x="64" y="330" font-size="54" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeStatus}</text>
+              <text x="250" y="330" font-size="30" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#41506c">담당 RM ${safeRm}</text>
+              <line x1="64" y1="360" x2="548" y2="360" stroke="#b9c8e6" stroke-width="2"/>
+              <text x="64" y="410" font-size="26" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">지역단 / 지점</text>
+              <text x="280" y="410" font-size="26" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f" font-weight="700">${safeRegion} / ${safeBranch}</text>
+              <text x="64" y="450" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#697997">본 이미지는 표준 이미지이며 활동물품 이미지는 제외되었습니다.</text>
+
+              <rect x="596" y="230" width="574" height="236" rx="24" fill="#ffffff" stroke="#d7e2f3" stroke-width="3"/>
+              <rect x="596" y="230" width="574" height="48" rx="24" fill="#1662dc"/>
+              <text x="626" y="263" font-size="28" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="700">2. 기본 적용 기준</text>
+              <rect x="626" y="304" width="514" height="44" rx="10" fill="#f5f8ff"/>
+              <text x="660" y="334" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">프로모션 대상</text>
+              <text x="1078" y="334" text-anchor="end" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeAgency}</text>
+              <rect x="626" y="358" width="514" height="44" rx="10" fill="#f5f8ff"/>
+              <text x="660" y="388" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">적용 상품군</text>
+              <text x="1078" y="388" text-anchor="end" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeProduct}</text>
+              <rect x="626" y="412" width="514" height="44" rx="10" fill="#f5f8ff"/>
+              <text x="660" y="442" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">기준 월</text>
+              <text x="1078" y="442" text-anchor="end" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeMonth}</text>
+
+              <rect x="36" y="490" width="1134" height="338" rx="24" fill="#ffffff" stroke="#d7e2f3" stroke-width="3"/>
+              <rect x="36" y="490" width="1134" height="48" rx="24" fill="#1662dc"/>
+              <text x="66" y="523" font-size="28" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="700">3. 운영 기준 및 안내 문구</text>
+              <rect x="62" y="566" width="1082" height="60" rx="14" fill="#fff8cf" stroke="#ecd75f" stroke-width="2"/>
+              <text x="88" y="606" font-size="26" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#8b6905" font-weight="700">표준 이미지 사용</text>
+              <text x="340" y="606" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">활동물품, 별도 부가 이미지 없이 핵심 프로모션 정보만 표기</text>
+              <text x="76" y="676" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">• 본 안내장은 본사 표준 템플릿을 기준으로 생성됩니다.</text>
+              <text x="76" y="728" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">• 상세 적용 기준 및 확정 조건은 관리자 승인 상태에 따라 최종 반영됩니다.</text>
+              <text x="76" y="780" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f">• 전체 승인 이후 확정건만 이미지 다운로드가 가능하며, 미확정 및 오류 건은 생성되지 않습니다.</text>
+
+              <rect x="36" y="852" width="1134" height="456" rx="24" fill="#ffffff" stroke="#d7e2f3" stroke-width="3"/>
+              <rect x="36" y="852" width="1134" height="48" rx="24" fill="#1662dc"/>
+              <text x="66" y="885" font-size="28" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff" font-weight="700">4. 프로모션 요약 표</text>
+              <rect x="68" y="930" width="250" height="72" fill="#f4f7fd" stroke="#cfdaf0" stroke-width="2"/>
+              <rect x="318" y="930" width="816" height="72" fill="#f4f7fd" stroke="#cfdaf0" stroke-width="2"/>
+              <text x="193" y="975" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f" font-weight="700">구분</text>
+              <text x="726" y="975" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#13233f" font-weight="700">내용</text>
+
+              <rect x="68" y="1002" width="250" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <rect x="318" y="1002" width="816" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <text x="193" y="1048" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#41506c">대리점</text>
+              <text x="726" y="1048" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeAgency}</text>
+
+              <rect x="68" y="1074" width="250" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <rect x="318" y="1074" width="816" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <text x="193" y="1120" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#41506c">지역단 / 지점</text>
+              <text x="726" y="1120" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeRegion} / ${safeBranch}</text>
+
+              <rect x="68" y="1146" width="250" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <rect x="318" y="1146" width="816" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <text x="193" y="1192" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#41506c">상품군</text>
+              <text x="726" y="1192" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeProduct}</text>
+
+              <rect x="68" y="1218" width="250" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <rect x="318" y="1218" width="816" height="72" fill="#ffffff" stroke="#cfdaf0" stroke-width="2"/>
+              <text x="193" y="1264" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#41506c">상태</text>
+              <text x="726" y="1264" text-anchor="middle" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#1250c7" font-weight="700">${safeStatus}</text>
+
+              <rect x="36" y="1336" width="1134" height="210" rx="24" fill="#111111"/>
+              <text x="600" y="1394" text-anchor="middle" font-size="34" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffe600" font-weight="700">보장성 상품 및 운영 유의사항</text>
+              <text x="80" y="1464" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff">• 세부 보장 조건과 지급 기준은 본사 승인 완료 후 최종 확정됩니다.</text>
+              <text x="80" y="1510" font-size="24" font-family="Malgun Gothic, Segoe UI, sans-serif" fill="#ffffff">• 본 표준 이미지에는 활동물품 관련 이미지와 부가 시각 요소를 포함하지 않습니다.</text>
+            </svg>
+          `;
+          return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+        }
+
+        return "";
+      }
+
+      async function downloadNoticeAsJpg(item) {
+        const templateData = state.templateForms[item.id];
+        if (!templateData) {
+          throw new Error("표준안내장 데이터가 없어 다운로드할 수 없습니다.");
+        }
+
+        await new Promise((resolve, reject) => {
+          const iframe = document.createElement("iframe");
+          const requestId = `promo-export-${item.id}-${Date.now()}`;
+          const cleanup = () => {
+            window.removeEventListener("message", handleMessage);
+            iframe.remove();
+          };
+
+          const timeoutId = window.setTimeout(() => {
+            cleanup();
+            reject(new Error("표준안내장 다운로드 시간이 초과되었습니다."));
+          }, 15000);
+
+          const handleMessage = (event) => {
+            if (!event.data || event.data.type !== "promo-template-export-result" || event.data.requestId !== requestId) {
+              return;
+            }
+
+            window.clearTimeout(timeoutId);
+            cleanup();
+
+            if (event.data.ok) {
+              resolve();
+              return;
+            }
+
+            reject(new Error(event.data.message || "표준안내장 JPG 내보내기에 실패했습니다."));
+          };
+
+          window.addEventListener("message", handleMessage);
+          iframe.src = "./template-package/promo-template.html?preview=1&export=1";
+          iframe.style.position = "fixed";
+          iframe.style.left = "-99999px";
+          iframe.style.top = "0";
+          iframe.style.width = "1400px";
+          iframe.style.height = "2200px";
+          iframe.style.opacity = "0";
+          iframe.style.pointerEvents = "none";
+          document.body.appendChild(iframe);
+
+          iframe.addEventListener("load", () => {
+            iframe.contentWindow?.postMessage({
+              type: "promo-template-export-jpg",
+              requestId,
+              fileName: `${item.agency}_안내장.jpg`,
+              data: templateData
+            }, "*");
+          }, { once: true });
+        });
+      }
+
+      async function handleDownloadClick(button) {
+        const isEnabled = button.dataset.downloadEnabled === "true";
+        const status = button.dataset.downloadStatus || "";
+        const targetId = Number(button.dataset.downloadId);
+
+        if (!isEnabled) {
+          if (status === "미확정") {
+            window.alert("미확정 건은 다운로드할 수 없습니다.");
+          } else if (status === "오류") {
+            window.alert("오류 건은 다운로드할 수 없습니다. 오류 사유를 먼저 확인해주세요.");
+          } else {
+            window.alert("표준안내장 생성과 전체 승인 후 다운로드할 수 있습니다.");
+          }
+          return false;
+        }
+
+        const item = state.promotions.find((promotion) => promotion.id === targetId);
+        if (!item) {
+          window.alert("다운로드 대상을 찾지 못했습니다.");
+          return false;
+        }
+
+        try {
+          await downloadNoticeAsJpg(item);
+        } catch (error) {
+          console.error(error);
+          window.alert(`다운로드에 실패했습니다.\n${error.message}`);
+        }
+
+        return false;
+      }
+
+      window.handleDownloadClick = handleDownloadClick;
+
+      function renderFilterChips(options, activeValue, group, allLabel) {
+        return `
+          <div class="filter-row">
+            <button class="filter-chip ${activeValue === "all" ? "active" : ""}" type="button" data-filter-group="${group}" data-filter-value="all">${allLabel}</button>
+            ${options.map((option) => `
+              <button class="filter-chip ${activeValue === option ? "active" : ""}" type="button" data-filter-group="${group}" data-filter-value="${option}">${option}</button>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      function renderPromotionSearchFilters(regionOptions, branchOptions) {
+        return `
+          <div class="filter-stack">
+            <div class="search-filter-grid">
+              <div class="search-filter-field">
+                <label for="regionFilter">지역단명</label>
+                <select id="regionFilter" class="search-filter-control" aria-label="지역단명">
+                  <option value="all" ${state.regionFilter === "all" ? "selected" : ""}>전체</option>
+                  ${regionOptions.map((option) => `
+                    <option value="${option}" ${state.regionFilter === option ? "selected" : ""}>${option}</option>
+                  `).join("")}
+                </select>
+              </div>
+              <div class="search-filter-field">
+                <label for="branchFilter">지점명</label>
+                <select id="branchFilter" class="search-filter-control" aria-label="지점명">
+                  <option value="all" ${state.branchFilter === "all" ? "selected" : ""}>전체</option>
+                  ${branchOptions.map((option) => `
+                    <option value="${option}" ${state.branchFilter === option ? "selected" : ""}>${option}</option>
+                  `).join("")}
+                </select>
+              </div>
+              <div class="search-filter-field">
+                <label for="agencyKeyword">대리점명</label>
+                <input id="agencyKeyword" class="search-filter-control" type="text" value="${state.agencyKeyword}" placeholder="대리점명 입력" aria-label="대리점명 입력">
+              </div>
+              <button id="applyAgencySearch" class="search-filter-button" type="button">조회</button>
+            </div>
+            <div class="search-filter-grid secondary">
+              <div class="search-filter-field">
+                <label for="statusFilterSelect">상태</label>
+                <select id="statusFilterSelect" class="search-filter-control" aria-label="상태">
+                  <option value="all" ${state.statusFilter === "all" ? "selected" : ""}>전체</option>
+                  <option value="확정" ${state.statusFilter === "확정" ? "selected" : ""}>확정</option>
+                  <option value="미확정" ${state.statusFilter === "미확정" ? "selected" : ""}>미확정</option>
+                  <option value="오류" ${state.statusFilter === "오류" ? "selected" : ""}>오류</option>
+                </select>
+              </div>
+              ${state.currentUser.role === "branch"
+                ? `<button id="toggleAgencyScope" class="search-filter-toggle" type="button">${state.showAllAgencies ? "전체 대리점 조회 중" : "내 지점 기준"}</button>`
+                : ""}
+            </div>
+          </div>
+        `;
+      }
+
+      function updatePromotionStatus(id, nextStatus) {
+        state.promotions = state.promotions.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              status: nextStatus,
+              updatedAt: "2026-06-16 10:30"
+            };
+          }
+          return item;
+        });
+        renderApp();
+      }
+
+      function renderLoginScreen() {
+        return `
+          <main class="screen login-screen">
+            <section class="login-layout">
+              <article class="hero-panel">
+                <div class="brand-badge">SAMSUNG LIFE</div>
+                <h1 class="hero-title">GA 프로모션 ON AX<br>운영 대시보드</h1>
+                <p class="hero-copy">
+                  대리점별 프로모션 협의현황과 안내장 상태를
+                  편하게 확인할 수 있도록 정리한 내부 운영 화면입니다.
+                </p>
+                <div class="hero-note-list">
+                  <div class="hero-note-item">사번 5자리와 같은 비밀번호로 바로 로그인할 수 있습니다.</div>
+                  <div class="hero-note-item">본사 담당자는 승인 관리, 영업관리자는 조회 중심으로 사용합니다.</div>
+                  <div class="hero-note-item">월별 현황과 안내장 다운로드 가능 여부를 한 화면에서 확인할 수 있습니다.</div>
+                </div>
+              </article>
+
+              <section class="login-card" aria-label="로그인">
+                <span class="card-label">1 PAGE · LOGIN</span>
+                <h2>로그인</h2>
+                <p class="login-intro">사번 5자리와 동일한 비밀번호 5자리를 입력하면 다음 페이지로 이동합니다.</p>
+
+                <div class="field-group">
+                  <label for="employeeId">사번</label>
+                  <input id="employeeId" class="field" maxlength="5" inputmode="numeric" placeholder="예: 10001">
+                  <span class="login-subcopy">숫자 5자리만 입력해 주세요.</span>
+                </div>
+
+                <div class="field-group">
+                  <label for="password">비밀번호</label>
+                  <input id="password" class="field" maxlength="5" inputmode="numeric" type="password" placeholder="사번 5자리 입력">
+                  <span class="login-subcopy">비밀번호는 사번과 동일한 5자리입니다.</span>
+                </div>
+
+                <div id="loginError" class="error-text" hidden></div>
+
+                <div class="button-row">
+                  <button id="loginButton" class="primary-button" type="button">프로모션 현황 보기</button>
+                </div>
+
+                <div class="helper-box">
+                  <h3>로그인 예시</h3>
+                  <p>본사담당자 예시: <strong>10001</strong>, <strong>10002</strong></p>
+                  <p>영업관리자 예시: <strong>20001</strong>, <strong>30001</strong></p>
+                  <p>그 외에도 <strong>아무 5자리 사번</strong>과 같은 비밀번호면 로그인됩니다.</p>
+                </div>
+              </section>
+            </section>
+          </main>
+        `;
+      }
+
+      function renderSummaryCards(summary) {
+        return `
+          <section class="summary-grid" aria-label="프로모션 요약">
+            <article class="summary-card">
+              <span>전체 건수</span>
+              <strong>${summary.total}</strong>
+            </article>
+            <article class="summary-card">
+              <span>확정</span>
+              <strong>${summary.confirmed}</strong>
+            </article>
+            <article class="summary-card">
+              <span>미확정</span>
+              <strong>${summary.pending}</strong>
+            </article>
+            <article class="summary-card">
+              <span>오류</span>
+              <strong>${summary.error}</strong>
+            </article>
+          </section>
+        `;
+      }
+
+      function renderMonthTabs() {
+        return `
+          <div class="month-tabs" aria-label="월별 조회">
+            ${monthOptions.map((month) => `
+              <button
+                class="month-tab ${state.selectedMonth === month ? "active" : ""}"
+                type="button"
+                data-month="${month}"
+              >
+                ${month}
+              </button>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      function renderHeader() {
+        const roleText = state.currentUser.role === "hq"
+          ? "본사 담당자는 업로드, 표준안내장 생성, 전체 승인 흐름을 한 화면에서 관리합니다."
+          : "영업관리자는 기본으로 소속 지점 기준으로 열리고, 필요 시 전체 대리점 조회로 전환할 수 있습니다.";
+
+        return `
+          <section class="dashboard-card dashboard-header">
+            <div class="top-meta-strip">
+              <span>최종 업로드 일시</span>
+              <strong>${state.excelUpdatedAt}</strong>
+            </div>
+            <div class="header-top">
+              <div class="header-titleblock">
+                <div class="brand-badge">SAMSUNG LIFE</div>
+                <h1>GA대리점별 프로모션 현황</h1>
+                <div class="header-subtitles">
+                  <span class="header-subtitle">대리점별 프로모션 협의현황을 한눈에</span>
+                  <span class="header-subtitle">확정건만 다운로드 가능</span>
+                </div>
+                <p class="header-copy">${roleText}</p>
+              </div>
+
+              <div class="header-actions">
+                <button id="logoutButton" class="ghost-button" type="button">로그아웃</button>
+              </div>
+            </div>
+
+            ${renderMonthTabs()}
+          </section>
+        `;
+      }
+
+      function renderPromotionTable(data) {
+        if (!data.length) {
+          return `<div class="empty-box">${state.selectedMonth} 기준으로 표시할 프로모션 현황이 없습니다.</div>`;
+        }
+
+        return `
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>GA명</th>
+                  <th>지역단</th>
+                  <th>지점</th>
+                  <th>상태</th>
+                  <th>오류사유</th>
+                  <th>다운로드</th>
+                  <th>최종 반영</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.map((item) => `
+                  <tr>
+                    <td class="agency-cell">
+                      <strong>${item.agency}</strong>
+                      <span>${item.month} · 행 단위 생성 대상</span>
+                    </td>
+                    <td>${item.region}</td>
+                    <td>${item.branch}</td>
+                    <td>
+                      <span class="traffic ${getStatusClass(item.status)}">${item.status}</span>
+                    </td>
+                    <td>${item.status === "오류" ? `<span class="status-note">${item.errorReason || "오류 사유 확인 필요"}</span>` : `<span class="status-note">-</span>`}</td>
+                    <td>
+                      <div class="notice-links">
+                        <button
+                          class="notice-link"
+                          type="button"
+                          data-download-id="${item.id}"
+                          data-download-enabled="${isDownloadEnabled(item) ? "true" : "false"}"
+                          data-download-status="${item.status}"
+                          onclick="return window.handleDownloadClick(this)"
+                        >다운로드</button>
+                      </div>
+                    </td>
+                    <td>${item.updatedAt}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      function renderAdminPanel(data) {
+        const isAdminAlwaysOpen = state.currentUser.role === "hq";
+        const isOpen = isAdminAlwaysOpen || state.adminPanelOpen;
+        const adminSummary = getSummary(data);
+        const previewItems = getGeneratedPreviewItems(data);
+
+        return `
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>관리자 섹션</h2>
+                <p>
+                  ${isAdminAlwaysOpen
+                    ? "업로드, 안내장 생성, 행별 미리보기, 전체 승인 흐름을 순서대로 운영합니다."
+                    : "영업관리자 로그인 시 관리자 섹션은 닫힘 상태로 시작합니다."}
+                </p>
+              </div>
+              ${isAdminAlwaysOpen
+                ? ""
+                : `<button id="toggleAdminPanel" class="ghost-button" type="button">${isOpen ? "관리자 섹션 닫기" : "관리자 섹션 열기"}</button>`}
+            </div>
+            ${isOpen
+              ? `
+                <div class="admin-dashboard">
+                  <div class="admin-page-head">
+                    <h3>본사담당자 관리페이지</h3>
+                    <span class="admin-page-note">관리자 권한 접속 시 표시</span>
+                  </div>
+
+                  <div class="admin-kpi-grid">
+                    <div class="admin-kpi-card">
+                      <span>전체</span>
+                      <strong>${adminSummary.total}건</strong>
+                    </div>
+                    <div class="admin-kpi-card">
+                      <span>승인</span>
+                      <strong>${adminSummary.confirmed}건</strong>
+                    </div>
+                    <div class="admin-kpi-card">
+                      <span>미확정</span>
+                      <strong>${adminSummary.pending}건</strong>
+                    </div>
+                    <div class="admin-kpi-card">
+                      <span>오류</span>
+                      <strong>${adminSummary.error}건</strong>
+                    </div>
+                  </div>
+
+                  <div class="admin-meta-grid">
+                    <div class="admin-meta-card">
+                      <span>최종 업로드 일시</span>
+                      <strong>${state.excelUpdatedAt}</strong>
+                    </div>
+                    <div class="admin-meta-card">
+                      <span>안내장 생성 일시</span>
+                      <strong>${state.generatedAt || "생성 전"}</strong>
+                    </div>
+                    <div class="admin-meta-card">
+                      <span>최종 승인 일시</span>
+                      <strong>${state.approvedAt || "승인 전"}</strong>
+                    </div>
+                  </div>
+
+                  <div class="admin-action-grid">
+                    <div class="admin-action-card">
+                      <h4>엑셀 파일 업로드</h4>
+                      <div class="admin-upload-row upload-emphasis">
+                        <label class="admin-file-field">
+                          <input id="excelFileInput" type="file" aria-label="엑셀 파일 업로드">
+                        </label>
+                        <button id="uploadConfirmButton" class="admin-main-button" type="button">업로드 반영</button>
+                      </div>
+                      <p>${state.selectedUploadFileName} 기준으로 전체 데이터를 교체하고, 맞는 행만 반영합니다.</p>
+                    </div>
+
+                    <div class="admin-action-card">
+                      <h4>안내장 생성</h4>
+                      <div class="admin-upload-row">
+                        <button id="generateNoticesButton" class="admin-main-button" type="button" style="width:100%;">표준안내장 생성</button>
+                      </div>
+                      <p>정상건만 생성하고, 미확정 및 오류 건은 생성하지 않습니다.</p>
+                    </div>
+
+                    <div class="admin-action-card">
+                      <h4>전체 승인</h4>
+                      <div class="admin-approve-row">
+                        <input class="admin-password-field" type="password" value="${state.currentUser.employeeId}" aria-label="승인 비밀번호">
+                        <button id="approveAllButton" class="admin-main-button alt" type="button" ${state.generatedAt ? "" : "disabled"}>전체 승인</button>
+                      </div>
+                      <p>생성된 정상건만 확정되며, 미확정과 오류는 다운로드 비활성화 상태로 유지됩니다.</p>
+                    </div>
+                  </div>
+
+                  <div class="admin-action-card">
+                    <h4>행별 미리보기</h4>
+                    <p>안내장 생성 후 관리자만 초안을 건별로 확인할 수 있습니다.</p>
+                    <div class="admin-preview-list">
+                      ${previewItems.length
+                        ? previewItems.map((item) => `
+                          <div class="admin-preview-item">
+                            <div>
+                              <strong>${item.agency}</strong>
+                              <span>${item.region} · ${item.branch} · ${item.product}</span>
+                            </div>
+                            <button class="preview-button" type="button" data-preview-id="${item.id}">미리보기</button>
+                          </div>
+                        `).join("")
+                        : `<div class="empty-box">안내장 생성 후 미리보기 목록이 표시됩니다.</div>`}
+                    </div>
+                  </div>
+
+                  <div class="admin-action-card">
+                    <h4>표준템플릿 미리보기</h4>
+                    <div class="admin-upload-row">
+                      <button id="openTemplatePreviewButton" class="admin-main-button" type="button" style="width:100%;">표준안내장 보기</button>
+                    </div>
+                    <p>ZIP 패키지 안의 실제 표준안내장 템플릿 화면을 바로 열어 확인합니다.</p>
+                  </div>
+                </div>
+              `
+              : `<div class="admin-collapsed">관리자 섹션이 닫혀 있습니다. 엑셀 및 안내장 업로드 시 승인권한 부여가 필요할 때 열어보세요.</div>`}
+          </section>
+        `;
+      }
+
+      function renderFileReferencePanel() {
+        return `
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>기타자료실</h2>
+                <p>전체 대리점 엑셀 파일과 참고 자료를 한곳에 모았습니다.</p>
+              </div>
+            </div>
+            <div class="resource-room">
+              <div class="resource-grid">
+                <div class="resource-card">
+                  <div>
+                    <strong>전체대리점 엑셀다운로드</strong>
+                    <span>${state.selectedUploadFileName} · 최근 반영 ${state.excelUpdatedAt}</span>
+                  </div>
+                  <a class="resource-button button-link" href="./promo-source.xlsx" download>다운로드</a>
+                </div>
+                <div class="resource-card">
+                  <div>
+                    <strong>상품별 예상환급률 다운로드</strong>
+                    <span>상품별 참고 자료 파일</span>
+                  </div>
+                  <a class="resource-button button-link" href="./promo-source.xlsx">다운로드</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderDashboardBoard(data) {
+        const summary = getSummary(data);
+        const downloadable = data.filter((item) => isDownloadEnabled(item)).length;
+        const approvalRate = summary.total ? Math.round((summary.confirmed / summary.total) * 100) : 0;
+        const recentItems = [...data]
+          .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+          .slice(0, 12);
+
+        return `
+          <section class="dashboard-board">
+            <article class="board-card">
+              <h2>운영 단계 현황</h2>
+              <p>${state.selectedMonth} 기준으로 업로드, 생성, 전체 승인 진행 상태를 한눈에 볼 수 있도록 구성했습니다.</p>
+              <div class="stage-list">
+                <div class="stage-item">
+                  <div>
+                    <strong>1. 업로드</strong>
+                    <span>${state.selectedUploadFileName}</span>
+                  </div>
+                  <div class="stage-value">${state.excelUpdatedAt}</div>
+                </div>
+                <div class="stage-item">
+                  <div>
+                    <strong>2. 안내장 생성</strong>
+                    <span>정상건만 생성, 미확정/오류 제외</span>
+                  </div>
+                  <div class="stage-value">${state.generatedAt || "생성 전"}</div>
+                </div>
+                <div class="stage-item">
+                  <div>
+                    <strong>3. 전체 승인</strong>
+                    <span>확정건만 다운로드 가능</span>
+                  </div>
+                  <div class="stage-value">${state.approvedAt || "승인 전"}</div>
+                </div>
+              </div>
+              <div class="board-grid">
+                <div class="board-stat">
+                  <span>확정 비율</span>
+                  <strong>${approvalRate}%</strong>
+                  <em>확정 ${summary.confirmed}건 / 전체 ${summary.total}건</em>
+                </div>
+                <div class="board-stat">
+                  <span>다운로드 가능 건수</span>
+                  <strong>${downloadable}건</strong>
+                  <em>전체 승인 이후 확정건 기준</em>
+                </div>
+              </div>
+            </article>
+
+            <article class="board-card">
+              <h3>최근 업데이트</h3>
+              <p>리스트를 스크롤하면서 최근 변경된 대리점 상태를 내림차순으로 확인할 수 있습니다.</p>
+              <div class="timeline-list">
+                ${recentItems.length
+                  ? recentItems.map((item) => `
+                    <div class="timeline-item">
+                      <div class="timeline-time">${item.updatedAt.slice(5, 16)}</div>
+                      <div class="timeline-body">
+                        <strong>${item.agency}</strong>
+                        <span>${item.branch} · ${item.status}${item.status === "오류" && item.errorReason ? ` · ${item.errorReason}` : ""}</span>
+                      </div>
+                    </div>
+                  `).join("")
+                  : `<div class="empty-box">${state.selectedMonth} 기준 최근 업데이트 내역이 없습니다.</div>`}
+              </div>
+            </article>
+          </section>
+        `;
+      }
+
+      function renderPreviewModal() {
+        const previewItem = getPreviewItem();
+        if (!previewItem) return "";
+
+        return `
+          <div id="previewModal" class="preview-modal">
+            <div class="preview-dialog">
+              <div class="preview-dialog-head">
+                <div>
+                  <h3>표준안내장 미리보기</h3>
+                  <p>${previewItem.agency} · ${previewItem.region} · ${previewItem.branch} · ${previewItem.product}</p>
+                </div>
+                <button id="closePreviewModal" class="ghost-button" type="button">닫기</button>
+              </div>
+              <iframe
+                id="previewTemplateFrame"
+                class="preview-frame"
+                src="./template-package/promo-template.html?preview=1"
+                title="${previewItem.agency} 안내장 미리보기"
+              ></iframe>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderPromotionPage() {
+        const monthScopedPromotions = getMonthScopedPromotions();
+        const filteredPromotions = applyFilters(monthScopedPromotions);
+        const summary = getSummary(filteredPromotions);
+        const regionOptions = getRegionOptions(monthScopedPromotions);
+        const branchSource = state.regionFilter === "all"
+          ? monthScopedPromotions
+          : monthScopedPromotions.filter((item) => item.region === state.regionFilter);
+        const branchOptions = getBranchOptions(branchSource);
+
+        return `
+          <main class="screen dashboard-screen">
+            <div class="dashboard-shell">
+              ${renderHeader()}
+              ${renderSummaryCards(summary)}
+              ${renderDashboardBoard(filteredPromotions)}
+
+              <section class="panel">
+                <div class="panel-head">
+                  <div>
+                    <h2>GA대리점별 프로모션 현황</h2>
+                    <p>
+                      같은 GA명이 여러 줄 표시될 수 있으며, 행 단위 기준으로 상태와 다운로드 가능 여부를 함께 확인할 수 있습니다.
+                    </p>
+                  </div>
+                </div>
+                ${renderPromotionSearchFilters(regionOptions, branchOptions)}
+                ${renderPromotionTable(filteredPromotions)}
+              </section>
+
+              <section class="stack-section">
+                ${renderFileReferencePanel()}
+                ${renderAdminPanel(monthScopedPromotions)}
+              </section>
+            </div>
+            ${renderPreviewModal()}
+            ${renderTemplatePreviewModal()}
+          </main>
+        `;
+      }
+
+      function handleLogin() {
+        const employeeId = document.getElementById("employeeId").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const errorEl = document.getElementById("loginError");
+
+        if (!isFiveDigitNumber(employeeId) || !isFiveDigitNumber(password)) {
+          errorEl.textContent = "사번과 비밀번호는 5자리 숫자로 입력해주세요.";
+          errorEl.hidden = false;
+          return;
+        }
+
+        if (employeeId !== password) {
+          errorEl.textContent = "비밀번호는 사번과 동일한 5자리여야 합니다.";
+          errorEl.hidden = false;
+          return;
+        }
+
+        errorEl.hidden = true;
+        state.currentUser = buildUserFromEmployeeId(employeeId);
+        state.showAllAgencies = false;
+        state.statusFilter = "all";
+        state.regionFilter = "all";
+        state.branchFilter = "all";
+        state.agencyKeyword = "";
+        state.agencyQuery = "";
+        state.selectedMonth = "2026.06";
+        state.adminPanelOpen = false;
+        state.period = "직전 6개월";
+        state.previewItemId = null;
+        state.showTemplatePreview = false;
+        renderApp();
+      }
+
+      function bindLoginEvents() {
+        document.getElementById("loginButton").addEventListener("click", handleLogin);
+        ["employeeId", "password"].forEach((id) => {
+          document.getElementById(id).addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              handleLogin();
+            }
+          });
+        });
+      }
+
+      function bindDashboardEvents() {
+        const logoutButton = document.getElementById("logoutButton");
+        if (logoutButton) {
+          logoutButton.addEventListener("click", () => {
+            state.currentUser = null;
+            state.showAllAgencies = false;
+            state.statusFilter = "all";
+            state.regionFilter = "all";
+            state.branchFilter = "all";
+            state.agencyKeyword = "";
+            state.agencyQuery = "";
+            state.selectedMonth = "2026.06";
+            state.adminPanelOpen = false;
+            state.period = "직전 6개월";
+            state.previewItemId = null;
+            state.showTemplatePreview = false;
+            renderApp();
+          });
+        }
+
+        const toggleAgencyScope = document.getElementById("toggleAgencyScope");
+        if (toggleAgencyScope) {
+          toggleAgencyScope.addEventListener("click", () => {
+            state.showAllAgencies = !state.showAllAgencies;
+            state.regionFilter = "all";
+            state.branchFilter = "all";
+            state.agencyKeyword = "";
+            state.agencyQuery = "";
+            renderApp();
+          });
+        }
+
+        document.querySelectorAll("[data-month]").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.selectedMonth = button.dataset.month;
+            state.regionFilter = "all";
+            state.branchFilter = "all";
+            state.agencyKeyword = "";
+            state.agencyQuery = "";
+            renderApp();
+          });
+        });
+
+        const regionFilter = document.getElementById("regionFilter");
+        if (regionFilter) {
+          regionFilter.addEventListener("change", (event) => {
+            state.regionFilter = event.target.value;
+            state.branchFilter = "all";
+            renderApp();
+          });
+        }
+
+        const branchFilter = document.getElementById("branchFilter");
+        if (branchFilter) {
+          branchFilter.addEventListener("change", (event) => {
+            state.branchFilter = event.target.value;
+            renderApp();
+          });
+        }
+
+        const agencyKeyword = document.getElementById("agencyKeyword");
+        if (agencyKeyword) {
+          agencyKeyword.addEventListener("input", (event) => {
+            state.agencyKeyword = event.target.value;
+          });
+          agencyKeyword.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              state.agencyQuery = event.target.value.trim();
+              renderApp();
+            }
+          });
+        }
+
+        const applyAgencySearch = document.getElementById("applyAgencySearch");
+        if (applyAgencySearch) {
+          applyAgencySearch.addEventListener("click", () => {
+            state.agencyQuery = state.agencyKeyword.trim();
+            renderApp();
+          });
+        }
+
+        const statusFilterSelect = document.getElementById("statusFilterSelect");
+        if (statusFilterSelect) {
+          statusFilterSelect.addEventListener("change", (event) => {
+            state.statusFilter = event.target.value;
+            renderApp();
+          });
+        }
+
+        const toggleAdminPanel = document.getElementById("toggleAdminPanel");
+        if (toggleAdminPanel) {
+          toggleAdminPanel.addEventListener("click", () => {
+            state.adminPanelOpen = !state.adminPanelOpen;
+            renderApp();
+          });
+        }
+
+        const uploadConfirmButton = document.getElementById("uploadConfirmButton");
+        if (uploadConfirmButton) {
+          uploadConfirmButton.addEventListener("click", async () => {
+            const fileInput = document.getElementById("excelFileInput");
+            const file = fileInput && fileInput.files && fileInput.files[0]
+              ? fileInput.files[0]
+              : null;
+
+            if (!file) {
+              window.alert("업로드할 엑셀 파일을 먼저 선택해주세요.");
+              return;
+            }
+
+            if (!window.XLSX) {
+              window.alert("엑셀 라이브러리를 불러오지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해주세요.");
+              return;
+            }
+
+            try {
+              const buffer = await file.arrayBuffer();
+              const workbook = window.XLSX.read(buffer, { type: "array" });
+              const parsed = parsePromotionWorkbook(file.name, workbook);
+              const nextStamp = getNowStamp();
+
+              state.selectedUploadFileName = parsed.fileName;
+              state.selectedMonth = parsed.monthValue || state.selectedMonth;
+              state.excelUpdatedAt = nextStamp;
+              state.generatedAt = "";
+              state.approvedAt = "";
+              state.previewItemId = null;
+              state.showTemplatePreview = false;
+              state.templateForms = parsed.templateForms;
+              state.promotions = parsed.promotions.map((item) => ({
+                ...item,
+                generated: false,
+                updatedAt: nextStamp
+              }));
+              renderApp();
+              window.alert(`엑셀 업로드 반영이 완료되었습니다. 총 ${parsed.promotions.length}건입니다.`);
+            } catch (error) {
+              console.error(error);
+              window.alert(`엑셀 업로드에 실패했습니다.\n${error.message}`);
+            }
+          });
+        }
+
+        const generateNoticesButton = document.getElementById("generateNoticesButton");
+        if (generateNoticesButton) {
+          generateNoticesButton.addEventListener("click", () => {
+            const readyCount = state.promotions.filter((item) => canGenerateItem(item)).length;
+            if (!readyCount) {
+              window.alert("생성 가능한 확정 데이터가 없습니다. 먼저 엑셀 업로드를 반영해주세요.");
+              return;
+            }
+
+            const nextStamp = getNowStamp();
+            state.generatedAt = nextStamp;
+            state.approvedAt = "";
+            state.previewItemId = null;
+            state.promotions = state.promotions.map((item) => ({
+              ...item,
+              generated: canGenerateItem(item),
+              updatedAt: canGenerateItem(item) ? nextStamp : item.updatedAt
+            }));
+            renderApp();
+          });
+        }
+
+        const approveAllButton = document.getElementById("approveAllButton");
+        if (approveAllButton) {
+          approveAllButton.addEventListener("click", () => {
+            if (!state.generatedAt) return;
+            state.approvedAt = getNowStamp();
+            renderApp();
+          });
+        }
+
+        document.querySelectorAll("[data-preview-id]").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.previewItemId = Number(button.dataset.previewId);
+            renderApp();
+          });
+        });
+
+        const closePreviewModal = document.getElementById("closePreviewModal");
+        if (closePreviewModal) {
+          closePreviewModal.addEventListener("click", () => {
+            state.previewItemId = null;
+            renderApp();
+          });
+        }
+
+        const previewModal = document.getElementById("previewModal");
+        if (previewModal) {
+          previewModal.addEventListener("click", (event) => {
+            if (event.target.id === "previewModal") {
+              state.previewItemId = null;
+              renderApp();
+            }
+          });
+        }
+
+        const previewTemplateFrame = document.getElementById("previewTemplateFrame");
+        if (previewTemplateFrame) {
+          syncTemplateFrame(previewTemplateFrame, getPreviewTemplateData());
+        }
+
+        const openTemplatePreviewButton = document.getElementById("openTemplatePreviewButton");
+        if (openTemplatePreviewButton) {
+          openTemplatePreviewButton.addEventListener("click", () => {
+            state.showTemplatePreview = true;
+            renderApp();
+          });
+        }
+
+        const closeTemplatePreviewModal = document.getElementById("closeTemplatePreviewModal");
+        if (closeTemplatePreviewModal) {
+          closeTemplatePreviewModal.addEventListener("click", () => {
+            state.showTemplatePreview = false;
+            renderApp();
+          });
+        }
+
+        const templatePreviewModal = document.getElementById("templatePreviewModal");
+        if (templatePreviewModal) {
+          templatePreviewModal.addEventListener("click", (event) => {
+            if (event.target.id === "templatePreviewModal") {
+              state.showTemplatePreview = false;
+              renderApp();
+            }
+          });
+        }
+
+        const templatePreviewFrame = document.getElementById("templatePreviewFrame");
+        if (templatePreviewFrame) {
+          syncTemplateFrame(templatePreviewFrame, getActiveTemplateData());
+        }
+      }
+
+      function renderApp() {
+        const app = document.getElementById("app");
+        app.innerHTML = state.currentUser ? renderPromotionPage() : renderLoginScreen();
+        if (state.currentUser) {
+          bindDashboardEvents();
+        } else {
+          bindLoginEvents();
+        }
+      }
+
+      renderApp();
+    </script>
+  </body>
+</html>
