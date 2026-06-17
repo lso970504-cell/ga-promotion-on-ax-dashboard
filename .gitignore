@@ -3,3 +3,5 @@ outputs/excel-template-builder/node_modules/
 .tmp-*.js
 tmp_*
 *.inspect.ndjson
+
+.vercel
