@@ -609,10 +609,11 @@
 
       .panel-head {
         display: flex;
-        align-items: flex-start;
+        align-items: flex-end;
         justify-content: space-between;
         gap: 18px;
         margin-bottom: 22px;
+        flex-wrap: wrap;
       }
 
       .panel-head h2 {
@@ -776,7 +777,7 @@
       table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 980px;
+        min-width: 940px;
         background: #fff;
         table-layout: fixed;
       }
@@ -818,22 +819,22 @@
 
       th:nth-child(1),
       td:nth-child(1) {
-        width: 18%;
+        width: 17%;
       }
 
       th:nth-child(2),
       td:nth-child(2) {
-        width: 18%;
+        width: 17%;
       }
 
       th:nth-child(3),
       td:nth-child(3) {
-        width: 28%;
+        width: 32%;
       }
 
       th:nth-child(4),
       td:nth-child(4) {
-        width: 14%;
+        width: 12%;
         text-align: center;
       }
 
@@ -847,6 +848,8 @@
         display: block;
         font-size: 19px;
         line-height: 1.4;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
       }
 
       .region-cell,
@@ -854,6 +857,7 @@
         font-weight: 700;
         color: var(--brand-950);
         font-size: 17px;
+        white-space: nowrap;
       }
 
       .status-cell,
@@ -979,6 +983,8 @@
         display: grid;
         gap: 10px;
         min-width: 132px;
+        max-width: 168px;
+        margin: 0 auto;
       }
 
       .notice-link {
@@ -1351,7 +1357,7 @@
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 16px;
-        align-items: start;
+        align-items: stretch;
       }
 
       .admin-insight-grid {
@@ -1366,6 +1372,10 @@
         background: #fff;
         border: 1px solid #dfe7f4;
         box-shadow: 0 12px 26px rgba(16, 56, 126, 0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100%;
       }
 
       .admin-action-card.upload-card-wide {
@@ -2165,6 +2175,141 @@
         return "미확정";
       }
 
+      const BRANCH_REGION_MAP = {
+        "금천지점": "서울지역단",
+        "강서지점": "서울지역단",
+        "여의도지점": "서울지역단",
+        "영등포지점": "서울지역단",
+        "구로지점": "서울지역단",
+        "서대문지점": "서울지역단",
+        "동작지점": "서울지역단",
+        "서울직할지점": "서울지역단",
+        "노원지점": "강북지역단",
+        "일산지점": "강북지역단",
+        "강북지점": "강북지역단",
+        "남양주지점": "강북지역단",
+        "의정부지점": "강북지역단",
+        "을지로지점": "강북지역단",
+        "종로지점": "강북지역단",
+        "강북직할지점": "강북지역단",
+        "광진지점": "강남지역단",
+        "송파지점": "강남지역단",
+        "강동지점": "강남지역단",
+        "강남지점": "강남지역단",
+        "역삼지점": "강남지역단",
+        "용산지점": "강남지역단",
+        "방배지점": "강남지역단",
+        "강남직할지점": "강남지역단",
+        "경인지점": "경인지역단",
+        "부평지점": "경인지역단",
+        "중동지점": "경인지역단",
+        "청라지점": "경인지역단",
+        "부천지점": "경인지역단",
+        "경기지점": "경인지역단",
+        "경인직할지점": "경인지역단",
+        "김포지점": "경인지역단",
+        "안양지점": "경원지역단",
+        "동탄지점": "경원지역단",
+        "수원지점": "경원지역단",
+        "원주지점": "경원지역단",
+        "평택지점": "경원지역단",
+        "성남지점": "경원지역단",
+        "강릉지점": "경원지역단",
+        "경원직할지점": "경원지역단",
+        "충청지점": "충청지역단",
+        "대전지점": "충청지역단",
+        "천안지점": "충청지역단",
+        "충남지점": "충청지역단",
+        "충북지점": "충청지역단",
+        "한밭지점": "충청지역단",
+        "충청직할지점": "충청지역단",
+        "연제지점": "부산지역단",
+        "부산지점": "부산지역단",
+        "영남지점": "부산지역단",
+        "해운대지점": "부산지역단",
+        "부산중앙지점": "부산지역단",
+        "서부산지점": "부산지역단",
+        "부산직할지점": "부산지역단",
+        "대구지점": "대구지역단",
+        "영남중앙지점": "대구지역단",
+        "경북지점": "대구지역단",
+        "대경지점": "대구지역단",
+        "경북북부지점": "대구지역단",
+        "대구중앙지점": "대구지역단",
+        "구미지점": "대구지역단",
+        "대구직할지점": "대구지역단",
+        "광주지점": "호남지역단",
+        "순천지점": "호남지역단",
+        "전남지점": "호남지역단",
+        "전북지점": "호남지역단",
+        "전주지점": "호남지역단",
+        "호남지점": "호남지역단",
+        "신전주지점": "호남지역단",
+        "목포지점": "호남지역단",
+        "여수지점": "호남지역단",
+        "정읍지점": "호남지역단",
+        "제주지점": "호남지역단",
+        "호남직할지점": "호남지역단",
+        "창원지점": "경남지역단",
+        "진주지점": "경남지역단",
+        "울산지점": "경남지역단",
+        "김해지점": "경남지역단",
+        "거제통영지점": "경남지역단",
+        "신울산지점": "경남지역단",
+        "마산지점": "경남지역단",
+        "강북미래지점": "강북금융지역단",
+        "강북비전지점": "강북금융지역단",
+        "강북일류지점": "강북금융지역단",
+        "강북중앙지점": "강북금융지역단",
+        "강북스타지점": "강북금융지역단",
+        "강북삼성지점": "강북금융지역단",
+        "강남삼성지점": "강남금융지역단",
+        "강남일류지점": "강남금융지역단",
+        "강남중앙지점": "강남금융지역단",
+        "서부충청지점": "강남금융지역단",
+        "서부호남지점": "강남금융지역단",
+        "서부광주지점": "강남금융지역단",
+        "강남금융직할지점": "강남금융지역단",
+        "동부부산지점": "동부금융지역단",
+        "동부드림지점": "동부금융지역단",
+        "동부금융지점": "동부금융지역단",
+        "동부선진지점": "동부금융지역단",
+        "동부미래지점": "동부금융지역단"
+      };
+
+      function normalizeBranchLookupKey(value) {
+        return String(value ?? "")
+          .replace(/\s+/g, "")
+          .replace(/^GA/, "")
+          .replace(/지역단/g, "")
+          .replace(/지점/g, "")
+          .replace(/지사/g, "")
+          .trim();
+      }
+
+      function resolveRegionFromBranch(branchValue) {
+        const raw = normalizeCellText(branchValue);
+        const compact = raw.replace(/\s+/g, "");
+        const base = normalizeBranchLookupKey(raw);
+        const candidates = [compact, `${base}지점`, `${base}지사`, `${base}직할지점`].filter(Boolean);
+
+        for (const candidate of candidates) {
+          if (BRANCH_REGION_MAP[candidate]) {
+            return BRANCH_REGION_MAP[candidate];
+          }
+        }
+        return "";
+      }
+
+      function isRegionValueLikelyBranch(regionValue, branchValue) {
+        const region = normalizeCellText(regionValue);
+        const branch = normalizeCellText(branchValue);
+        if (!region) return true;
+        if (!branch) return false;
+        if (normalizeBranchLookupKey(region) === normalizeBranchLookupKey(branch)) return true;
+        return !region.includes("지역단");
+      }
+
       function normalizeMonthValue(value) {
         if (!value && value !== 0) return "2026.06";
         const text = String(value).trim();
@@ -2191,13 +2336,20 @@
         const id = item.id ?? index + 1;
         const month = normalizeMonthValue(item.month || item.updatedAt);
         const status = item.status || statusFromKey(item.statusKey);
+        const rawBranch = item.branch || item.region || "";
+        const rawRegion = item.region || "";
+        const mappedRegion = resolveRegionFromBranch(rawBranch);
+        const branch = normalizeCellText(rawBranch) || "미지정";
+        const region = isRegionValueLikelyBranch(rawRegion, rawBranch)
+          ? (mappedRegion || normalizeCellText(rawRegion) || branch || "미지정")
+          : normalizeCellText(rawRegion);
 
         return {
           ...item,
           id,
           agency: item.agency || `대리점 ${id}`,
-          region: item.region || item.branch || "미지정",
-          branch: item.branch || item.region || "미지정",
+          region,
+          branch,
           rm: item.rm || "미배정",
           product: item.product || item.happyType || "프로모션",
           month,
@@ -2545,6 +2697,17 @@
         if (!workbook) return "";
         const compactKeyword = compactCellText(keyword);
         return workbook.SheetNames.find((name) => compactCellText(name).includes(compactKeyword)) || "";
+      }
+
+      function findSheetNameAny(workbook, keywords = [], fallback = "") {
+        if (!workbook || !Array.isArray(keywords)) return fallback;
+        for (const keyword of keywords) {
+          const matched = findSheetName(workbook, keyword);
+          if (matched) {
+            return matched;
+          }
+        }
+        return fallback;
       }
 
       function normalizeUploadStatus(value, hasMetrics = false) {
@@ -3468,25 +3631,56 @@
         const bridge67SheetName = findSheetName(workbook, "6~7?붾툕由우?");
         const orgSheetName = findSheetName(workbook, "議곗쭅");
 
-        if (!mainSheetName || !orgSheetName) {
+        const resolvedMainSheetName = mainSheetName || findSheetNameAny(workbook, [
+          "지점별담당분류_전체",
+          "지점별 담당분류_전체",
+          "지점별담당분류",
+          "지점별 담당분류",
+          "담당분류_전체",
+          "데이터"
+        ]);
+        const resolvedBasicSheetName = basicSheetName || findSheetNameAny(workbook, [
+          "기본가동",
+          "기본 가동"
+        ]);
+        const resolvedBridge56SheetName = bridge56SheetName || findSheetNameAny(workbook, [
+          "5~6브릿지",
+          "5~6 브릿지",
+          "5~6월브릿지",
+          "5~6월 브릿지",
+          "5-6브릿지"
+        ]);
+        const resolvedBridge67SheetName = bridge67SheetName || findSheetNameAny(workbook, [
+          "6~7브릿지",
+          "6~7 브릿지",
+          "6~7월브릿지",
+          "6~7월 브릿지",
+          "6-7브릿지"
+        ]);
+        const resolvedOrgSheetName = orgSheetName || findSheetNameAny(workbook, [
+          "조직",
+          "GA지사현황",
+          "조직현황"
+        ]);
+        if (!resolvedMainSheetName || !resolvedOrgSheetName) {
           throw new Error("?꾩닔 ?쒗듃瑜?李얠? 紐삵뻽?듬땲?? 6??吏?먮퀎 ?대떦 遺꾨쪟_?꾩껜, 議곗쭅 ?쒗듃瑜??뺤씤?댁＜?몄슂.");
         }
 
         const monthValue = getMonthDisplayFromWorkbook(workbook);
-        const mainRows = sheetToRows(workbook.Sheets[mainSheetName]);
-        const basicRows = basicSheetName ? sheetToRows(workbook.Sheets[basicSheetName]) : [];
-        const bridge56Rows = bridge56SheetName ? sheetToRows(workbook.Sheets[bridge56SheetName]) : [];
-        const bridge67Rows = bridge67SheetName ? sheetToRows(workbook.Sheets[bridge67SheetName]) : [];
-        const orgRows = sheetToRows(workbook.Sheets[orgSheetName]);
+        const mainRows = sheetToRows(workbook.Sheets[resolvedMainSheetName]);
+        const basicRows = resolvedBasicSheetName ? sheetToRows(workbook.Sheets[resolvedBasicSheetName]) : [];
+        const bridge56Rows = resolvedBridge56SheetName ? sheetToRows(workbook.Sheets[resolvedBridge56SheetName]) : [];
+        const bridge67Rows = resolvedBridge67SheetName ? sheetToRows(workbook.Sheets[resolvedBridge67SheetName]) : [];
+        const orgRows = sheetToRows(workbook.Sheets[resolvedOrgSheetName]);
         const headerRows = {
           basic: basicRows[4] || [],
           bridge56: bridge56Rows[4] || [],
           bridge67: bridge67Rows[4] || []
         };
 
-        const basicLookup = basicSheetName ? buildTableLookup(basicRows, 6) : new Map();
-        const bridge56Lookup = bridge56SheetName ? buildTableLookup(bridge56Rows, 6) : new Map();
-        const bridge67Lookup = bridge67SheetName ? buildTableLookup(bridge67Rows, 6) : new Map();
+        const basicLookup = resolvedBasicSheetName ? buildTableLookup(basicRows, 6) : new Map();
+        const bridge56Lookup = resolvedBridge56SheetName ? buildTableLookup(bridge56Rows, 6) : new Map();
+        const bridge67Lookup = resolvedBridge67SheetName ? buildTableLookup(bridge67Rows, 6) : new Map();
         const orgLookup = buildOrgLookup(orgRows);
         const uploadMeta = extractUploadMetaFromLegacyWorkbook(workbook, monthValue, mainRows);
         const uploadBlocks = extractUploadBlocksFromLegacyWorkbook(workbook, mainRows);
@@ -3709,25 +3903,30 @@
         const bridge56SheetName = findSheetName(workbook, "5~6브릿지");
         const bridge67SheetName = findSheetName(workbook, "6~7브릿지");
         const orgSheetName = findSheetName(workbook, "조직");
-        if (!mainSheetName || !orgSheetName) {
+        const resolvedMainSheetName = mainSheetName || findSheetNameAny(workbook, ["지점별담당분류_전체", "지점별 담당분류_전체", "지점별담당분류", "지점별 담당분류", "담당분류_전체", "데이터"]);
+        const resolvedBasicSheetName = basicSheetName || findSheetNameAny(workbook, ["기본가동", "기본 가동"]);
+        const resolvedBridge56SheetName = bridge56SheetName || findSheetNameAny(workbook, ["5~6브릿지", "5~6 브릿지", "5~6월브릿지", "5~6월 브릿지", "5-6브릿지"]);
+        const resolvedBridge67SheetName = bridge67SheetName || findSheetNameAny(workbook, ["6~7브릿지", "6~7 브릿지", "6~7월브릿지", "6~7월 브릿지", "6-7브릿지"]);
+        const resolvedOrgSheetName = orgSheetName || findSheetNameAny(workbook, ["조직", "GA지사현황", "조직현황"]);
+        if (!resolvedMainSheetName || !resolvedOrgSheetName) {
           throw new Error("필수 시트를 찾지 못했습니다. 지점별 담당분류_전체와 조직 시트를 확인해주세요.");
         }
 
         const monthValue = getMonthDisplayFromWorkbook(workbook);
-        const mainRows = sheetToRows(workbook.Sheets[mainSheetName]);
-        const basicRows = basicSheetName ? sheetToRows(workbook.Sheets[basicSheetName]) : [];
-        const bridge56Rows = bridge56SheetName ? sheetToRows(workbook.Sheets[bridge56SheetName]) : [];
-        const bridge67Rows = bridge67SheetName ? sheetToRows(workbook.Sheets[bridge67SheetName]) : [];
-        const orgRows = sheetToRows(workbook.Sheets[orgSheetName]);
+        const mainRows = sheetToRows(workbook.Sheets[resolvedMainSheetName]);
+        const basicRows = resolvedBasicSheetName ? sheetToRows(workbook.Sheets[resolvedBasicSheetName]) : [];
+        const bridge56Rows = resolvedBridge56SheetName ? sheetToRows(workbook.Sheets[resolvedBridge56SheetName]) : [];
+        const bridge67Rows = resolvedBridge67SheetName ? sheetToRows(workbook.Sheets[resolvedBridge67SheetName]) : [];
+        const orgRows = sheetToRows(workbook.Sheets[resolvedOrgSheetName]);
         const headerRows = {
           basic: basicRows[4] || [],
           bridge56: bridge56Rows[4] || [],
           bridge67: bridge67Rows[4] || []
         };
 
-        const basicLookup = basicSheetName ? buildTableLookup(basicRows, 6) : new Map();
-        const bridge56Lookup = bridge56SheetName ? buildTableLookup(bridge56Rows, 6) : new Map();
-        const bridge67Lookup = bridge67SheetName ? buildTableLookup(bridge67Rows, 6) : new Map();
+        const basicLookup = resolvedBasicSheetName ? buildTableLookup(basicRows, 6) : new Map();
+        const bridge56Lookup = resolvedBridge56SheetName ? buildTableLookup(bridge56Rows, 6) : new Map();
+        const bridge67Lookup = resolvedBridge67SheetName ? buildTableLookup(bridge67Rows, 6) : new Map();
         const orgLookup = buildOrgLookup(orgRows);
         const uploadMeta = extractUploadMetaFromLegacyWorkbook(workbook, monthValue, mainRows);
         const uploadBlocks = extractUploadBlocksFromLegacyWorkbook(workbook, mainRows);
@@ -4893,6 +5092,44 @@
         };
       }
 
+      function getMonthTemplateContext(monthValue) {
+        const month = normalizeMonthValue(monthValue || state.selectedMonth);
+        const baseMeta = {
+          ...createDefaultUploadMeta(),
+          month,
+          generatedTitle: toPromotionTitle(month)
+        };
+
+        return {
+          meta: state.monthMetaMap[month]
+            ? { ...baseMeta, ...state.monthMetaMap[month] }
+            : baseMeta,
+          blocks: Array.isArray(state.monthBlocksMap[month]) && state.monthBlocksMap[month].length
+            ? state.monthBlocksMap[month]
+            : createDefaultUploadBlocks(),
+          noticeLines: Array.isArray(state.monthNoticeMap[month]) && state.monthNoticeMap[month].length
+            ? state.monthNoticeMap[month]
+            : createDefaultNoticeLines()
+        };
+      }
+
+      function ensureTemplateFormsForMonth(monthValue) {
+        const month = normalizeMonthValue(monthValue || state.selectedMonth);
+        const { meta, blocks, noticeLines } = getMonthTemplateContext(month);
+        let changed = false;
+
+        state.promotions.forEach((item) => {
+          if (item.month !== month) return;
+          if (item.status !== "확정") return;
+          if (state.templateForms[item.id]) return;
+
+          state.templateForms[item.id] = buildTemplateDataFromSimpleConfig(item, meta, blocks, noticeLines, []);
+          changed = true;
+        });
+
+        return changed;
+      }
+
       function getHeaderDisplayDate() {
         return formatFinalAppliedDate(state.excelUpdatedAt || getNowStamp());
       }
@@ -5494,6 +5731,10 @@
         const generateNoticesButton = document.getElementById("generateNoticesButton");
         if (generateNoticesButton) {
           generateNoticesButton.addEventListener("click", () => {
+            const recovered = ensureTemplateFormsForMonth(state.selectedMonth);
+            if (recovered) {
+              saveStoredPromoDashboardState();
+            }
             const readyCount = state.promotions.filter((item) => item.month === state.selectedMonth && canGenerateItem(item)).length;
             if (!readyCount) {
               window.alert("생성 가능한 확정 데이터가 없습니다. 먼저 엑셀 업로드를 반영해주세요.");
@@ -5596,6 +5837,10 @@
 
       function renderApp() {
         const app = document.getElementById("app");
+        const recovered = ensureTemplateFormsForMonth(state.selectedMonth);
+        if (recovered) {
+          saveStoredPromoDashboardState();
+        }
         app.innerHTML = state.currentUser ? renderPromotionPage() : renderLoginScreen();
         if (state.currentUser) {
           bindDashboardEvents();
