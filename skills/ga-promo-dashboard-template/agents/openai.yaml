@@ -1,0 +1,4 @@
+interface:
+  display_name: "GA 프로모션 대시보드"
+  short_description: "GA 프로모션 대시보드와 표준 안내장 템플릿 작업용 스킬"
+  default_prompt: "Use $ga-promo-dashboard-template to update the GA promotion dashboard and notice template from Excel uploads."

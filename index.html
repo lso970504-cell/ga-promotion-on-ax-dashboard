@@ -724,6 +724,18 @@
         justify-content: flex-end;
       }
 
+      .promotion-download-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+
+      .promotion-download-row .resource-button {
+        min-width: 172px;
+      }
+
       .search-filter-toggle {
         width: 220px;
         height: 58px;
@@ -1155,6 +1167,22 @@
         margin-top: 0;
       }
 
+      .admin-action-inner .upload-template-row {
+        margin-top: 0;
+      }
+
+      .admin-action-inner .upload-main-row {
+        margin-top: 14px;
+      }
+
+      .admin-action-inner .admin-approve-row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 122px;
+        align-items: stretch;
+        gap: 12px;
+      }
+
       .admin-resource-upload-item strong {
         display: block;
         color: var(--brand-950);
@@ -1547,10 +1575,12 @@
 
       .admin-approve-row .admin-password-field {
         height: 48px;
+        min-width: 0;
       }
 
       .admin-approve-row .admin-main-button {
-        min-width: 148px;
+        min-width: 0;
+        width: 100%;
         height: 48px;
         font-size: 15px;
       }
@@ -4137,6 +4167,23 @@
         `;
       }
 
+      function renderPromotionQuickDownloads() {
+        const promoDownloadUrl = getCurrentUploadDownloadUrl();
+        const promoFileName = state.selectedUploadFileName || "전체대리점_프로모션현황.xlsx";
+        const refundFileName = state.refundFileName || "상품별_예상해약환급금.xlsx";
+
+        return `
+          <div class="promotion-download-row">
+            ${promoDownloadUrl
+              ? `<a class="resource-button button-link" href="${promoDownloadUrl}" download="${promoFileName}">전체대리점 현황 다운로드</a>`
+              : `<button class="resource-button disabled" type="button" disabled>전체대리점 현황 다운로드</button>`}
+            ${state.refundDownloadUrl
+              ? `<a class="resource-button button-link" href="${state.refundDownloadUrl}" download="${refundFileName}">해약환급금 다운로드</a>`
+              : `<button class="resource-button disabled" type="button" disabled>해약환급금 다운로드</button>`}
+          </div>
+        `;
+      }
+
       function updatePromotionStatus(id, nextStatus) {
         state.promotions = state.promotions.map((item) => {
           if (item.id === id) {
@@ -4518,9 +4565,13 @@
       }
 
       function renderFileReferencePanel() {
+        const promoDownloadUrl = getCurrentUploadDownloadUrl();
+        const promoDownloadButton = promoDownloadUrl
+          ? `<a class="resource-button button-link" href="${promoDownloadUrl}" download="${state.selectedUploadFileName || "전체대리점_프로모션현황.xlsx"}">다운로드</a>`
+          : `<button class="resource-button disabled" type="button" disabled>다운로드</button>`;
         const refundDownloadButton = state.refundDownloadUrl
-          ? `<a class="resource-button button-link" href="${state.refundDownloadUrl}" download="${state.refundFileName || "상품별_예상해약환급금.xlsx"}">엑셀다운로드</a>`
-          : `<button class="resource-button disabled" type="button" disabled>엑셀다운로드</button>`;
+          ? `<a class="resource-button button-link" href="${state.refundDownloadUrl}" download="${state.refundFileName || "상품별_예상해약환급금.xlsx"}">다운로드</a>`
+          : `<button class="resource-button disabled" type="button" disabled>다운로드</button>`;
 
         return `
           <section class="panel">
@@ -4537,7 +4588,7 @@
                     <strong>전체대리점 프로모션현황</strong>
                     <span>${state.selectedUploadFileName || "업로드된 파일 없음"} · ${state.excelUpdatedAt ? `실시간 반영 ${state.excelUpdatedAt}` : "업로드 필요"}</span>
                   </div>
-                  <a class="resource-button button-link" href="${getCurrentUploadDownloadUrl()}" download="${state.selectedUploadFileName || "전체대리점_프로모션현황.xlsx"}">엑셀 다운로드</a>
+                  ${promoDownloadButton}
                 </div>
                 <div class="resource-card">
                   <div>
@@ -4607,6 +4658,7 @@
                     <p class="panel-date">최종반영 ${finalAppliedDate}</p>
                   </div>
                 </div>
+                ${renderPromotionQuickDownloads()}
                 ${renderPromotionSearchFilters(regionOptions, branchOptions)}
                 ${renderPromotionTable(sortedPromotions)}
               </section>
@@ -4657,7 +4709,7 @@
       }
 
       function getCurrentUploadDownloadUrl() {
-        return state.selectedUploadDownloadUrl || "./promo-source.xlsx";
+        return state.selectedUploadDownloadUrl || "";
       }
 
       function findSimpleDataHeaderInfo(rows) {
@@ -4954,15 +5006,17 @@
               <div class="admin-action-grid">
                 <div class="admin-action-card">
                   <h4>프로모션 업로드</h4>
-                  <div class="admin-upload-row upload-template-row">
-                    <a class="admin-main-button alt button-link" href="${sampleTemplateDownloadUrl}" download="${sampleTemplateFileName}">업로드양식</a>
-                  </div>
-                  <div class="admin-upload-row upload-emphasis upload-main-row">
-                    <label class="admin-file-field is-picker">
-                      <span id="excelFileInputLabel">엑셀파일 업로드</span>
-                      <input id="excelFileInput" type="file" aria-label="엑셀파일 업로드">
-                    </label>
-                    <button id="uploadConfirmButton" class="admin-main-button" type="button" disabled>업로드 반영</button>
+                  <div class="admin-action-inner">
+                    <div class="admin-upload-row upload-template-row">
+                      <a class="admin-main-button alt button-link" href="${sampleTemplateDownloadUrl}" download="${sampleTemplateFileName}">업로드양식</a>
+                    </div>
+                    <div class="admin-upload-row upload-emphasis upload-main-row">
+                      <label class="admin-file-field is-picker">
+                        <span id="excelFileInputLabel">엑셀파일 업로드</span>
+                        <input id="excelFileInput" type="file" aria-label="엑셀파일 업로드">
+                      </label>
+                      <button id="uploadConfirmButton" class="admin-main-button" type="button" disabled>업로드 반영</button>
+                    </div>
                   </div>
                 </div>
 

@@ -3,5 +3,20 @@ outputs/excel-template-builder/node_modules/
 .tmp-*.js
 tmp_*
 *.inspect.ndjson
+tmp/
+outputs/~$*.xlsx
+~$*.xlsx
+sample-upload.xlsx
+outputs/ga_branch_upload_template.xlsx
+outputs/ga_promo_all_text_sample.xlsx
+outputs/ga_promo_full_sample.xlsx
+outputs/ga_promo_full_sample_v2.xlsx
+outputs/ga_promo_full_sample_v3.xlsx
+outputs/ga_promotion_upload_template_auto_max.xlsx
+outputs/ga_promotion_upload_template_from_sample.xlsx
+outputs/ga_promotion_upload_template_leftlabel_max.xlsx
+outputs/ga_promotion_upload_template_refined.xlsx
+outputs/ga_promotion_upload_template_with_labels.xlsx
+outputs/ga_promotion_upload_template_with_leftmax.xlsx
 
 .vercel
